@@ -1,14 +1,13 @@
-name: FOFA IP
+name: FOFA IP & M3U 生成
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
-  workflow_dispatch:          # 手动触发
+    - cron: "*/15 * * * *"   # 每15分钟运行一次
+  workflow_dispatch:         # 支持手动触发
 
 jobs:
-  fetch-and-push:
+  fetch-and-generate:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -25,18 +24,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
 
-      - name: Install ffmpeg
+      - name: Install ffmpeg & ffprobe（用于频道检测）
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Run fofa_fetch.py
+      - name: 运行 1. fofa_fetch.py（抓取IP、检测、生成 IPTV.txt）
         run: python fofa_fetch.py
 
-      - name: Commit and push changes
+      - name: 运行 2. txt_to_m3u.py（将 IPTV.txt 转为带台标的 IPTV.m3u）
+        run: python txt_to_m3u.py
+
+      - name: Commit and push all changes
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@users.noreply.github.com"
           git add 计数.txt
           git add ip/*.txt || true
+          git add zubo.txt || true
           git add IPTV.txt || true
-          git commit -m "自动更新：计数、IP文件、IPTV.txt" || echo "⚠️ 无需提交"
+          git add IPTV.m3u || true        # 新增：提交生成的 M3U 文件
+          git commit -m "自动更新：IP列表 + IPTV.txt + IPTV.m3u（带台标）" || echo "⚠️ 无需提交"
           git push origin main || echo "⚠️ 推送失败"
