@@ -5,16 +5,11 @@ import re
 INPUT_FILE = "IPTV.txt"
 OUTPUT_FILE = "IPTV.m3u"
 
-# 台标主来源（最全最稳定）
-LOGO_BASE_PRIMARY = "https://live.fanmingming.cn/tv/"
-# 备用来源（部分特殊频道）
-LOGO_BASE_BACKUP = "https://raw.githubusercontent.com/iptv-org/iptv-org-logo/master/logos/"
-
-# EPG（强烈推荐）
-ADD_EPG = True
+# 台标来源
+LOGO_BASE = "https://live.fanmingming.cn/tv/"
 EPG_URL = "https://live.fanmingming.cn/e.xml"
 
-# ===== 从 fofa_fetch.py 直接借用的完整频道分类和顺序 =====
+# 完整频道分类（从 fofa_fetch.py 复制）
 CHANNEL_CATEGORIES = {
     "央视频道": [
         "CCTV1", "CCTV2", "CCTV3", "CCTV4", "CCTV4欧洲", "CCTV4美洲", "CCTV5", "CCTV5+", "CCTV6", "CCTV7",
@@ -42,23 +37,21 @@ CHANNEL_CATEGORIES = {
         "湖北公共新闻", "湖北经视频道", "湖北综合频道", "湖北垄上频道", "湖北影视频道", "湖北生活频道", "湖北教育频道", "武汉新闻综合", "武汉电视剧", "武汉科技生活",
         "武汉文体频道", "武汉教育频道", "阳新综合", "房县综合", "蔡甸综合",
     ]
-    # 如需添加更多分类，直接在这里扩展，与原脚本保持一致
 }
 
-# ===== 台标文件名特殊映射（基于原脚本所有标准名优化）=====
+# 台标特殊映射
 LOGO_SPECIAL_MAP = {
-    "CCTV1": "CCTV1", "CCTV2": "CCTV2", "CCTV3": "CCTV3", "CCTV4": "CCTV4", "CCTV5": "CCTV5", "CCTV5+": "CCTV5+",
-    "CCTV6": "CCTV6", "CCTV7": "CCTV7", "CCTV8": "CCTV8", "CCTV9": "CCTV9", "CCTV10": "CCTV10", "CCTV11": "CCTV11",
-    "CCTV12": "CCTV12", "CCTV13": "CCTV13", "CCTV14": "CCTV14", "CCTV15": "CCTV15", "CCTV16": "CCTV16", "CCTV17": "CCTV17",
-    "CCTV4K": "CCTV4K", "CCTV8K": "CCTV8K",
-    "CHC动作电影": "CHC动作电影", "CHC家庭影院": "CHC家庭影院", "CHC影迷电影": "CHC影迷电影",
+    "CCTV5+": "CCTV5+",
     "CHANNEL[V]": "Channel V",
-    "凤凰卫视中文台": "凤凰中文", "凤凰卫视香港台": "凤凰香港", "凤凰卫视资讯台": "凤凰资讯", "凤凰卫视电影台": "凤凰电影",
-    # 其他直接用原名，大多数都能匹配
+    "凤凰卫视中文台": "凤凰中文",
+    "凤凰卫视香港台": "凤凰香港",
+    "凤凰卫视资讯台": "凤凰资讯",
+    "凤凰卫视电影台": "凤凰电影",
 }
 
 def get_logo_url(ch_name):
     name = ch_name.strip()
+    # 移除高清、4K 等后缀
     name = re.sub(r"[ -_]HD|高清|4K|超清|超高清|8K|plus|\+|Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ", "", name, flags=re.IGNORECASE)
     name = name.replace(" ", "").replace("&", "")
     filename = LOGO_SPECIAL_MAP.get(ch_name, name) + ".png"
@@ -66,25 +59,25 @@ def get_logo_url(ch_name):
 
 def main():
     if not os.path.exists(INPUT_FILE):
-        print(f"❌ 未找到 {INPUT_FILE}")
+        print(f"❌ 未找到 {INPUT_FILE}，跳过生成 M3U")
         return
 
-    valid_lines = []  # 收集所有有效频道行
-
+    # 收集所有有效行
+    valid_lines = []
     with open(INPUT_FILE, "r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if not line or ",#genre#" in line:
                 continue
             if "更新时间" in line or "Disclaimer" in line:
-                valid_lines.append(line)  # 保留更新时间和免责
+                valid_lines.append(line)
                 continue
             if "," in line and "$" in line:
-                ch_name, rest = line.split(",", 1)
-                ch_name = ch_name.strip()
+                ch_name = line.split(",", 1)[0].strip()
                 if any(ch_name in chans for chans in CHANNEL_CATEGORIES.values()):
                     valid_lines.append(line)
 
+    # 生成 M3U
     with open(OUTPUT_FILE, "w", encoding="utf-8") as out:
         out.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n\n')
 
@@ -97,30 +90,32 @@ def main():
                     out.write(f'#EXTINF:-1 group-title="提示",{title.strip()}\n{url.strip()}\n\n')
                 continue
 
-            # 正常频道行
+            # 处理正常频道
             ch_name, rest = line.split(",", 1)
             ch_name = ch_name.strip()
             url, operator = rest.split("$", 1)
             url = url.strip()
             operator = operator.strip()
 
-            # 查找分类
+            # 确定分类
             for cat, chans in CHANNEL_CATEGORIES.items():
                 if ch_name in chans:
                     current_group = cat
                     break
 
-            # 可选标题：显示运营商，便于区分重复项
+            # 标题加上运营商，便于区分不同源
             title = f"{ch_name} [{operator}]"
-            # title = ch_name  # 如果不想显示运营商，用这个（纯重复名）
+            # 如果不想显示运营商，改成：title = ch_name
 
             logo = get_logo_url(ch_name)
-            out.write(f'#EXTINF:-1 tvg-name="{ch_name}" tvg-logo="{logo}" group-title="{current_group}",{title}\n')
-            out.write(f"{url}\n\n')  # 注意：这里保留原 URL 不带 $运营商，如果你想带上，可改成 f"{url}${operator}\n"
 
-    print(f"✅ 生成完成：{OUTPUT_FILE}")
-    print(f"   每个源单独一条完整 EXTINF+URL（严格标准，完美兼容所有播放器）")
-    print(f"   重复频道名用于多源备份，TiviMate 等可自动合并/切换")
+            out.write(f'#EXTINF:-1 tvg-name="{ch_name}" tvg-logo="{logo}" group-title="{current_group}",{title}\n')
+            out.write(f"{url}\n\n")  # 只写纯 URL，不带 $运营商（播放器不需要）
+
+    print(f"✅ {OUTPUT_FILE} 生成成功！")
+    print(f"   - 每个源独立一条目（严格符合 M3U 标准）")
+    print(f"   - 标题显示运营商，便于识别不同源")
+    print(f"   - 支持 TiviMate 等播放器自动合并重复频道并切换源")
 
 if __name__ == "__main__":
-    main()main()
+    main()
