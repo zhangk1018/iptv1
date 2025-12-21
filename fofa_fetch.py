@@ -234,8 +234,9 @@ def third_stage():
 
     print(f"🎯 IPTV.txt 生成完成，共 {len(valid_lines)} 条存活酒店源")
 
+
 # ===============================
-# 文件推送
+# 文件推送（修复版，无 emoji）
 def push_all_files():
     print("🚀 推送所有更新文件到 GitHub...")
     os.system('git config --global user.name "github-actions"')
@@ -244,8 +245,9 @@ def push_all_files():
     os.system("git add ip/*.txt || true")
     os.system("git add zubo.txt || true")
     os.system("git add IPTV.txt || true")
-    os.system('git commit -m "自动更新：酒店IPTV源 IP + IPTV.txt" || echo "⚠️ 无需提交"')
-    os.system("git push origin main || echo "⚠️ 推送失败"')
+    os.system("git add IPTV.m3u || true")
+    os.system('git commit -m "自动更新：计数、IP文件、IPTV.txt、IPTV.m3u" || echo "无变更，无需提交"')
+    os.system("git push origin main || echo '推送失败（可能无变更或网络问题）'")
 
 # ===============================
 # 主执行逻辑
