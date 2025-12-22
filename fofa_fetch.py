@@ -14,15 +14,14 @@ FOFA_URLS = {
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
 }
-
 COUNTER_FILE = "计数.txt"
 IP_DIR = "ip"
 RTP_DIR = "rtp"
 ZUBO_FILE = "zubo.txt"
 IPTV_FILE = "IPTV.txt"
-
 # ===============================
-# 分类与映射配置
+
+# 分类与映射配置（保持不变）
 CHANNEL_CATEGORIES = {
     "央视频道": [
         "CCTV1", "CCTV2", "CCTV3", "CCTV4", "CCTV4欧洲", "CCTV4美洲", "CCTV5", "CCTV5+", "CCTV6", "CCTV7",
@@ -41,15 +40,15 @@ CHANNEL_CATEGORIES = {
         "CHC动作电影", "CHC家庭影院", "CHC影迷电影", "淘电影", "淘精彩", "淘剧场", "淘4K", "淘娱乐", "淘BABY", "淘萌宠", "重温经典",
         "星空卫视", "CHANNEL[V]", "凤凰卫视中文台", "凤凰卫视资讯台", "凤凰卫视香港台", "凤凰卫视电影台", "求索纪录", "求索科学",
         "求索生活", "求索动物", "纪实人文", "金鹰纪实", "纪实科教", "睛彩青少", "睛彩竞技", "睛彩篮球", "睛彩广场舞", "魅力足球", "五星体育",
-        "劲爆体育", "快乐垂钓", "茶频道", "先锋乒羽", "天元围棋", "汽摩", "梨园频道", "文物宝库", "武术世界", "哒啵赛事", "哒啵电竞", "黑莓电影", "黑莓动画", 
-        "乐游", "生活时尚", "都市剧场", "欢笑剧场", "游戏风云", "金色学堂", "动漫秀场", "新动漫", "卡酷少儿", "金鹰卡通", "优漫卡通", "哈哈炫动", "嘉佳卡通", 
+        "劲爆体育", "快乐垂钓", "茶频道", "先锋乒羽", "天元围棋", "汽摩", "梨园频道", "文物宝库", "武术世界", "哒啵赛事", "哒啵电竞", "黑莓电影", "黑莓动画",
+        "乐游", "生活时尚", "都市剧场", "欢笑剧场", "游戏风云", "金色学堂", "动漫秀场", "新动漫", "卡酷少儿", "金鹰卡通", "优漫卡通", "哈哈炫动", "嘉佳卡通",
         "中国交通", "中国天气", "华数4K", "华数星影", "华数动作影院", "华数喜剧影院", "华数家庭影院", "华数经典电影", "华数热播剧场", "华数碟战剧场",
         "华数军旅剧场", "华数城市剧场", "华数武侠剧场", "华数古装剧场", "华数魅力时尚", "华数少儿动画", "华数动画"
     ],
     "湖北": [
         "湖北公共新闻", "湖北经视频道", "湖北综合频道", "湖北垄上频道", "湖北影视频道", "湖北生活频道", "湖北教育频道", "武汉新闻综合", "武汉电视剧", "武汉科技生活",
         "武汉文体频道", "武汉教育频道", "阳新综合", "房县综合", "蔡甸综合",
-    ],#任意添加，与仓库中rtp/省份运营商.txt内频道一致即可，或在下方频道名映射中改名
+    ],
 }
 
 # ===== 映射（别名 -> 标准名） =====
@@ -150,7 +149,7 @@ CHANNEL_MAPPING = {
     "中国交通": ["中国交通频道"],
     "中国天气": ["中国天气频道"],
     "华数4K": ["华数低于4K", "华数4K电影", "华数爱上4K"],
-}#格式为"频道分类中的标准名": ["rtp/中的名字"],
+}
 
 # ===============================
 # 计数逻辑
@@ -192,7 +191,7 @@ def get_isp(ip):
         return "未知"
 
 # ===============================
-# 第一阶段
+# 第一阶段：爬取FOFA并分类写入IP文件
 def first_stage():
     all_ips = set()
     for url, filename in FOFA_URLS.items():
@@ -227,11 +226,12 @@ def first_stage():
             for ip_port in sorted(ip_set):
                 f.write(ip_port + "\n")
         print(f"{path} 已{'覆盖' if mode=='w' else '追加'}写入 {len(ip_set)} 个 IP")
+
     print(f"✅ 第一阶段完成，当前轮次：{run_count}")
     return run_count
 
 # ===============================
-# 第二阶段
+# 第二阶段：组合生成 zubo.txt
 def second_stage():
     print("🔔 第二阶段触发：生成 zubo.txt")
     combined_lines = []
@@ -242,14 +242,11 @@ def second_stage():
         rtp_path = os.path.join(RTP_DIR, ip_file)
         if not os.path.exists(rtp_path):
             continue
-
         with open(ip_path, encoding="utf-8") as f1, open(rtp_path, encoding="utf-8") as f2:
             ip_lines = [x.strip() for x in f1 if x.strip()]
             rtp_lines = [x.strip() for x in f2 if x.strip()]
-
         if not ip_lines or not rtp_lines:
             continue
-
         for ip_port in ip_lines:
             for rtp_line in rtp_lines:
                 if "," not in rtp_line:
@@ -257,7 +254,7 @@ def second_stage():
                 ch_name, rtp_url = rtp_line.split(",", 1)
                 combined_lines.append(f"{ch_name},http://{ip_port}/rtp/{rtp_url.split('rtp://')[1]}")
 
-    # 去重
+    # 去重（按URL去重）
     unique = {}
     for line in combined_lines:
         url_part = line.split(",", 1)[1]
@@ -270,12 +267,11 @@ def second_stage():
     print(f"🎯 第二阶段完成，共 {len(unique)} 条有效 URL")
 
 # ===============================
-# 第三阶段
+# 第三阶段：检测并生成 IPTV.txt
 def third_stage():
     print("🧩 第三阶段：多线程检测代表频道生成 IPTV.txt")
-
     if not os.path.exists(ZUBO_FILE):
-        print("⚠️ zubo.txt 不存在，跳过")
+        print("⚠️ zubo.txt 不存在，跳过第三阶段")
         return
 
     def check_stream(url, timeout=5):
@@ -290,11 +286,13 @@ def third_stage():
         except Exception:
             return False
 
+    # 别名映射
     alias_map = {}
     for main_name, aliases in CHANNEL_MAPPING.items():
         for alias in aliases:
             alias_map[alias] = main_name
 
+    # IP归属信息
     ip_info = {}
     for fname in os.listdir(IP_DIR):
         if not fname.endswith(".txt"):
@@ -306,6 +304,7 @@ def third_stage():
                 ip_port = line.strip()
                 ip_info[ip_port] = province_operator
 
+    # 按IP分组
     groups = {}
     with open(ZUBO_FILE, encoding="utf-8") as f:
         for line in f:
@@ -319,6 +318,7 @@ def third_stage():
                 groups.setdefault(ip_port, []).append((ch_main, url))
 
     def detect_ip(ip_port, entries):
+        # 优先检测CCTV1，没有则用第一个频道
         rep_channels = [u for c, u in entries if c == "CCTV1"]
         if not rep_channels and entries:
             rep_channels = [entries[0][1]]
@@ -338,7 +338,6 @@ def third_stage():
 
     valid_lines = []
     seen = set()
-
     for ip_port in playable_ips:
         province_operator = ip_info.get(ip_port, "未知")
         for c, u in groups[ip_port]:
@@ -354,7 +353,6 @@ def third_stage():
         f.write(f"更新时间: {beijing_now}（北京时间）\n\n")
         f.write("更新时间,#genre#\n")
         f.write(f"{beijing_now},{disclaimer_url}\n\n")
-
         for category, ch_list in CHANNEL_CATEGORIES.items():
             f.write(f"{category},#genre#\n")
             for ch in ch_list:
@@ -364,26 +362,33 @@ def third_stage():
                         f.write(line + "\n")
             f.write("\n")
 
-    print(f"🎯 IPTV.txt 生成完成（含更新时间），共 {len(valid_lines)} 条频道")
+    print(f"🎉 IPTV.txt 生成完成，共 {len(valid_lines)} 条有效频道")
 
 # ===============================
-# 文件推送  
+# 文件推送
 def push_all_files():
     print("🚀 推送所有更新文件到 GitHub...")
     os.system('git config --global user.name "github-actions"')
     os.system('git config --global user.email "github-actions@users.noreply.github.com"')
     os.system("git add 计数.txt")
     os.system("git add ip/*.txt || true")
+    os.system("git add zubo.txt || true")
     os.system("git add IPTV.txt || true")
-    os.system('git commit -m "自动更新：计数、IP文件、IPTV.txt" || echo "⚠️ 无需提交"')
+    os.system('git commit -m "自动更新：计数、IP文件、zubo.txt、IPTV.txt" || echo "⚠️ 无需提交"')
     os.system("git push origin main || echo '⚠️ 推送失败'")
 
-
 # ===============================
-# 主执行逻辑
+# 主执行逻辑（关键修改：手动运行时强制执行全部阶段）
 if __name__ == "__main__":
     run_count = first_stage()
-    if run_count in [12, 24, 36, 48, 60, 72]:
-        second_stage()
-        third_stage()
+
+    # === 强制执行第二、三阶段（手动运行时始终完整更新）===
+    second_stage()
+    third_stage()
+
+    # 如需恢复原“每12次大更新一次”逻辑，可取消注释下面这行并注释掉上面两行
+    # if run_count in [12, 24, 36, 48, 60, 72]:
+    #     second_stage()
+    #     third_stage()
+
     push_all_files()
