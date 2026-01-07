@@ -1,10 +1,7 @@
 #EXTM3U x-tvg-url="https://live.fanmingming.cn/e.xml"
 
-#EXTINF:-1 group-title="提示",2026-01-07 19:52:15
+#EXTINF:-1 group-title="提示",2026-01-07 21:53:25
 https://kakaxi-1.asia/LOGO/Disclaimer.mp4
-
-#EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV1.png" group-title="央视频道",CCTV1
-http://183.159.205.65:4000/rtp/233.50.201.118:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV1.png" group-title="央视频道",CCTV1
 http://175.8.129.116:4000/rtp/239.76.253.151:9000$湖南电信
@@ -13,10 +10,7 @@ http://175.8.129.116:4000/rtp/239.76.253.151:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.254.96.96:8550$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV1.png" group-title="央视频道",CCTV1
-http://183.142.250.107:8881/rtp/233.50.201.118:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV2" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV2.png" group-title="央视频道",CCTV2
-http://183.159.205.65:4000/rtp/233.50.201.119:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.118:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV2" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV2.png" group-title="央视频道",CCTV2
 http://175.8.129.116:4000/rtp/239.76.253.152:9000$湖南电信
@@ -28,10 +22,7 @@ http://175.8.129.116:4000/rtp/239.76.246.152:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.102:10250$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV2" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV2.png" group-title="央视频道",CCTV2
-http://183.142.250.107:8881/rtp/233.50.201.119:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV3" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV3.png" group-title="央视频道",CCTV3
-http://183.159.205.65:4000/rtp/233.50.201.196:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.119:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV3" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV3.png" group-title="央视频道",CCTV3
 http://175.8.129.116:4000/rtp/239.76.253.153:9000$湖南电信
@@ -43,10 +34,7 @@ http://175.8.129.116:4000/rtp/239.76.246.153:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.122:10370$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV3" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV3.png" group-title="央视频道",CCTV3
-http://183.142.250.107:8881/rtp/233.50.201.196:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV4.png" group-title="央视频道",CCTV4
-http://183.159.205.65:4000/rtp/233.50.200.101:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.196:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV4.png" group-title="央视频道",CCTV4
 http://175.8.129.116:4000/rtp/239.76.245.195:1234$湖南电信
@@ -61,7 +49,7 @@ http://175.8.129.116:4000/rtp/239.76.253.154:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.138:10466$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV4" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV4.png" group-title="央视频道",CCTV4
-http://183.142.250.107:8881/rtp/233.50.200.101:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.101:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV4欧洲" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV4欧洲.png" group-title="央视频道",CCTV4欧洲
 http://175.8.129.116:4000/rtp/239.76.246.95:1234$湖南电信
@@ -82,12 +70,6 @@ http://175.8.129.116:4000/rtp/239.76.246.96:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.232:11034$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV5.png" group-title="央视频道",CCTV5
-http://183.159.205.65:4000/rtp/233.50.200.108:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV5.png" group-title="央视频道",CCTV5
-http://183.159.205.65:4000/rtp/233.50.201.194:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV5.png" group-title="央视频道",CCTV5
 http://175.8.129.116:4000/rtp/239.76.253.155:9000$湖南电信
 
 #EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV5.png" group-title="央视频道",CCTV5
@@ -100,13 +82,10 @@ http://175.8.129.116:4000/rtp/239.76.254.214:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.123:10376$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV5.png" group-title="央视频道",CCTV5
-http://183.142.250.107:8881/rtp/233.50.200.108:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.108:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV5" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV5.png" group-title="央视频道",CCTV5
-http://183.142.250.107:8881/rtp/233.50.201.194:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV5+" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV5+.png" group-title="央视频道",CCTV5+
-http://183.159.205.65:4000/rtp/233.50.201.220:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.194:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV5+" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV5+.png" group-title="央视频道",CCTV5+
 http://175.8.129.116:4000/rtp/239.76.246.168:1234$湖南电信
@@ -118,10 +97,7 @@ http://175.8.129.116:4000/rtp/239.76.254.215:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.254.96.234:9484$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV5+" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV5+.png" group-title="央视频道",CCTV5+
-http://183.142.250.107:8881/rtp/233.50.201.220:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV6.png" group-title="央视频道",CCTV6
-http://183.159.205.65:4000/rtp/233.50.200.109:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.220:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV6.png" group-title="央视频道",CCTV6
 http://175.8.129.116:4000/rtp/239.76.253.156:9000$湖南电信
@@ -133,10 +109,7 @@ http://175.8.129.116:4000/rtp/239.76.246.156:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.124:10382$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV6" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV6.png" group-title="央视频道",CCTV6
-http://183.142.250.107:8881/rtp/233.50.200.109:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV7" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV7.png" group-title="央视频道",CCTV7
-http://183.159.205.65:4000/rtp/233.50.200.102:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.109:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV7" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV7.png" group-title="央视频道",CCTV7
 http://175.8.129.116:4000/rtp/239.76.253.157:9000$湖南电信
@@ -148,10 +121,7 @@ http://175.8.129.116:4000/rtp/239.76.246.157:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.103:10256$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV7" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV7.png" group-title="央视频道",CCTV7
-http://183.142.250.107:8881/rtp/233.50.200.102:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV8" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV8.png" group-title="央视频道",CCTV8
-http://183.159.205.65:4000/rtp/233.50.201.116:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.102:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV8" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV8.png" group-title="央视频道",CCTV8
 http://175.8.129.116:4000/rtp/239.76.253.158:9000$湖南电信
@@ -163,10 +133,7 @@ http://175.8.129.116:4000/rtp/239.76.246.158:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.125:10388$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV8" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV8.png" group-title="央视频道",CCTV8
-http://183.142.250.107:8881/rtp/233.50.201.116:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV9" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV9.png" group-title="央视频道",CCTV9
-http://183.159.205.65:4000/rtp/233.50.200.23:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.116:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV9" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV9.png" group-title="央视频道",CCTV9
 http://175.8.129.116:4000/rtp/239.76.246.159:1234$湖南电信
@@ -178,10 +145,7 @@ http://175.8.129.116:4000/rtp/239.76.253.159:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.104:10262$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV9" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV9.png" group-title="央视频道",CCTV9
-http://183.142.250.107:8881/rtp/233.50.200.23:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV10.png" group-title="央视频道",CCTV10
-http://183.159.205.65:4000/rtp/233.50.200.22:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.23:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV10.png" group-title="央视频道",CCTV10
 http://175.8.129.116:4000/rtp/239.76.253.160:9000$湖南电信
@@ -193,10 +157,7 @@ http://175.8.129.116:4000/rtp/239.76.246.160:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.105:10268$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV10" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV10.png" group-title="央视频道",CCTV10
-http://183.142.250.107:8881/rtp/233.50.200.22:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV11.png" group-title="央视频道",CCTV11
-http://183.159.205.65:4000/rtp/233.50.200.132:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.22:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV11.png" group-title="央视频道",CCTV11
 http://175.8.129.116:4000/rtp/239.76.245.251:1234$湖南电信
@@ -208,10 +169,7 @@ http://175.8.129.116:4000/rtp/239.76.252.251:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.154:10560$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV11" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV11.png" group-title="央视频道",CCTV11
-http://183.142.250.107:8881/rtp/233.50.200.132:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV12.png" group-title="央视频道",CCTV12
-http://183.159.205.65:4000/rtp/233.50.200.21:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.132:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV12.png" group-title="央视频道",CCTV12
 http://175.8.129.116:4000/rtp/239.76.246.162:1234$湖南电信
@@ -223,10 +181,7 @@ http://175.8.129.116:4000/rtp/239.76.253.162:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.106:10274$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV12" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV12.png" group-title="央视频道",CCTV12
-http://183.142.250.107:8881/rtp/233.50.200.21:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV13" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV13.png" group-title="央视频道",CCTV13
-http://183.159.205.65:4000/rtp/233.50.200.97:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.21:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV13" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV13.png" group-title="央视频道",CCTV13
 http://175.8.129.116:4000/rtp/239.76.253.93:9000$湖南电信
@@ -238,10 +193,7 @@ http://175.8.129.116:4000/rtp/239.76.246.93:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.254.96.161:9040$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV13" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV13.png" group-title="央视频道",CCTV13
-http://183.142.250.107:8881/rtp/233.50.200.97:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV14.png" group-title="央视频道",CCTV14
-http://183.159.205.65:4000/rtp/233.50.200.103:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.97:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV14.png" group-title="央视频道",CCTV14
 http://175.8.129.116:4000/rtp/239.76.246.164:1234$湖南电信
@@ -253,10 +205,7 @@ http://175.8.129.116:4000/rtp/239.76.253.164:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.107:10280$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV14" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV14.png" group-title="央视频道",CCTV14
-http://183.142.250.107:8881/rtp/233.50.200.103:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV15.png" group-title="央视频道",CCTV15
-http://183.159.205.65:4000/rtp/233.50.200.133:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.103:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV15.png" group-title="央视频道",CCTV15
 http://175.8.129.116:4000/rtp/239.76.252.252:9000$湖南电信
@@ -268,10 +217,7 @@ http://175.8.129.116:4000/rtp/239.76.245.252:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.155:10566$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV15" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV15.png" group-title="央视频道",CCTV15
-http://183.142.250.107:8881/rtp/233.50.200.133:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV16" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV16.png" group-title="央视频道",CCTV16
-http://183.159.205.65:4000/rtp/233.50.201.63:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.133:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV16" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV16.png" group-title="央视频道",CCTV16
 http://175.8.129.116:4000/rtp/239.76.253.98:9000$湖南电信
@@ -289,10 +235,7 @@ http://175.8.129.116:4000/rtp/239.76.253.230:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.247:11124$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV16" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV16.png" group-title="央视频道",CCTV16
-http://183.142.250.107:8881/rtp/233.50.201.63:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV17" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV17.png" group-title="央视频道",CCTV17
-http://183.159.205.65:4000/rtp/233.50.200.113:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.63:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV17" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV17.png" group-title="央视频道",CCTV17
 http://175.8.129.116:4000/rtp/239.76.252.238:9000$湖南电信
@@ -304,10 +247,7 @@ http://175.8.129.116:4000/rtp/239.76.245.238:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.152:10548$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV17" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV17.png" group-title="央视频道",CCTV17
-http://183.142.250.107:8881/rtp/233.50.200.113:5140$浙江电信
-
-#EXTINF:-1 tvg-name="CCTV4K" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV.png" group-title="央视频道",CCTV4K
-http://183.159.205.65:4000/rtp/233.50.201.226:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.113:5140$浙江电信
 
 #EXTINF:-1 tvg-name="CCTV4K" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV.png" group-title="央视频道",CCTV4K
 http://175.8.129.116:4000/rtp/239.76.254.64:9000$湖南电信
@@ -319,7 +259,7 @@ http://175.8.129.116:4000/rtp/239.76.254.101:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.12:9712$湖北电信
 
 #EXTINF:-1 tvg-name="CCTV4K" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/CCTV.png" group-title="央视频道",CCTV4K
-http://183.142.250.107:8881/rtp/233.50.201.226:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.226:5140$浙江电信
 
 #EXTINF:-1 tvg-name="兵器科技" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/兵器科技.png" group-title="央视频道",兵器科技
 http://175.8.129.116:4000/rtp/239.76.254.59:9000$湖南电信
@@ -397,15 +337,6 @@ http://175.8.129.116:4000/rtp/239.76.254.48:9000$湖南电信
 http://175.8.129.116:4000/rtp/239.76.254.26:9000$湖南电信
 
 #EXTINF:-1 tvg-name="湖南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/湖南卫视.png" group-title="卫视频道",湖南卫视
-http://183.159.205.65:4000/rtp/233.50.201.103:5140$浙江电信
-
-#EXTINF:-1 tvg-name="湖南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/湖南卫视.png" group-title="卫视频道",湖南卫视
-http://183.159.205.65:4000/rtp/233.50.200.190:5140$浙江电信
-
-#EXTINF:-1 tvg-name="湖南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/湖南卫视.png" group-title="卫视频道",湖南卫视
-http://183.159.205.65:4000/rtp/233.50.202.106:5140$浙江电信
-
-#EXTINF:-1 tvg-name="湖南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/湖南卫视.png" group-title="卫视频道",湖南卫视
 http://175.8.129.116:4000/rtp/239.76.245.115:1234$湖南电信
 
 #EXTINF:-1 tvg-name="湖南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/湖南卫视.png" group-title="卫视频道",湖南卫视
@@ -445,25 +376,13 @@ http://175.8.129.116:4000/rtp/239.76.253.62:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.254.96.139:8908$湖北电信
 
 #EXTINF:-1 tvg-name="湖南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/湖南卫视.png" group-title="卫视频道",湖南卫视
-http://183.142.250.107:8881/rtp/233.50.201.103:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.103:5140$浙江电信
 
 #EXTINF:-1 tvg-name="湖南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/湖南卫视.png" group-title="卫视频道",湖南卫视
-http://183.142.250.107:8881/rtp/233.50.200.190:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.190:5140$浙江电信
 
 #EXTINF:-1 tvg-name="湖南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/湖南卫视.png" group-title="卫视频道",湖南卫视
-http://183.142.250.107:8881/rtp/233.50.202.106:5140$浙江电信
-
-#EXTINF:-1 tvg-name="浙江卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/浙江卫视.png" group-title="卫视频道",浙江卫视
-http://183.159.205.65:4000/rtp/233.50.200.231:5140$浙江电信
-
-#EXTINF:-1 tvg-name="浙江卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/浙江卫视.png" group-title="卫视频道",浙江卫视
-http://183.159.205.65:4000/rtp/233.50.201.100:5140$浙江电信
-
-#EXTINF:-1 tvg-name="浙江卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/浙江卫视.png" group-title="卫视频道",浙江卫视
-http://183.159.205.65:4000/rtp/233.50.200.145:5140$浙江电信
-
-#EXTINF:-1 tvg-name="浙江卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/浙江卫视.png" group-title="卫视频道",浙江卫视
-http://183.159.205.65:4000/rtp/233.50.202.104:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.106:5140$浙江电信
 
 #EXTINF:-1 tvg-name="浙江卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/浙江卫视.png" group-title="卫视频道",浙江卫视
 http://175.8.129.116:4000/rtp/239.76.246.182:1234$湖南电信
@@ -481,22 +400,16 @@ http://175.8.129.116:4000/rtp/239.76.254.220:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.254.96.143:8932$湖北电信
 
 #EXTINF:-1 tvg-name="浙江卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/浙江卫视.png" group-title="卫视频道",浙江卫视
-http://183.142.250.107:8881/rtp/233.50.200.231:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.231:5140$浙江电信
 
 #EXTINF:-1 tvg-name="浙江卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/浙江卫视.png" group-title="卫视频道",浙江卫视
-http://183.142.250.107:8881/rtp/233.50.201.100:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.100:5140$浙江电信
 
 #EXTINF:-1 tvg-name="浙江卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/浙江卫视.png" group-title="卫视频道",浙江卫视
-http://183.142.250.107:8881/rtp/233.50.200.145:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.145:5140$浙江电信
 
 #EXTINF:-1 tvg-name="浙江卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/浙江卫视.png" group-title="卫视频道",浙江卫视
-http://183.142.250.107:8881/rtp/233.50.202.104:5140$浙江电信
-
-#EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/江苏卫视.png" group-title="卫视频道",江苏卫视
-http://183.159.205.65:4000/rtp/233.50.201.106:5140$浙江电信
-
-#EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/江苏卫视.png" group-title="卫视频道",江苏卫视
-http://183.159.205.65:4000/rtp/233.50.200.144:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.104:5140$浙江电信
 
 #EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/江苏卫视.png" group-title="卫视频道",江苏卫视
 http://175.8.129.116:4000/rtp/239.76.253.181:9000$湖南电信
@@ -508,19 +421,10 @@ http://175.8.129.116:4000/rtp/239.76.246.181:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.254.96.144:8938$湖北电信
 
 #EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/江苏卫视.png" group-title="卫视频道",江苏卫视
-http://183.142.250.107:8881/rtp/233.50.201.106:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.106:5140$浙江电信
 
 #EXTINF:-1 tvg-name="江苏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/江苏卫视.png" group-title="卫视频道",江苏卫视
-http://183.142.250.107:8881/rtp/233.50.200.144:5140$浙江电信
-
-#EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/东方卫视.png" group-title="卫视频道",东方卫视
-http://183.159.205.65:4000/rtp/233.50.201.125:5140$浙江电信
-
-#EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/东方卫视.png" group-title="卫视频道",东方卫视
-http://183.159.205.65:4000/rtp/233.50.200.146:5140$浙江电信
-
-#EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/东方卫视.png" group-title="卫视频道",东方卫视
-http://183.159.205.65:4000/rtp/233.50.202.105:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.144:5140$浙江电信
 
 #EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/东方卫视.png" group-title="卫视频道",东方卫视
 http://175.8.129.116:4000/rtp/239.76.246.186:1234$湖南电信
@@ -538,22 +442,13 @@ http://175.8.129.116:4000/rtp/239.76.254.226:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.254.96.142:8926$湖北电信
 
 #EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/东方卫视.png" group-title="卫视频道",东方卫视
-http://183.142.250.107:8881/rtp/233.50.201.125:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.125:5140$浙江电信
 
 #EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/东方卫视.png" group-title="卫视频道",东方卫视
-http://183.142.250.107:8881/rtp/233.50.200.146:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.146:5140$浙江电信
 
 #EXTINF:-1 tvg-name="东方卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/东方卫视.png" group-title="卫视频道",东方卫视
-http://183.142.250.107:8881/rtp/233.50.202.105:5140$浙江电信
-
-#EXTINF:-1 tvg-name="深圳卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/深圳卫视.png" group-title="卫视频道",深圳卫视
-http://183.159.205.65:4000/rtp/233.50.201.101:5140$浙江电信
-
-#EXTINF:-1 tvg-name="深圳卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/深圳卫视.png" group-title="卫视频道",深圳卫视
-http://183.159.205.65:4000/rtp/233.50.200.188:5140$浙江电信
-
-#EXTINF:-1 tvg-name="深圳卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/深圳卫视.png" group-title="卫视频道",深圳卫视
-http://183.159.205.65:4000/rtp/233.50.202.102:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.105:5140$浙江电信
 
 #EXTINF:-1 tvg-name="深圳卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/深圳卫视.png" group-title="卫视频道",深圳卫视
 http://175.8.129.116:4000/rtp/239.76.246.188:1234$湖南电信
@@ -568,22 +463,13 @@ http://175.8.129.116:4000/rtp/239.76.254.137:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.254.96.137:8896$湖北电信
 
 #EXTINF:-1 tvg-name="深圳卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/深圳卫视.png" group-title="卫视频道",深圳卫视
-http://183.142.250.107:8881/rtp/233.50.201.101:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.101:5140$浙江电信
 
 #EXTINF:-1 tvg-name="深圳卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/深圳卫视.png" group-title="卫视频道",深圳卫视
-http://183.142.250.107:8881/rtp/233.50.200.188:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.188:5140$浙江电信
 
 #EXTINF:-1 tvg-name="深圳卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/深圳卫视.png" group-title="卫视频道",深圳卫视
-http://183.142.250.107:8881/rtp/233.50.202.102:5140$浙江电信
-
-#EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/北京卫视.png" group-title="卫视频道",北京卫视
-http://183.159.205.65:4000/rtp/233.50.201.107:5140$浙江电信
-
-#EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/北京卫视.png" group-title="卫视频道",北京卫视
-http://183.159.205.65:4000/rtp/233.50.200.179:5140$浙江电信
-
-#EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/北京卫视.png" group-title="卫视频道",北京卫视
-http://183.159.205.65:4000/rtp/233.50.202.100:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.102:5140$浙江电信
 
 #EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/北京卫视.png" group-title="卫视频道",北京卫视
 http://175.8.129.116:4000/rtp/239.76.246.184:1234$湖南电信
@@ -604,13 +490,25 @@ http://175.8.129.116:4000/rtp/239.76.246.246:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.254.96.141:8920$湖北电信
 
 #EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/北京卫视.png" group-title="卫视频道",北京卫视
-http://183.142.250.107:8881/rtp/233.50.201.107:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.107:5140$浙江电信
 
 #EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/北京卫视.png" group-title="卫视频道",北京卫视
-http://183.142.250.107:8881/rtp/233.50.200.179:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.179:5140$浙江电信
 
 #EXTINF:-1 tvg-name="北京卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/北京卫视.png" group-title="卫视频道",北京卫视
-http://183.142.250.107:8881/rtp/233.50.202.100:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.100:5140$浙江电信
+
+#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
+http://175.8.129.116:4000/rtp/239.76.252.189:9000$湖南电信
+
+#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
+http://175.8.129.116:4000/rtp/239.76.245.189:1234$湖南电信
+
+#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
+http://175.8.129.116:4000/rtp/239.76.254.138:9000$湖南电信
+
+#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
+http://171.113.178.136:8686/rtp/239.254.96.140:8914$湖北电信
 
 #EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
 http://183.159.205.65:4000/rtp/233.50.200.187:5140$浙江电信
@@ -627,36 +525,6 @@ http://183.159.205.65:4000/rtp/233.50.201.102:5140$浙江电信
 #EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
 http://183.159.205.65:4000/rtp/233.50.202.101:5140$浙江电信
 
-#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
-http://175.8.129.116:4000/rtp/239.76.252.189:9000$湖南电信
-
-#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
-http://175.8.129.116:4000/rtp/239.76.245.189:1234$湖南电信
-
-#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
-http://175.8.129.116:4000/rtp/239.76.254.138:9000$湖南电信
-
-#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
-http://171.113.178.136:8686/rtp/239.254.96.140:8914$湖北电信
-
-#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
-http://183.142.250.107:8881/rtp/233.50.200.187:5140$浙江电信
-
-#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
-http://183.142.250.107:8881/rtp/233.50.200.126:5140$浙江电信
-
-#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
-http://183.142.250.107:8881/rtp/233.50.200.149:5140$浙江电信
-
-#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
-http://183.142.250.107:8881/rtp/233.50.201.102:5140$浙江电信
-
-#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广东卫视.png" group-title="卫视频道",广东卫视
-http://183.142.250.107:8881/rtp/233.50.202.101:5140$浙江电信
-
-#EXTINF:-1 tvg-name="广西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广西卫视.png" group-title="卫视频道",广西卫视
-http://183.159.205.65:4000/rtp/233.50.200.136:5140$浙江电信
-
 #EXTINF:-1 tvg-name="广西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广西卫视.png" group-title="卫视频道",广西卫视
 http://175.8.129.116:4000/rtp/239.76.254.54:9000$湖南电信
 
@@ -664,13 +532,7 @@ http://175.8.129.116:4000/rtp/239.76.254.54:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.191:10788$湖北电信
 
 #EXTINF:-1 tvg-name="广西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/广西卫视.png" group-title="卫视频道",广西卫视
-http://183.142.250.107:8881/rtp/233.50.200.136:5140$浙江电信
-
-#EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/东南卫视.png" group-title="卫视频道",东南卫视
-http://183.159.205.65:4000/rtp/233.50.201.146:5140$浙江电信
-
-#EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/东南卫视.png" group-title="卫视频道",东南卫视
-http://183.159.205.65:4000/rtp/233.50.200.135:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.136:5140$浙江电信
 
 #EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/东南卫视.png" group-title="卫视频道",东南卫视
 http://175.8.129.116:4000/rtp/239.76.245.190:1234$湖南电信
@@ -682,10 +544,13 @@ http://175.8.129.116:4000/rtp/239.76.252.190:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.108:10286$湖北电信
 
 #EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/东南卫视.png" group-title="卫视频道",东南卫视
-http://183.142.250.107:8881/rtp/233.50.201.146:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.146:5140$浙江电信
 
 #EXTINF:-1 tvg-name="东南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/东南卫视.png" group-title="卫视频道",东南卫视
-http://183.142.250.107:8881/rtp/233.50.200.135:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.135:5140$浙江电信
+
+#EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/海南卫视.png" group-title="卫视频道",海南卫视
+http://171.113.178.136:8686/rtp/239.69.1.151:10542$湖北电信
 
 #EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/海南卫视.png" group-title="卫视频道",海南卫视
 http://183.159.205.65:4000/rtp/233.50.200.165:5140$浙江电信
@@ -695,24 +560,6 @@ http://183.159.205.65:4000/rtp/233.50.200.62:5140$浙江电信
 
 #EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/海南卫视.png" group-title="卫视频道",海南卫视
 http://183.159.205.65:4000/rtp/233.50.201.55:5140$浙江电信
-
-#EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/海南卫视.png" group-title="卫视频道",海南卫视
-http://171.113.178.136:8686/rtp/239.69.1.151:10542$湖北电信
-
-#EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/海南卫视.png" group-title="卫视频道",海南卫视
-http://183.142.250.107:8881/rtp/233.50.200.165:5140$浙江电信
-
-#EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/海南卫视.png" group-title="卫视频道",海南卫视
-http://183.142.250.107:8881/rtp/233.50.200.62:5140$浙江电信
-
-#EXTINF:-1 tvg-name="海南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/海南卫视.png" group-title="卫视频道",海南卫视
-http://183.142.250.107:8881/rtp/233.50.201.55:5140$浙江电信
-
-#EXTINF:-1 tvg-name="河北卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/河北卫视.png" group-title="卫视频道",河北卫视
-http://183.159.205.65:4000/rtp/233.50.201.140:5140$浙江电信
-
-#EXTINF:-1 tvg-name="河北卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/河北卫视.png" group-title="卫视频道",河北卫视
-http://183.159.205.65:4000/rtp/233.50.200.105:5140$浙江电信
 
 #EXTINF:-1 tvg-name="河北卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/河北卫视.png" group-title="卫视频道",河北卫视
 http://175.8.129.116:4000/rtp/239.76.245.199:1234$湖南电信
@@ -724,16 +571,10 @@ http://175.8.129.116:4000/rtp/239.76.252.199:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.254.96.113:9616$湖北电信
 
 #EXTINF:-1 tvg-name="河北卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/河北卫视.png" group-title="卫视频道",河北卫视
-http://183.142.250.107:8881/rtp/233.50.201.140:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.140:5140$浙江电信
 
 #EXTINF:-1 tvg-name="河北卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/河北卫视.png" group-title="卫视频道",河北卫视
-http://183.142.250.107:8881/rtp/233.50.200.105:5140$浙江电信
-
-#EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/河南卫视.png" group-title="卫视频道",河南卫视
-http://183.159.205.65:4000/rtp/233.50.201.144:5140$浙江电信
-
-#EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/河南卫视.png" group-title="卫视频道",河南卫视
-http://183.159.205.65:4000/rtp/233.50.200.142:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.105:5140$浙江电信
 
 #EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/河南卫视.png" group-title="卫视频道",河南卫视
 http://175.8.129.116:4000/rtp/239.76.253.202:9000$湖南电信
@@ -748,16 +589,10 @@ http://175.8.129.116:4000/rtp/239.76.246.203:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.168:10644$湖北电信
 
 #EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/河南卫视.png" group-title="卫视频道",河南卫视
-http://183.142.250.107:8881/rtp/233.50.201.144:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.144:5140$浙江电信
 
 #EXTINF:-1 tvg-name="河南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/河南卫视.png" group-title="卫视频道",河南卫视
-http://183.142.250.107:8881/rtp/233.50.200.142:5140$浙江电信
-
-#EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/湖北卫视.png" group-title="卫视频道",湖北卫视
-http://183.159.205.65:4000/rtp/233.50.201.114:5140$浙江电信
-
-#EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/湖北卫视.png" group-title="卫视频道",湖北卫视
-http://183.159.205.65:4000/rtp/233.50.200.147:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.142:5140$浙江电信
 
 #EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/湖北卫视.png" group-title="卫视频道",湖北卫视
 http://175.8.129.116:4000/rtp/239.76.246.193:1234$湖南电信
@@ -769,16 +604,10 @@ http://175.8.129.116:4000/rtp/239.76.253.193:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.254.96.115:8664$湖北电信
 
 #EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/湖北卫视.png" group-title="卫视频道",湖北卫视
-http://183.142.250.107:8881/rtp/233.50.201.114:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.114:5140$浙江电信
 
 #EXTINF:-1 tvg-name="湖北卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/湖北卫视.png" group-title="卫视频道",湖北卫视
-http://183.142.250.107:8881/rtp/233.50.200.147:5140$浙江电信
-
-#EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/江西卫视.png" group-title="卫视频道",江西卫视
-http://183.159.205.65:4000/rtp/233.50.201.145:5140$浙江电信
-
-#EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/江西卫视.png" group-title="卫视频道",江西卫视
-http://183.159.205.65:4000/rtp/233.50.200.119:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.147:5140$浙江电信
 
 #EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/江西卫视.png" group-title="卫视频道",江西卫视
 http://175.8.129.116:4000/rtp/239.76.252.225:9000$湖南电信
@@ -790,19 +619,10 @@ http://175.8.129.116:4000/rtp/239.76.245.225:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.126:10394$湖北电信
 
 #EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/江西卫视.png" group-title="卫视频道",江西卫视
-http://183.142.250.107:8881/rtp/233.50.201.145:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.145:5140$浙江电信
 
 #EXTINF:-1 tvg-name="江西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/江西卫视.png" group-title="卫视频道",江西卫视
-http://183.142.250.107:8881/rtp/233.50.200.119:5140$浙江电信
-
-#EXTINF:-1 tvg-name="四川卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/四川卫视.png" group-title="卫视频道",四川卫视
-http://183.159.205.65:4000/rtp/233.50.201.139:5140$浙江电信
-
-#EXTINF:-1 tvg-name="四川卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/四川卫视.png" group-title="卫视频道",四川卫视
-http://183.159.205.65:4000/rtp/233.50.200.118:5140$浙江电信
-
-#EXTINF:-1 tvg-name="四川卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/四川卫视.png" group-title="卫视频道",四川卫视
-http://183.159.205.65:4000/rtp/233.50.202.109:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.119:5140$浙江电信
 
 #EXTINF:-1 tvg-name="四川卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/四川卫视.png" group-title="卫视频道",四川卫视
 http://175.8.129.116:4000/rtp/239.76.253.91:9000$湖南电信
@@ -820,19 +640,13 @@ http://175.8.129.116:4000/rtp/239.76.254.232:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.169:10650$湖北电信
 
 #EXTINF:-1 tvg-name="四川卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/四川卫视.png" group-title="卫视频道",四川卫视
-http://183.142.250.107:8881/rtp/233.50.201.139:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.139:5140$浙江电信
 
 #EXTINF:-1 tvg-name="四川卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/四川卫视.png" group-title="卫视频道",四川卫视
-http://183.142.250.107:8881/rtp/233.50.200.118:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.118:5140$浙江电信
 
 #EXTINF:-1 tvg-name="四川卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/四川卫视.png" group-title="卫视频道",四川卫视
-http://183.142.250.107:8881/rtp/233.50.202.109:5140$浙江电信
-
-#EXTINF:-1 tvg-name="重庆卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/重庆卫视.png" group-title="卫视频道",重庆卫视
-http://183.159.205.65:4000/rtp/233.50.201.143:5140$浙江电信
-
-#EXTINF:-1 tvg-name="重庆卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/重庆卫视.png" group-title="卫视频道",重庆卫视
-http://183.159.205.65:4000/rtp/233.50.200.114:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.109:5140$浙江电信
 
 #EXTINF:-1 tvg-name="重庆卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/重庆卫视.png" group-title="卫视频道",重庆卫视
 http://175.8.129.116:4000/rtp/239.76.246.92:1234$湖南电信
@@ -844,16 +658,10 @@ http://175.8.129.116:4000/rtp/239.76.253.92:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.149:10530$湖北电信
 
 #EXTINF:-1 tvg-name="重庆卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/重庆卫视.png" group-title="卫视频道",重庆卫视
-http://183.142.250.107:8881/rtp/233.50.201.143:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.143:5140$浙江电信
 
 #EXTINF:-1 tvg-name="重庆卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/重庆卫视.png" group-title="卫视频道",重庆卫视
-http://183.142.250.107:8881/rtp/233.50.200.114:5140$浙江电信
-
-#EXTINF:-1 tvg-name="贵州卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/贵州卫视.png" group-title="卫视频道",贵州卫视
-http://183.159.205.65:4000/rtp/233.50.201.142:5140$浙江电信
-
-#EXTINF:-1 tvg-name="贵州卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/贵州卫视.png" group-title="卫视频道",贵州卫视
-http://183.159.205.65:4000/rtp/233.50.200.139:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.114:5140$浙江电信
 
 #EXTINF:-1 tvg-name="贵州卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/贵州卫视.png" group-title="卫视频道",贵州卫视
 http://175.8.129.116:4000/rtp/239.76.245.198:1234$湖南电信
@@ -865,25 +673,16 @@ http://175.8.129.116:4000/rtp/239.76.252.198:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.150:10536$湖北电信
 
 #EXTINF:-1 tvg-name="贵州卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/贵州卫视.png" group-title="卫视频道",贵州卫视
-http://183.142.250.107:8881/rtp/233.50.201.142:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.142:5140$浙江电信
 
 #EXTINF:-1 tvg-name="贵州卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/贵州卫视.png" group-title="卫视频道",贵州卫视
-http://183.142.250.107:8881/rtp/233.50.200.139:5140$浙江电信
-
-#EXTINF:-1 tvg-name="云南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/云南卫视.png" group-title="卫视频道",云南卫视
-http://183.159.205.65:4000/rtp/233.50.200.115:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.139:5140$浙江电信
 
 #EXTINF:-1 tvg-name="云南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/云南卫视.png" group-title="卫视频道",云南卫视
 http://175.8.129.116:4000/rtp/239.76.254.60:9000$湖南电信
 
 #EXTINF:-1 tvg-name="云南卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/云南卫视.png" group-title="卫视频道",云南卫视
-http://183.142.250.107:8881/rtp/233.50.200.115:5140$浙江电信
-
-#EXTINF:-1 tvg-name="天津卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/天津卫视.png" group-title="卫视频道",天津卫视
-http://183.159.205.65:4000/rtp/233.50.201.104:5140$浙江电信
-
-#EXTINF:-1 tvg-name="天津卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/天津卫视.png" group-title="卫视频道",天津卫视
-http://183.159.205.65:4000/rtp/233.50.200.104:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.115:5140$浙江电信
 
 #EXTINF:-1 tvg-name="天津卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/天津卫视.png" group-title="卫视频道",天津卫视
 http://175.8.129.116:4000/rtp/239.76.253.185:9000$湖南电信
@@ -895,16 +694,10 @@ http://175.8.129.116:4000/rtp/239.76.246.185:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.68:10048$湖北电信
 
 #EXTINF:-1 tvg-name="天津卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/天津卫视.png" group-title="卫视频道",天津卫视
-http://183.142.250.107:8881/rtp/233.50.201.104:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.104:5140$浙江电信
 
 #EXTINF:-1 tvg-name="天津卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/天津卫视.png" group-title="卫视频道",天津卫视
-http://183.142.250.107:8881/rtp/233.50.200.104:5140$浙江电信
-
-#EXTINF:-1 tvg-name="安徽卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/安徽卫视.png" group-title="卫视频道",安徽卫视
-http://183.159.205.65:4000/rtp/233.50.201.113:5140$浙江电信
-
-#EXTINF:-1 tvg-name="安徽卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/安徽卫视.png" group-title="卫视频道",安徽卫视
-http://183.159.205.65:4000/rtp/233.50.200.106:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.104:5140$浙江电信
 
 #EXTINF:-1 tvg-name="安徽卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/安徽卫视.png" group-title="卫视频道",安徽卫视
 http://175.8.129.116:4000/rtp/239.76.245.196:1234$湖南电信
@@ -916,19 +709,10 @@ http://175.8.129.116:4000/rtp/239.76.252.196:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.70:10060$湖北电信
 
 #EXTINF:-1 tvg-name="安徽卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/安徽卫视.png" group-title="卫视频道",安徽卫视
-http://183.142.250.107:8881/rtp/233.50.201.113:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.113:5140$浙江电信
 
 #EXTINF:-1 tvg-name="安徽卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/安徽卫视.png" group-title="卫视频道",安徽卫视
-http://183.142.250.107:8881/rtp/233.50.200.106:5140$浙江电信
-
-#EXTINF:-1 tvg-name="山东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/山东卫视.png" group-title="卫视频道",山东卫视
-http://183.159.205.65:4000/rtp/233.50.201.105:5140$浙江电信
-
-#EXTINF:-1 tvg-name="山东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/山东卫视.png" group-title="卫视频道",山东卫视
-http://183.159.205.65:4000/rtp/233.50.200.127:5140$浙江电信
-
-#EXTINF:-1 tvg-name="山东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/山东卫视.png" group-title="卫视频道",山东卫视
-http://183.159.205.65:4000/rtp/233.50.202.108:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.106:5140$浙江电信
 
 #EXTINF:-1 tvg-name="山东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/山东卫视.png" group-title="卫视频道",山东卫视
 http://175.8.129.116:4000/rtp/239.76.253.195:9000$湖南电信
@@ -946,22 +730,13 @@ http://175.8.129.116:4000/rtp/239.76.254.230:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.69:10054$湖北电信
 
 #EXTINF:-1 tvg-name="山东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/山东卫视.png" group-title="卫视频道",山东卫视
-http://183.142.250.107:8881/rtp/233.50.201.105:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.105:5140$浙江电信
 
 #EXTINF:-1 tvg-name="山东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/山东卫视.png" group-title="卫视频道",山东卫视
-http://183.142.250.107:8881/rtp/233.50.200.127:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.127:5140$浙江电信
 
 #EXTINF:-1 tvg-name="山东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/山东卫视.png" group-title="卫视频道",山东卫视
-http://183.142.250.107:8881/rtp/233.50.202.108:5140$浙江电信
-
-#EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/辽宁卫视.png" group-title="卫视频道",辽宁卫视
-http://183.159.205.65:4000/rtp/233.50.201.141:5140$浙江电信
-
-#EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/辽宁卫视.png" group-title="卫视频道",辽宁卫视
-http://183.159.205.65:4000/rtp/233.50.200.129:5140$浙江电信
-
-#EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/辽宁卫视.png" group-title="卫视频道",辽宁卫视
-http://183.159.205.65:4000/rtp/233.50.200.173:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.108:5140$浙江电信
 
 #EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/辽宁卫视.png" group-title="卫视频道",辽宁卫视
 http://175.8.129.116:4000/rtp/239.76.245.197:1234$湖南电信
@@ -973,19 +748,13 @@ http://175.8.129.116:4000/rtp/239.76.252.197:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.71:10066$湖北电信
 
 #EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/辽宁卫视.png" group-title="卫视频道",辽宁卫视
-http://183.142.250.107:8881/rtp/233.50.201.141:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.141:5140$浙江电信
 
 #EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/辽宁卫视.png" group-title="卫视频道",辽宁卫视
-http://183.142.250.107:8881/rtp/233.50.200.129:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.129:5140$浙江电信
 
 #EXTINF:-1 tvg-name="辽宁卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/辽宁卫视.png" group-title="卫视频道",辽宁卫视
-http://183.142.250.107:8881/rtp/233.50.200.173:5140$浙江电信
-
-#EXTINF:-1 tvg-name="黑龙江卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/黑龙江卫视.png" group-title="卫视频道",黑龙江卫视
-http://183.159.205.65:4000/rtp/233.50.201.115:5140$浙江电信
-
-#EXTINF:-1 tvg-name="黑龙江卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/黑龙江卫视.png" group-title="卫视频道",黑龙江卫视
-http://183.159.205.65:4000/rtp/233.50.200.189:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.173:5140$浙江电信
 
 #EXTINF:-1 tvg-name="黑龙江卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/黑龙江卫视.png" group-title="卫视频道",黑龙江卫视
 http://175.8.129.116:4000/rtp/239.76.253.200:9000$湖南电信
@@ -997,16 +766,10 @@ http://175.8.129.116:4000/rtp/239.76.246.200:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.254.96.138:8902$湖北电信
 
 #EXTINF:-1 tvg-name="黑龙江卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/黑龙江卫视.png" group-title="卫视频道",黑龙江卫视
-http://183.142.250.107:8881/rtp/233.50.201.115:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.115:5140$浙江电信
 
 #EXTINF:-1 tvg-name="黑龙江卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/黑龙江卫视.png" group-title="卫视频道",黑龙江卫视
-http://183.142.250.107:8881/rtp/233.50.200.189:5140$浙江电信
-
-#EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/吉林卫视.png" group-title="卫视频道",吉林卫视
-http://183.159.205.65:4000/rtp/233.50.200.164:5140$浙江电信
-
-#EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/吉林卫视.png" group-title="卫视频道",吉林卫视
-http://183.159.205.65:4000/rtp/233.50.202.42:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.189:5140$浙江电信
 
 #EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/吉林卫视.png" group-title="卫视频道",吉林卫视
 http://175.8.129.116:4000/rtp/239.76.253.201:9000$湖南电信
@@ -1018,13 +781,10 @@ http://175.8.129.116:4000/rtp/239.76.246.201:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.212:10914$湖北电信
 
 #EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/吉林卫视.png" group-title="卫视频道",吉林卫视
-http://183.142.250.107:8881/rtp/233.50.200.164:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.164:5140$浙江电信
 
 #EXTINF:-1 tvg-name="吉林卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/吉林卫视.png" group-title="卫视频道",吉林卫视
-http://183.142.250.107:8881/rtp/233.50.202.42:5140$浙江电信
-
-#EXTINF:-1 tvg-name="宁夏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/宁夏卫视.png" group-title="卫视频道",宁夏卫视
-http://183.159.205.65:4000/rtp/233.50.202.45:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.42:5140$浙江电信
 
 #EXTINF:-1 tvg-name="宁夏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/宁夏卫视.png" group-title="卫视频道",宁夏卫视
 http://175.8.129.116:4000/rtp/239.76.252.107:9000$湖南电信
@@ -1033,13 +793,10 @@ http://175.8.129.116:4000/rtp/239.76.252.107:9000$湖南电信
 http://175.8.129.116:4000/rtp/239.76.245.107:1234$湖南电信
 
 #EXTINF:-1 tvg-name="宁夏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/宁夏卫视.png" group-title="卫视频道",宁夏卫视
-http://183.142.250.107:8881/rtp/233.50.202.45:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.45:5140$浙江电信
 
 #EXTINF:-1 tvg-name="陕西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/陕西卫视.png" group-title="卫视频道",陕西卫视
 http://175.8.129.116:4000/rtp/239.76.254.76:9000$湖南电信
-
-#EXTINF:-1 tvg-name="甘肃卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/甘肃卫视.png" group-title="卫视频道",甘肃卫视
-http://183.159.205.65:4000/rtp/233.50.200.163:5140$浙江电信
 
 #EXTINF:-1 tvg-name="甘肃卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/甘肃卫视.png" group-title="卫视频道",甘肃卫视
 http://175.8.129.116:4000/rtp/239.76.253.94:9000$湖南电信
@@ -1048,13 +805,10 @@ http://175.8.129.116:4000/rtp/239.76.253.94:9000$湖南电信
 http://175.8.129.116:4000/rtp/239.76.246.94:1234$湖南电信
 
 #EXTINF:-1 tvg-name="甘肃卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/甘肃卫视.png" group-title="卫视频道",甘肃卫视
-http://183.142.250.107:8881/rtp/233.50.200.163:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.163:5140$浙江电信
 
 #EXTINF:-1 tvg-name="青海卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/青海卫视.png" group-title="卫视频道",青海卫视
 http://175.8.129.116:4000/rtp/239.76.254.132:9000$湖南电信
-
-#EXTINF:-1 tvg-name="新疆卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/新疆卫视.png" group-title="卫视频道",新疆卫视
-http://183.159.205.65:4000/rtp/233.50.202.46:5140$浙江电信
 
 #EXTINF:-1 tvg-name="新疆卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/新疆卫视.png" group-title="卫视频道",新疆卫视
 http://175.8.129.116:4000/rtp/239.76.252.109:9000$湖南电信
@@ -1063,10 +817,7 @@ http://175.8.129.116:4000/rtp/239.76.252.109:9000$湖南电信
 http://175.8.129.116:4000/rtp/239.76.245.109:1234$湖南电信
 
 #EXTINF:-1 tvg-name="新疆卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/新疆卫视.png" group-title="卫视频道",新疆卫视
-http://183.142.250.107:8881/rtp/233.50.202.46:5140$浙江电信
-
-#EXTINF:-1 tvg-name="西藏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/西藏卫视.png" group-title="卫视频道",西藏卫视
-http://183.159.205.65:4000/rtp/233.50.202.43:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.46:5140$浙江电信
 
 #EXTINF:-1 tvg-name="西藏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/西藏卫视.png" group-title="卫视频道",西藏卫视
 http://175.8.129.116:4000/rtp/239.76.245.108:1234$湖南电信
@@ -1075,10 +826,7 @@ http://175.8.129.116:4000/rtp/239.76.245.108:1234$湖南电信
 http://175.8.129.116:4000/rtp/239.76.252.108:9000$湖南电信
 
 #EXTINF:-1 tvg-name="西藏卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/西藏卫视.png" group-title="卫视频道",西藏卫视
-http://183.142.250.107:8881/rtp/233.50.202.43:5140$浙江电信
-
-#EXTINF:-1 tvg-name="三沙卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/三沙卫视.png" group-title="卫视频道",三沙卫视
-http://183.159.205.65:4000/rtp/233.50.200.175:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.43:5140$浙江电信
 
 #EXTINF:-1 tvg-name="三沙卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/三沙卫视.png" group-title="卫视频道",三沙卫视
 http://175.8.129.116:4000/rtp/239.76.246.74:1234$湖南电信
@@ -1087,10 +835,7 @@ http://175.8.129.116:4000/rtp/239.76.246.74:1234$湖南电信
 http://175.8.129.116:4000/rtp/239.76.253.74:9000$湖南电信
 
 #EXTINF:-1 tvg-name="三沙卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/三沙卫视.png" group-title="卫视频道",三沙卫视
-http://183.142.250.107:8881/rtp/233.50.200.175:5140$浙江电信
-
-#EXTINF:-1 tvg-name="兵团卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/兵团卫视.png" group-title="卫视频道",兵团卫视
-http://183.159.205.65:4000/rtp/233.50.202.44:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.175:5140$浙江电信
 
 #EXTINF:-1 tvg-name="兵团卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/兵团卫视.png" group-title="卫视频道",兵团卫视
 http://175.8.129.116:4000/rtp/239.76.252.232:9000$湖南电信
@@ -1099,19 +844,13 @@ http://175.8.129.116:4000/rtp/239.76.252.232:9000$湖南电信
 http://175.8.129.116:4000/rtp/239.76.245.232:1234$湖南电信
 
 #EXTINF:-1 tvg-name="兵团卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/兵团卫视.png" group-title="卫视频道",兵团卫视
-http://183.142.250.107:8881/rtp/233.50.202.44:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.44:5140$浙江电信
 
 #EXTINF:-1 tvg-name="山东教育卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/山东教育卫视.png" group-title="卫视频道",山东教育卫视
 http://175.8.129.116:4000/rtp/239.76.252.191:9000$湖南电信
 
 #EXTINF:-1 tvg-name="山东教育卫视" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/山东教育卫视.png" group-title="卫视频道",山东教育卫视
 http://175.8.129.116:4000/rtp/239.76.245.191:1234$湖南电信
-
-#EXTINF:-1 tvg-name="中国教育1台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育1台.png" group-title="卫视频道",中国教育1台
-http://183.159.205.65:4000/rtp/233.50.200.169:5140$浙江电信
-
-#EXTINF:-1 tvg-name="中国教育1台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育1台.png" group-title="卫视频道",中国教育1台
-http://183.159.205.65:4000/rtp/233.50.201.75:5140$浙江电信
 
 #EXTINF:-1 tvg-name="中国教育1台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育1台.png" group-title="卫视频道",中国教育1台
 http://175.8.129.116:4000/rtp/239.76.245.192:1234$湖南电信
@@ -1123,10 +862,16 @@ http://175.8.129.116:4000/rtp/239.76.252.192:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.110:10298$湖北电信
 
 #EXTINF:-1 tvg-name="中国教育1台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育1台.png" group-title="卫视频道",中国教育1台
-http://183.142.250.107:8881/rtp/233.50.200.169:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.169:5140$浙江电信
 
 #EXTINF:-1 tvg-name="中国教育1台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育1台.png" group-title="卫视频道",中国教育1台
-http://183.142.250.107:8881/rtp/233.50.201.75:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.75:5140$浙江电信
+
+#EXTINF:-1 tvg-name="中国教育4台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育4台.png" group-title="卫视频道",中国教育4台
+http://175.8.129.116:4000/rtp/239.76.252.254:9000$湖南电信
+
+#EXTINF:-1 tvg-name="中国教育4台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育4台.png" group-title="卫视频道",中国教育4台
+http://175.8.129.116:4000/rtp/239.76.245.254:1234$湖南电信
 
 #EXTINF:-1 tvg-name="中国教育4台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育4台.png" group-title="卫视频道",中国教育4台
 http://183.159.205.65:4000/rtp/233.50.200.162:5140$浙江电信
@@ -1139,24 +884,6 @@ http://183.159.205.65:4000/rtp/233.50.200.141:5140$浙江电信
 
 #EXTINF:-1 tvg-name="中国教育4台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育4台.png" group-title="卫视频道",中国教育4台
 http://183.159.205.65:4000/rtp/233.50.201.172:5140$浙江电信
-
-#EXTINF:-1 tvg-name="中国教育4台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育4台.png" group-title="卫视频道",中国教育4台
-http://175.8.129.116:4000/rtp/239.76.252.254:9000$湖南电信
-
-#EXTINF:-1 tvg-name="中国教育4台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育4台.png" group-title="卫视频道",中国教育4台
-http://175.8.129.116:4000/rtp/239.76.245.254:1234$湖南电信
-
-#EXTINF:-1 tvg-name="中国教育4台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育4台.png" group-title="卫视频道",中国教育4台
-http://183.142.250.107:8881/rtp/233.50.200.162:5140$浙江电信
-
-#EXTINF:-1 tvg-name="中国教育4台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育4台.png" group-title="卫视频道",中国教育4台
-http://183.142.250.107:8881/rtp/233.50.200.174:5140$浙江电信
-
-#EXTINF:-1 tvg-name="中国教育4台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育4台.png" group-title="卫视频道",中国教育4台
-http://183.142.250.107:8881/rtp/233.50.200.141:5140$浙江电信
-
-#EXTINF:-1 tvg-name="中国教育4台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/中国教育4台.png" group-title="卫视频道",中国教育4台
-http://183.142.250.107:8881/rtp/233.50.201.172:5140$浙江电信
 
 #EXTINF:-1 tvg-name="早期教育" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/早期教育.png" group-title="卫视频道",早期教育
 http://175.8.129.116:4000/rtp/239.76.254.202:9000$湖南电信
@@ -1189,19 +916,13 @@ http://175.8.129.116:4000/rtp/239.76.252.242:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.241:11088$湖北电信
 
 #EXTINF:-1 tvg-name="凤凰卫视中文台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/凤凰中文.png" group-title="数字频道",凤凰卫视中文台
-http://183.159.205.65:4000/rtp/233.50.202.35:5140$浙江电信
-
-#EXTINF:-1 tvg-name="凤凰卫视中文台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/凤凰中文.png" group-title="数字频道",凤凰卫视中文台
 http://175.8.129.116:4000/rtp/239.76.253.135:9000$湖南电信
 
 #EXTINF:-1 tvg-name="凤凰卫视中文台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/凤凰中文.png" group-title="数字频道",凤凰卫视中文台
 http://175.8.129.116:4000/rtp/239.76.246.134:1234$湖南电信
 
 #EXTINF:-1 tvg-name="凤凰卫视中文台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/凤凰中文.png" group-title="数字频道",凤凰卫视中文台
-http://183.142.250.107:8881/rtp/233.50.202.35:5140$浙江电信
-
-#EXTINF:-1 tvg-name="凤凰卫视资讯台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/凤凰资讯.png" group-title="数字频道",凤凰卫视资讯台
-http://183.159.205.65:4000/rtp/233.50.202.36:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.35:5140$浙江电信
 
 #EXTINF:-1 tvg-name="凤凰卫视资讯台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/凤凰资讯.png" group-title="数字频道",凤凰卫视资讯台
 http://175.8.129.116:4000/rtp/239.76.246.135:1234$湖南电信
@@ -1210,7 +931,7 @@ http://175.8.129.116:4000/rtp/239.76.246.135:1234$湖南电信
 http://175.8.129.116:4000/rtp/239.76.253.134:9000$湖南电信
 
 #EXTINF:-1 tvg-name="凤凰卫视资讯台" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/凤凰资讯.png" group-title="数字频道",凤凰卫视资讯台
-http://183.142.250.107:8881/rtp/233.50.202.36:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.36:5140$浙江电信
 
 #EXTINF:-1 tvg-name="金鹰纪实" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/金鹰纪实.png" group-title="数字频道",金鹰纪实
 http://175.8.129.116:4000/rtp/239.76.253.110:9000$湖南电信
@@ -1228,37 +949,19 @@ http://175.8.129.116:4000/rtp/239.76.245.122:1234$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.109:10292$湖北电信
 
 #EXTINF:-1 tvg-name="纪实科教" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/纪实科教.png" group-title="数字频道",纪实科教
-http://183.159.205.65:4000/rtp/233.50.202.34:5140$浙江电信
-
-#EXTINF:-1 tvg-name="纪实科教" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/纪实科教.png" group-title="数字频道",纪实科教
 http://175.8.129.116:4000/rtp/239.76.254.65:9000$湖南电信
 
 #EXTINF:-1 tvg-name="纪实科教" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/纪实科教.png" group-title="数字频道",纪实科教
-http://183.142.250.107:8881/rtp/233.50.202.34:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.34:5140$浙江电信
 
 #EXTINF:-1 tvg-name="睛彩青少" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/睛彩青少.png" group-title="数字频道",睛彩青少
 http://183.159.205.65:4000/rtp/233.50.202.28:5140$浙江电信
 
-#EXTINF:-1 tvg-name="睛彩青少" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/睛彩青少.png" group-title="数字频道",睛彩青少
-http://183.142.250.107:8881/rtp/233.50.202.28:5140$浙江电信
-
 #EXTINF:-1 tvg-name="睛彩竞技" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/睛彩竞技.png" group-title="数字频道",睛彩竞技
 http://183.159.205.65:4000/rtp/233.50.202.26:5140$浙江电信
 
-#EXTINF:-1 tvg-name="睛彩竞技" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/睛彩竞技.png" group-title="数字频道",睛彩竞技
-http://183.142.250.107:8881/rtp/233.50.202.26:5140$浙江电信
-
 #EXTINF:-1 tvg-name="睛彩篮球" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/睛彩篮球.png" group-title="数字频道",睛彩篮球
 http://183.159.205.65:4000/rtp/233.50.202.27:5140$浙江电信
-
-#EXTINF:-1 tvg-name="睛彩篮球" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/睛彩篮球.png" group-title="数字频道",睛彩篮球
-http://183.142.250.107:8881/rtp/233.50.202.27:5140$浙江电信
-
-#EXTINF:-1 tvg-name="快乐垂钓" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/快乐垂钓.png" group-title="数字频道",快乐垂钓
-http://183.159.205.65:4000/rtp/233.50.201.109:5140$浙江电信
-
-#EXTINF:-1 tvg-name="快乐垂钓" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/快乐垂钓.png" group-title="数字频道",快乐垂钓
-http://183.159.205.65:4000/rtp/233.50.200.123:5140$浙江电信
 
 #EXTINF:-1 tvg-name="快乐垂钓" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/快乐垂钓.png" group-title="数字频道",快乐垂钓
 http://175.8.129.116:4000/rtp/239.76.246.5:1234$湖南电信
@@ -1276,16 +979,10 @@ http://175.8.129.116:4000/rtp/239.76.253.5:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.142:10488$湖北电信
 
 #EXTINF:-1 tvg-name="快乐垂钓" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/快乐垂钓.png" group-title="数字频道",快乐垂钓
-http://183.142.250.107:8881/rtp/233.50.201.109:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.109:5140$浙江电信
 
 #EXTINF:-1 tvg-name="快乐垂钓" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/快乐垂钓.png" group-title="数字频道",快乐垂钓
-http://183.142.250.107:8881/rtp/233.50.200.123:5140$浙江电信
-
-#EXTINF:-1 tvg-name="茶频道" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/茶频道.png" group-title="数字频道",茶频道
-http://183.159.205.65:4000/rtp/233.50.201.188:5140$浙江电信
-
-#EXTINF:-1 tvg-name="茶频道" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/茶频道.png" group-title="数字频道",茶频道
-http://183.159.205.65:4000/rtp/233.50.200.124:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.123:5140$浙江电信
 
 #EXTINF:-1 tvg-name="茶频道" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/茶频道.png" group-title="数字频道",茶频道
 http://175.8.129.116:4000/rtp/239.76.245.239:1234$湖南电信
@@ -1297,10 +994,10 @@ http://175.8.129.116:4000/rtp/239.76.252.239:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.144:10500$湖北电信
 
 #EXTINF:-1 tvg-name="茶频道" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/茶频道.png" group-title="数字频道",茶频道
-http://183.142.250.107:8881/rtp/233.50.201.188:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.188:5140$浙江电信
 
 #EXTINF:-1 tvg-name="茶频道" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/茶频道.png" group-title="数字频道",茶频道
-http://183.142.250.107:8881/rtp/233.50.200.124:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.124:5140$浙江电信
 
 #EXTINF:-1 tvg-name="天元围棋" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/天元围棋.png" group-title="数字频道",天元围棋
 http://175.8.129.116:4000/rtp/239.76.246.2:1234$湖南电信
@@ -1333,13 +1030,13 @@ http://175.8.129.116:4000/rtp/239.76.252.181:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.47:9922$湖北电信
 
 #EXTINF:-1 tvg-name="乐游" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/乐游.png" group-title="数字频道",乐游
-http://183.159.205.65:4000/rtp/233.50.201.185:5140$浙江电信
-
-#EXTINF:-1 tvg-name="乐游" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/乐游.png" group-title="数字频道",乐游
 http://175.8.129.116:4000/rtp/239.76.254.68:9000$湖南电信
 
 #EXTINF:-1 tvg-name="乐游" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/乐游.png" group-title="数字频道",乐游
-http://183.142.250.107:8881/rtp/233.50.201.185:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.185:5140$浙江电信
+
+#EXTINF:-1 tvg-name="生活时尚" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/生活时尚.png" group-title="数字频道",生活时尚
+http://175.8.129.116:4000/rtp/239.76.254.73:9000$湖南电信
 
 #EXTINF:-1 tvg-name="生活时尚" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/生活时尚.png" group-title="数字频道",生活时尚
 http://183.159.205.65:4000/rtp/233.50.201.187:5140$浙江电信
@@ -1347,38 +1044,14 @@ http://183.159.205.65:4000/rtp/233.50.201.187:5140$浙江电信
 #EXTINF:-1 tvg-name="生活时尚" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/生活时尚.png" group-title="数字频道",生活时尚
 http://183.159.205.65:4000/rtp/233.50.200.15:5140$浙江电信
 
-#EXTINF:-1 tvg-name="生活时尚" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/生活时尚.png" group-title="数字频道",生活时尚
-http://175.8.129.116:4000/rtp/239.76.254.73:9000$湖南电信
-
-#EXTINF:-1 tvg-name="生活时尚" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/生活时尚.png" group-title="数字频道",生活时尚
-http://183.142.250.107:8881/rtp/233.50.201.187:5140$浙江电信
-
-#EXTINF:-1 tvg-name="生活时尚" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/生活时尚.png" group-title="数字频道",生活时尚
-http://183.142.250.107:8881/rtp/233.50.200.15:5140$浙江电信
+#EXTINF:-1 tvg-name="都市剧场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/都市剧场.png" group-title="数字频道",都市剧场
+http://175.8.129.116:4000/rtp/239.76.254.74:9000$湖南电信
 
 #EXTINF:-1 tvg-name="都市剧场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/都市剧场.png" group-title="数字频道",都市剧场
 http://183.159.205.65:4000/rtp/233.50.201.190:5140$浙江电信
 
 #EXTINF:-1 tvg-name="都市剧场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/都市剧场.png" group-title="数字频道",都市剧场
 http://183.159.205.65:4000/rtp/233.50.200.11:5140$浙江电信
-
-#EXTINF:-1 tvg-name="都市剧场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/都市剧场.png" group-title="数字频道",都市剧场
-http://175.8.129.116:4000/rtp/239.76.254.74:9000$湖南电信
-
-#EXTINF:-1 tvg-name="都市剧场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/都市剧场.png" group-title="数字频道",都市剧场
-http://183.142.250.107:8881/rtp/233.50.201.190:5140$浙江电信
-
-#EXTINF:-1 tvg-name="都市剧场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/都市剧场.png" group-title="数字频道",都市剧场
-http://183.142.250.107:8881/rtp/233.50.200.11:5140$浙江电信
-
-#EXTINF:-1 tvg-name="欢笑剧场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/欢笑剧场.png" group-title="数字频道",欢笑剧场
-http://183.159.205.65:4000/rtp/233.50.201.189:5140$浙江电信
-
-#EXTINF:-1 tvg-name="欢笑剧场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/欢笑剧场.png" group-title="数字频道",欢笑剧场
-http://183.159.205.65:4000/rtp/233.50.200.229:5140$浙江电信
-
-#EXTINF:-1 tvg-name="欢笑剧场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/欢笑剧场.png" group-title="数字频道",欢笑剧场
-http://183.159.205.65:4000/rtp/233.50.200.52:5140$浙江电信
 
 #EXTINF:-1 tvg-name="欢笑剧场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/欢笑剧场.png" group-title="数字频道",欢笑剧场
 http://175.8.129.116:4000/rtp/239.76.254.66:9000$湖南电信
@@ -1390,13 +1063,16 @@ http://175.8.129.116:4000/rtp/239.76.253.43:9000$湖南电信
 http://175.8.129.116:4000/rtp/239.76.246.43:1234$湖南电信
 
 #EXTINF:-1 tvg-name="欢笑剧场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/欢笑剧场.png" group-title="数字频道",欢笑剧场
-http://183.142.250.107:8881/rtp/233.50.201.189:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.201.189:5140$浙江电信
 
 #EXTINF:-1 tvg-name="欢笑剧场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/欢笑剧场.png" group-title="数字频道",欢笑剧场
-http://183.142.250.107:8881/rtp/233.50.200.229:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.229:5140$浙江电信
 
 #EXTINF:-1 tvg-name="欢笑剧场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/欢笑剧场.png" group-title="数字频道",欢笑剧场
-http://183.142.250.107:8881/rtp/233.50.200.52:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.52:5140$浙江电信
+
+#EXTINF:-1 tvg-name="游戏风云" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/游戏风云.png" group-title="数字频道",游戏风云
+http://175.8.129.116:4000/rtp/239.76.254.71:9000$湖南电信
 
 #EXTINF:-1 tvg-name="游戏风云" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/游戏风云.png" group-title="数字频道",游戏风云
 http://183.159.205.65:4000/rtp/233.50.201.183:5140$浙江电信
@@ -1404,14 +1080,8 @@ http://183.159.205.65:4000/rtp/233.50.201.183:5140$浙江电信
 #EXTINF:-1 tvg-name="游戏风云" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/游戏风云.png" group-title="数字频道",游戏风云
 http://183.159.205.65:4000/rtp/233.50.200.14:5140$浙江电信
 
-#EXTINF:-1 tvg-name="游戏风云" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/游戏风云.png" group-title="数字频道",游戏风云
-http://175.8.129.116:4000/rtp/239.76.254.71:9000$湖南电信
-
-#EXTINF:-1 tvg-name="游戏风云" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/游戏风云.png" group-title="数字频道",游戏风云
-http://183.142.250.107:8881/rtp/233.50.201.183:5140$浙江电信
-
-#EXTINF:-1 tvg-name="游戏风云" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/游戏风云.png" group-title="数字频道",游戏风云
-http://183.142.250.107:8881/rtp/233.50.200.14:5140$浙江电信
+#EXTINF:-1 tvg-name="金色学堂" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/金色学堂.png" group-title="数字频道",金色学堂
+http://175.8.129.116:4000/rtp/239.76.254.75:9000$湖南电信
 
 #EXTINF:-1 tvg-name="金色学堂" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/金色学堂.png" group-title="数字频道",金色学堂
 http://183.159.205.65:4000/rtp/233.50.201.186:5140$浙江电信
@@ -1419,14 +1089,8 @@ http://183.159.205.65:4000/rtp/233.50.201.186:5140$浙江电信
 #EXTINF:-1 tvg-name="金色学堂" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/金色学堂.png" group-title="数字频道",金色学堂
 http://183.159.205.65:4000/rtp/233.50.200.122:5140$浙江电信
 
-#EXTINF:-1 tvg-name="金色学堂" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/金色学堂.png" group-title="数字频道",金色学堂
-http://175.8.129.116:4000/rtp/239.76.254.75:9000$湖南电信
-
-#EXTINF:-1 tvg-name="金色学堂" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/金色学堂.png" group-title="数字频道",金色学堂
-http://183.142.250.107:8881/rtp/233.50.201.186:5140$浙江电信
-
-#EXTINF:-1 tvg-name="金色学堂" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/金色学堂.png" group-title="数字频道",金色学堂
-http://183.142.250.107:8881/rtp/233.50.200.122:5140$浙江电信
+#EXTINF:-1 tvg-name="动漫秀场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/动漫秀场.png" group-title="数字频道",动漫秀场
+http://175.8.129.116:4000/rtp/239.76.254.70:9000$湖南电信
 
 #EXTINF:-1 tvg-name="动漫秀场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/动漫秀场.png" group-title="数字频道",动漫秀场
 http://183.159.205.65:4000/rtp/233.50.201.184:5140$浙江电信
@@ -1434,23 +1098,8 @@ http://183.159.205.65:4000/rtp/233.50.201.184:5140$浙江电信
 #EXTINF:-1 tvg-name="动漫秀场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/动漫秀场.png" group-title="数字频道",动漫秀场
 http://183.159.205.65:4000/rtp/233.50.200.12:5140$浙江电信
 
-#EXTINF:-1 tvg-name="动漫秀场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/动漫秀场.png" group-title="数字频道",动漫秀场
-http://175.8.129.116:4000/rtp/239.76.254.70:9000$湖南电信
-
-#EXTINF:-1 tvg-name="动漫秀场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/动漫秀场.png" group-title="数字频道",动漫秀场
-http://183.142.250.107:8881/rtp/233.50.201.184:5140$浙江电信
-
-#EXTINF:-1 tvg-name="动漫秀场" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/动漫秀场.png" group-title="数字频道",动漫秀场
-http://183.142.250.107:8881/rtp/233.50.200.12:5140$浙江电信
-
 #EXTINF:-1 tvg-name="新动漫" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/新动漫.png" group-title="数字频道",新动漫
 http://175.8.129.116:4000/rtp/239.76.245.244:1234$湖南电信
-
-#EXTINF:-1 tvg-name="卡酷少儿" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/卡酷少儿.png" group-title="数字频道",卡酷少儿
-http://183.159.205.65:4000/rtp/233.50.200.166:5140$浙江电信
-
-#EXTINF:-1 tvg-name="卡酷少儿" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/卡酷少儿.png" group-title="数字频道",卡酷少儿
-http://183.159.205.65:4000/rtp/233.50.202.33:5140$浙江电信
 
 #EXTINF:-1 tvg-name="卡酷少儿" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/卡酷少儿.png" group-title="数字频道",卡酷少儿
 http://175.8.129.116:4000/rtp/239.76.254.81:9000$湖南电信
@@ -1459,10 +1108,10 @@ http://175.8.129.116:4000/rtp/239.76.254.81:9000$湖南电信
 http://171.113.178.136:8686/rtp/239.69.1.193:10800$湖北电信
 
 #EXTINF:-1 tvg-name="卡酷少儿" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/卡酷少儿.png" group-title="数字频道",卡酷少儿
-http://183.142.250.107:8881/rtp/233.50.200.166:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.200.166:5140$浙江电信
 
 #EXTINF:-1 tvg-name="卡酷少儿" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/卡酷少儿.png" group-title="数字频道",卡酷少儿
-http://183.142.250.107:8881/rtp/233.50.202.33:5140$浙江电信
+http://183.159.205.65:4000/rtp/233.50.202.33:5140$浙江电信
 
 #EXTINF:-1 tvg-name="金鹰卡通" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/金鹰卡通.png" group-title="数字频道",金鹰卡通
 http://175.8.129.116:4000/rtp/239.76.245.120:1234$湖南电信
@@ -1487,9 +1136,6 @@ http://175.8.129.116:4000/rtp/239.76.245.112:1234$湖南电信
 
 #EXTINF:-1 tvg-name="哈哈炫动" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/哈哈炫动.png" group-title="数字频道",哈哈炫动
 http://183.159.205.65:4000/rtp/233.50.200.167:5140$浙江电信
-
-#EXTINF:-1 tvg-name="哈哈炫动" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/哈哈炫动.png" group-title="数字频道",哈哈炫动
-http://183.142.250.107:8881/rtp/233.50.200.167:5140$浙江电信
 
 #EXTINF:-1 tvg-name="嘉佳卡通" tvg-logo="https://gcore.jsdelivr.net/gh/taksssss/tv/icon/嘉佳卡通.png" group-title="数字频道",嘉佳卡通
 http://175.8.129.116:4000/rtp/239.76.252.230:9000$湖南电信
