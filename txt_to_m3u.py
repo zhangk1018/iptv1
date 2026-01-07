@@ -87,7 +87,7 @@ def main():
                 parts = line.split(",", 1)
                 if len(parts) == 2:
                     title, url = parts
-                    out.write(f'#EXTINF:-1 group-title="提示",{title.strip()}\n{url.strip()}\n\n')
+                    out.write(f'#EXTINF:-1 group-title="更新时间",{title.strip()}\n{url.strip()}\n\n')
                 continue
 
             # 正常频道行：CCTV1,http://...$广东电信
