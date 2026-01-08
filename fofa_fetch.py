@@ -4,6 +4,7 @@ import requests
 import time
 import concurrent.futures
 import subprocess
+from datetime import datetime, timezone, timedelta
 
 # ===============================
 # 配置区
@@ -13,21 +14,20 @@ FOFA_URLS = {
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
 }
-
 COUNTER_FILE = "计数.txt"
 IP_DIR = "ip"
 RTP_DIR = "rtp"
 ZUBO_FILE = "zubo.txt"
 IPTV_FILE = "IPTV.txt"
-
 # ===============================
-# 分类与映射配置
+
+# 分类与映射配置（保持不变）
 CHANNEL_CATEGORIES = {
     "央视频道": [
         "CCTV1", "CCTV2", "CCTV3", "CCTV4", "CCTV4欧洲", "CCTV4美洲", "CCTV5", "CCTV5+", "CCTV6", "CCTV7",
         "CCTV8", "CCTV9", "CCTV10", "CCTV11", "CCTV12", "CCTV13", "CCTV14", "CCTV15", "CCTV16", "CCTV17", "CCTV4K", "CCTV8K",
         "兵器科技", "风云音乐", "风云足球", "风云剧场", "怀旧剧场", "第一剧场", "女性时尚", "世界地理", "央视台球", "高尔夫网球",
-        "央视文化精品", "卫生健康", "电视指南"
+        "央视文化精品", "卫生健康", "电视指南", "中学生", "发现之旅", "书法频道", "国学频道", "环球奇观"
     ],
     "卫视频道": [
         "湖南卫视", "浙江卫视", "江苏卫视", "东方卫视", "深圳卫视", "北京卫视", "广东卫视", "广西卫视", "东南卫视", "海南卫视",
@@ -46,7 +46,11 @@ CHANNEL_CATEGORIES = {
         "华数军旅剧场", "华数城市剧场", "华数武侠剧场", "华数古装剧场", "华数魅力时尚", "华数少儿动画", "华数动画", "iHOT爱喜剧", "iHOT爱科幻", 
         "iHOT爱院线", "iHOT爱悬疑", "iHOT爱历史", "iHOT爱谍战", "iHOT爱旅行", "iHOT爱幼教", "iHOT爱玩具", "iHOT爱体育", "iHOT爱赛车", "iHOT爱浪漫", 
         "iHOT爱奇谈", "iHOT爱科学", "iHOT爱动漫",
-    ]
+    ],
+    "湖北": [
+        "湖北公共新闻", "湖北经视频道", "湖北综合频道", "湖北垄上频道", "湖北影视频道", "湖北生活频道", "湖北教育频道", "武汉新闻综合", "武汉电视剧", "武汉科技生活",
+        "武汉文体频道", "武汉教育频道", "阳新综合", "房县综合", "蔡甸综合",
+    ],
 }
 
 # ===== 映射（别名 -> 标准名） =====
@@ -92,12 +96,12 @@ CHANNEL_MAPPING = {
     "延边卫视": ["吉林延边卫视"],
     "安多卫视": ["青海安多卫视"],
     "康巴卫视": ["四川康巴卫视"],
-    "山东教育卫视": ["山东教育", "山东教育卫视 576"],
+    "山东教育卫视": ["山东教育"],
     "中国教育1台": ["CETV1", "中国教育一台", "中国教育1", "CETV-1 综合教育", "CETV-1"],
     "中国教育2台": ["CETV2", "中国教育二台", "中国教育2", "CETV-2 空中课堂", "CETV-2"],
     "中国教育3台": ["CETV3", "中国教育三台", "中国教育3", "CETV-3 教育服务", "CETV-3"],
     "中国教育4台": ["CETV4", "中国教育四台", "中国教育4", "CETV-4 职业教育", "CETV-4"],
-    "早期教育": ["中国教育5台", "中国教育5", "中国教育五台", "CETV早期教育", "华电早期教育", "CETV 早期教育", "CETV-5", "CETV5"],
+    "早期教育": ["中国教育5台", "中国教育五台", "CETV早期教育", "华电早期教育", "CETV 早期教育"],
     "湖南卫视": ["湖南卫视4K"],
     "北京卫视": ["北京卫视4K"],
     "东方卫视": ["东方卫视4K"],
@@ -147,21 +151,6 @@ CHANNEL_MAPPING = {
     "中国交通": ["中国交通频道"],
     "中国天气": ["中国天气频道"],
     "华数4K": ["华数低于4K", "华数4K电影", "华数爱上4K"],
-    "iHOT爱喜剧": ["iHOT 爱喜剧", "IHOT 爱喜剧", "IHOT爱喜剧", "ihot爱喜剧", "爱喜剧", "ihot 爱喜剧"],
-    "iHOT爱科幻": ["iHOT 爱科幻", "IHOT 爱科幻", "IHOT爱科幻", "ihot爱科幻", "爱科幻", "ihot 爱科幻"],
-    "iHOT爱院线": ["iHOT 爱院线", "IHOT 爱院线", "IHOT爱院线", "ihot爱院线", "ihot 爱院线", "爱院线"],
-    "iHOT爱悬疑": ["iHOT 爱悬疑", "IHOT 爱悬疑", "IHOT爱悬疑", "ihot爱悬疑", "ihot 爱悬疑", "爱悬疑"],
-    "iHOT爱历史": ["iHOT 爱历史", "IHOT 爱历史", "IHOT爱历史", "ihot爱历史", "ihot 爱历史", "爱历史"],
-    "iHOT爱谍战": ["iHOT 爱谍战", "IHOT 爱谍战", "IHOT爱谍战", "ihot爱谍战", "ihot 爱谍战", "爱谍战"],
-    "iHOT爱旅行": ["iHOT 爱旅行", "IHOT 爱旅行", "IHOT爱旅行", "ihot爱旅行", "ihot 爱旅行", "爱旅行"],
-    "iHOT爱幼教": ["iHOT 爱幼教", "IHOT 爱幼教", "IHOT爱幼教", "ihot爱幼教", "ihot 爱幼教", "爱幼教"],
-    "iHOT爱玩具": ["iHOT 爱玩具", "IHOT 爱玩具", "IHOT爱玩具", "ihot爱玩具", "ihot 爱玩具", "爱玩具"],
-    "iHOT爱体育": ["iHOT 爱体育", "IHOT 爱体育", "IHOT爱体育", "ihot爱体育", "ihot 爱体育", "爱体育"],
-    "iHOT爱赛车": ["iHOT 爱赛车", "IHOT 爱赛车", "IHOT爱赛车", "ihot爱赛车", "ihot 爱赛车", "爱赛车"],
-    "iHOT爱浪漫": ["iHOT 爱浪漫", "IHOT 爱浪漫", "IHOT爱浪漫", "ihot爱浪漫", "ihot 爱浪漫", "爱浪漫"],
-    "iHOT爱奇谈": ["iHOT 爱奇谈", "IHOT 爱奇谈", "IHOT爱奇谈", "ihot爱奇谈", "ihot 爱奇谈", "爱奇谈"],
-    "iHOT爱科学": ["iHOT 爱科学", "IHOT 爱科学", "IHOT爱科学", "ihot爱科学", "ihot 爱科学", "爱科学"],
-    "iHOT爱动漫": ["iHOT 爱动漫", "IHOT 爱动漫", "IHOT爱动漫", "ihot爱动漫", "ihot 爱动漫", "爱动漫"],
 }
 
 # ===============================
@@ -204,7 +193,7 @@ def get_isp(ip):
         return "未知"
 
 # ===============================
-# 第一阶段：爬取 + 分类写入
+# 第一阶段：爬取FOFA并分类写入IP文件
 def first_stage():
     all_ips = set()
     for url, filename in FOFA_URLS.items():
@@ -239,11 +228,12 @@ def first_stage():
             for ip_port in sorted(ip_set):
                 f.write(ip_port + "\n")
         print(f"{path} 已{'覆盖' if mode=='w' else '追加'}写入 {len(ip_set)} 个 IP")
+
     print(f"✅ 第一阶段完成，当前轮次：{run_count}")
     return run_count
 
 # ===============================
-# 第二阶段：生成 zubo.txt
+# 第二阶段：组合生成 zubo.txt
 def second_stage():
     print("🔔 第二阶段触发：生成 zubo.txt")
     combined_lines = []
@@ -254,14 +244,11 @@ def second_stage():
         rtp_path = os.path.join(RTP_DIR, ip_file)
         if not os.path.exists(rtp_path):
             continue
-
         with open(ip_path, encoding="utf-8") as f1, open(rtp_path, encoding="utf-8") as f2:
             ip_lines = [x.strip() for x in f1 if x.strip()]
             rtp_lines = [x.strip() for x in f2 if x.strip()]
-
         if not ip_lines or not rtp_lines:
             continue
-
         for ip_port in ip_lines:
             for rtp_line in rtp_lines:
                 if "," not in rtp_line:
@@ -269,7 +256,7 @@ def second_stage():
                 ch_name, rtp_url = rtp_line.split(",", 1)
                 combined_lines.append(f"{ch_name},http://{ip_port}/rtp/{rtp_url.split('rtp://')[1]}")
 
-    # 去重
+    # 去重（按URL去重）
     unique = {}
     for line in combined_lines:
         url_part = line.split(",", 1)[1]
@@ -282,13 +269,11 @@ def second_stage():
     print(f"🎯 第二阶段完成，共 {len(unique)} 条有效 URL")
 
 # ===============================
-# ===============================
-# ===============================
-# 第三阶段：检测代表频道并生成 IPTV.txt（使用 ffprobe + 映射匹配 + 分类排序）
+# 第三阶段：检测并生成 IPTV.txt
 def third_stage():
-    print("🧩 第三阶段：检测代表频道生成 IPTV.txt")
+    print("🧩 第三阶段：多线程检测代表频道生成 IPTV.txt")
     if not os.path.exists(ZUBO_FILE):
-        print("⚠️ zubo.txt 不存在，跳过")
+        print("⚠️ zubo.txt 不存在，跳过第三阶段")
         return
 
     def check_stream(url, timeout=5):
@@ -300,46 +285,76 @@ def third_stage():
                 timeout=timeout + 2
             )
             return b"codec_type" in result.stdout
-        except:
+        except Exception:
             return False
 
-    # 建立别名映射反查表
+    # 别名映射
     alias_map = {}
     for main_name, aliases in CHANNEL_MAPPING.items():
         for alias in aliases:
             alias_map[alias] = main_name
 
-    # 按 IP 分组
+    # IP归属信息
+    ip_info = {}
+    for fname in os.listdir(IP_DIR):
+        if not fname.endswith(".txt"):
+            continue
+        province_operator = fname.replace(".txt", "")
+        path = os.path.join(IP_DIR, fname)
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                ip_port = line.strip()
+                ip_info[ip_port] = province_operator
+
+    # 按IP分组
     groups = {}
     with open(ZUBO_FILE, encoding="utf-8") as f:
         for line in f:
             if "," not in line:
                 continue
             ch_name, url = line.strip().split(",", 1)
-
-            # 频道别名归一化
             ch_main = alias_map.get(ch_name, ch_name)
-
-            m = re.match(r"http://(.*?)/", url)
+            m = re.match(r"http://(\d+\.\d+\.\d+\.\d+:\d+)/", url)
             if m:
-                ip = m.group(1)
-                groups.setdefault(ip, []).append((ch_main, url))
+                ip_port = m.group(1)
+                groups.setdefault(ip_port, []).append((ch_main, url))
 
-    # 检测代表频道 CCTV1
-    valid_lines = []
-    for ip, entries in groups.items():
+    def detect_ip(ip_port, entries):
+        # 优先检测CCTV1，没有则用第一个频道
         rep_channels = [u for c, u in entries if c == "CCTV1"]
-        if not rep_channels:
-            continue
+        if not rep_channels and entries:
+            rep_channels = [entries[0][1]]
         playable = any(check_stream(u) for u in rep_channels)
-        if playable:
-            for c, u in entries:
-                line = f"{c},{u}"
-                if line not in valid_lines:
-                    valid_lines.append(line)
+        return ip_port, playable
 
-    # 分类 + 排序输出
+    print(f"🚀 启动多线程检测（共 {len(groups)} 个 IP）...")
+    playable_ips = set()
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        futures = {executor.submit(detect_ip, ip, chs): ip for ip, chs in groups.items()}
+        for future in concurrent.futures.as_completed(futures):
+            ip_port, ok = future.result()
+            if ok:
+                playable_ips.add(ip_port)
+
+    print(f"✅ 检测完成，可播放 IP 共 {len(playable_ips)} 个")
+
+    valid_lines = []
+    seen = set()
+    for ip_port in playable_ips:
+        province_operator = ip_info.get(ip_port, "未知")
+        for c, u in groups[ip_port]:
+            key = f"{c},{u}"
+            if key not in seen:
+                seen.add(key)
+                valid_lines.append(f"{c},{u}${province_operator}")
+
+    beijing_now = datetime.now(timezone(timedelta(hours=8))).strftime("%Y-%m-%d %H:%M:%S")
+    disclaimer_url = "https://kakaxi-1.asia/LOGO/Disclaimer.mp4"
+
     with open(IPTV_FILE, "w", encoding="utf-8") as f:
+        f.write(f"更新时间: {beijing_now}（北京时间）\n\n")
+        f.write("更新时间,#genre#\n")
+        f.write(f"{beijing_now},{disclaimer_url}\n\n")
         for category, ch_list in CHANNEL_CATEGORIES.items():
             f.write(f"{category},#genre#\n")
             for ch in ch_list:
@@ -349,7 +364,7 @@ def third_stage():
                         f.write(line + "\n")
             f.write("\n")
 
-    print(f"✅ IPTV.txt 分类+映射修正完成，共 {len(valid_lines)} 条有效频道")
+    print(f"🎉 IPTV.txt 生成完成，共 {len(valid_lines)} 条有效频道")
 
 # ===============================
 # 文件推送
@@ -359,15 +374,23 @@ def push_all_files():
     os.system('git config --global user.email "github-actions@users.noreply.github.com"')
     os.system("git add 计数.txt")
     os.system("git add ip/*.txt || true")
-    os.system("git add zubo.txt IPTV.txt || true")
+    os.system("git add zubo.txt || true")
+    os.system("git add IPTV.txt || true")
     os.system('git commit -m "自动更新：计数、IP文件、zubo.txt、IPTV.txt" || echo "⚠️ 无需提交"')
     os.system("git push origin main || echo '⚠️ 推送失败'")
 
 # ===============================
-# 主执行逻辑
+# 主执行逻辑（关键修改：手动运行时强制执行全部阶段）
 if __name__ == "__main__":
     run_count = first_stage()
-    if run_count in [12, 24, 36, 48, 60, 72]:
-        second_stage()
-        third_stage()
+
+    # === 强制执行第二、三阶段（手动运行时始终完整更新）===
+    second_stage()
+    third_stage()
+
+    # 如需恢复原“每12次大更新一次”逻辑，可取消注释下面这行并注释掉上面两行
+    # if run_count in [12, 24, 36, 48, 60, 72]:
+    #     second_stage()
+    #     third_stage()
+
     push_all_files()
