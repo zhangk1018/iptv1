@@ -4,7 +4,7 @@ import requests
 
 # 输入输出文件（改为远程 GitHub Raw URL）
 INPUT_URL = "https://raw.githubusercontent.com/linyu345/2026/refs/heads/main/py/fofa/IPTV.txt"
-OUTPUT_FILE = "IPTV.m3u"
+OUTPUT_FILE = "IPTV2.m3u"
 
 # 台标和 EPG（保持不变）
 LOGO_BASE = "https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/"
