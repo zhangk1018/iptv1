@@ -7,7 +7,7 @@ import subprocess
 from datetime import datetime, timezone, timedelta
 
 # ===============================
-# 配置区
+# 1. 配置区（在这里填写你想抓取的频道）
 # ===============================
 FOFA_URL = "https://fofa.info/result?qbase64=InVkcHh5IiAmJiBjb3VudHJ5PSJDTiI%3D"
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
@@ -17,7 +17,7 @@ RTP_DIR = "rtp"
 ZUBO_FILE = "zubo.txt"
 IPTV_FILE = "IPTV.txt"
 
-# 频道分类与映射（建议保留你完整版的内容，此处仅为结构示例）
+# --- 分类配置：只有出现在这里的频道名，才会被写入最终的 IPTV.txt ---
 CHANNEL_CATEGORIES = {
     "央视频道": [
         "CCTV1", "CCTV2", "CCTV3", "CCTV4", "CCTV4欧洲", "CCTV4美洲", "CCTV5", "CCTV5+", "CCTV6", "CCTV7",
@@ -168,140 +168,132 @@ CHANNEL_MAPPING = {
 }#格式为"频道分类中的标准名": ["rtp/中的名字"],
 
 # ===============================
-# 归属地识别逻辑 (API + 正则兜底)
+# 2. 核心逻辑函数
 # ===============================
 
 def get_ip_info(ip):
-    province = "未知"
-    isp = "未知"
-    
-    # 1. 尝试 API
+    """识别省份和运营商"""
+    province, isp = "未知", "未知"
     try:
-        res = requests.get(f"http://ip-api.com/json/{ip}?lang=zh-CN", timeout=5).json()
+        res = requests.get(f"http://ip-api.com/json/{ip}?lang=zh-CN", timeout=8).json()
         if res.get('status') == 'success':
             province = res.get('regionName', '').replace('市', '').replace('省', '')
             raw_isp = res.get('isp', '')
             if 'Telecom' in raw_isp or '电信' in raw_isp: isp = "电信"
             elif 'Unicom' in raw_isp or '联通' in raw_isp: isp = "联通"
             elif 'Mobile' in raw_isp or '移动' in raw_isp: isp = "移动"
-    except:
-        pass
-
-    # 2. 如果 ISP 仍未知，执行你的正则判断逻辑
+    except: pass
+    
     if isp == "未知":
-        if re.match(r"^(1[0-9]{2}|2[0-3]{2}|42|43|58|59|60|61|110|111|112|113|114|115|116|117|118|119|120|121|122|123|124|125|126|127|175|180|182|183|184|185|186|187|188|189|223)\.", ip):
-            isp = "电信"
-        elif re.match(r"^(42|43|58|59|60|61|110|111|112|113|114|115|116|117|118|119|120|121|122|123|124|125|126|127|175|180|182|183|184|185|186|187|188|189|223)\.", ip):
-            isp = "联通"
-        elif re.match(r"^(223|36|37|38|39|100|101|102|103|104|105|106|107|108|109|134|135|136|137|138|139|150|151|152|157|158|159|170|178|182|183|184|187|188|189)\.", ip):
-            isp = "移动"
+        if re.match(r"^(1[0-9]{2}|2[0-3]{2}|42|43|58|59|60|61|110|111|112|113|114|115|116|117|118|119|120|121|122|123|124|125|126|127|175|180|182|183|184|185|186|187|188|189|223)\.", ip): isp = "电信"
+        elif re.match(r"^(42|43|58|59|60|61|110|111|112|113|114|115|116|117|118|119|120|121|122|123|124|125|126|127|175|180|182|183|184|185|186|187|188|189|223)\.", ip): isp = "联通"
+        elif re.match(r"^(223|36|37|38|39|100|101|102|103|104|105|106|107|108|109|134|135|136|137|138|139|150|151|152|157|158|159|170|178|182|183|184|187|188|189)\.", ip): isp = "移动"
 
-    if isp != "未知":
-        # 如果省份还是未知，为了匹配模板，设为全国或默认值
-        tag = f"{province}{isp}" if province != "未知" else f"全国{isp}"
-        return tag
-    return None
-
-# ===============================
-# 核心执行函数
-# ===============================
+    return f"{province}{isp}" if isp != "未知" else None
 
 def check_stream(url):
-    """探测视频流是否真实有效"""
+    """检测流是否真实有效"""
     try:
         result = subprocess.run(
             ["ffprobe", "-v", "error", "-show_streams", "-select_streams", "v", "-i", url],
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=8
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10
         )
         return b"codec_type=video" in result.stdout
-    except:
-        return False
+    except: return False
+
+# ===============================
+# 3. 运行流程
+# ===============================
 
 def first_stage():
-    print("📡 1. 抓取 FOFA 并识别归属地...")
-    if os.path.exists(IP_DIR):
-        import shutil
-        shutil.rmtree(IP_DIR)
+    print("📡 1. 抓取 FOFA 原始节点...")
     os.makedirs(IP_DIR, exist_ok=True)
+    raw_ips = []
+    for i in range(2): # 尝试2次
+        try:
+            r = requests.get(FOFA_URL, headers=HEADERS, timeout=25)
+            raw_ips = list(set(re.findall(r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{2,5})', r.text)))
+            if raw_ips: break
+        except: time.sleep(5)
 
-    try:
-        r = requests.get(FOFA_URL, headers=HEADERS, timeout=15)
-        raw_ips = list(set(re.findall(r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{2,5})', r.text)))
-        print(f"✅ 抓到 {len(raw_ips)} 个原始节点")
-        
-        for node in raw_ips:
-            tag = get_ip_info(node.split(':')[0])
-            if tag:
-                with open(os.path.join(IP_DIR, f"{tag}.txt"), "a") as f:
-                    f.write(node + "\n")
-    except Exception as e:
-        print(f"❌ 抓取失败: {e}")
+    if not raw_ips:
+        print("⚠️ 抓取失败，跳过分类，将沿用现有 IP 数据")
+        return
+    
+    # 只有抓到数据才覆盖旧 IP 文件夹
+    import shutil
+    shutil.rmtree(IP_DIR); os.makedirs(IP_DIR)
+    for node in raw_ips:
+        tag = get_ip_info(node.split(':')[0])
+        if tag:
+            with open(os.path.join(IP_DIR, f"{tag}.txt"), "a") as f: f.write(node + "\n")
 
 def second_stage():
-    print("🔔 2. 匹配 RTP 模板生成 zubo.txt...")
+    print("🔗 2. 匹配 RTP 模板并筛选频道...")
     combined = []
-    if not os.path.exists(IP_DIR): return
-    
+    # 建立反向映射表：RTP名 -> 标准名
+    reverse_map = {}
+    for std_name, aliases in CHANNEL_MAPPING.items():
+        for alias in aliases: reverse_map[alias] = std_name
+
     for ip_file in os.listdir(IP_DIR):
         tag = ip_file.replace(".txt", "")
-        # 匹配 rtp 文件夹下的文件（如 tag 为 "湖北电信"，匹配 "rtp/湖北电信.txt"）
-        rtp_path = os.path.join(RTP_DIR, ip_file) 
-        if os.path.exists(rtp_path):
-            with open(os.path.join(IP_DIR, ip_file)) as f1, open(rtp_path, encoding="utf-8") as f2:
-                ips = [x.strip() for x in f1 if x.strip()]
-                rtps = [x.strip() for x in f2 if x.strip()]
-                for ip in ips:
-                    for r in rtps:
-                        if "," in r:
-                            name, rtp_url = r.split(",")
-                            url = f"http://{ip}/rtp/{rtp_url.replace('rtp://','')}"
-                            combined.append(f"{name},{url}")
+        # 寻找对应的 rtp/ 模板
+        target_rtp = None
+        for r_file in os.listdir(RTP_DIR):
+            if tag in r_file or r_file.replace("市","") == tag + ".txt":
+                target_rtp = r_file; break
+        
+        if target_rtp:
+            with open(os.path.join(IP_DIR, ip_file)) as f_ip, open(os.path.join(RTP_DIR, target_rtp), encoding="utf-8") as f_rtp:
+                ips = [x.strip() for x in f_ip if x.strip()]
+                for r_line in f_rtp:
+                    if "," in r_line:
+                        rtp_name, rtp_url = r_line.strip().split(",")
+                        # 转换成标准名，如果不在映射表里则保持原样
+                        final_name = reverse_map.get(rtp_name, rtp_name)
+                        # 检查这个频道是否在我们想要的分类里
+                        is_wanted = any(final_name in v for v in CHANNEL_CATEGORIES.values())
+                        if is_wanted:
+                            for ip in ips:
+                                url = f"http://{ip}/rtp/{rtp_url.replace('rtp://','')}"
+                                combined.append(f"{final_name},{url}${tag}")
     
     with open(ZUBO_FILE, "w", encoding="utf-8") as f:
-        for line in list(set(combined)):
-            f.write(line + "\n")
-    print(f"✅ zubo.txt 已生成，共 {len(combined)} 条候选源")
+        for line in list(set(combined)): f.write(line + "\n")
 
 def third_stage():
-    print("🧩 3. 探测并生成 IPTV.txt...")
+    print("🧩 3. 探测节点并生成分类 IPTV.txt...")
     if not os.path.exists(ZUBO_FILE): return
-
-    # 按 IP 分组检测，提高效率
-    groups = {}
+    
+    # 按 IP 分组，只需测每个 IP 的一个频道
+    ip_groups = {}
     with open(ZUBO_FILE, encoding="utf-8") as f:
         for line in f:
-            if "," in line:
-                name, url = line.strip().split(",", 1)
-                ip = url.split("/")[2]
-                groups.setdefault(ip, []).append((name, url))
+            name_tag, url_isp = line.strip().split(",")
+            ip = url_isp.split("/")[2]
+            ip_groups.setdefault(ip, []).append(line.strip())
 
     active_ips = set()
-    print(f"🚀 正在对 {len(groups)} 个 IP 节点进行测速...")
-    
-    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-        # 每个 IP 抽取第一个频道测试即可，通了则全组通
-        futures = {executor.submit(check_stream, chs[0][1]): ip for ip, chs in groups.items()}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+        futures = {executor.submit(check_stream, chs[0].split(",")[1].split("$")[0]): ip for ip, chs in ip_groups.items()}
         for future in concurrent.futures.as_completed(futures):
-            ip = futures[future]
-            if future.result():
-                active_ips.add(ip)
+            if future.result(): active_ips.add(futures[future])
 
-    # 最终汇总写入
+    # 写入最终文件
     now = (datetime.now(timezone.utc) + timedelta(hours=8)).strftime("%Y-%m-%d %H:%M")
-    valid_count = 0
     with open(IPTV_FILE, "w", encoding="utf-8") as f:
         f.write(f"更新时间,#genre#\n{now},https://kakaxi-1.asia/LOGO/Disclaimer.mp4\n\n")
-        
-        # 这里你可以按 CHANNEL_CATEGORIES 循环写入，
-        # 为了演示，我们直接写入所有探测成功的源
-        for ip in active_ips:
-            for name, url in groups[ip]:
-                f.write(f"{name},{url}\n")
-                valid_count += 1
-    
-    print(f"🎉 任务完成！IPTV.txt 已生成，共 {valid_count} 条有效源。")
+        for cat, names in CHANNEL_CATEGORIES.items():
+            f.write(f"{cat},#genre#\n")
+            for name in names:
+                for ip in active_ips:
+                    for entry in ip_groups[ip]:
+                        if entry.startswith(name + ","):
+                            # 格式：频道名,URL$归属地
+                            f.write(entry + "\n")
+            f.write("\n")
+    print(f"🎉 IPTV.txt 已生成，包含 {len(active_ips)} 个在线节点")
 
 if __name__ == "__main__":
-    first_stage()
-    second_stage()
-    third_stage()
+    first_stage(); second_stage(); third_stage()
