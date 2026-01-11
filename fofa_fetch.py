@@ -22,11 +22,6 @@ IPTV_FILE = "IPTV.txt"
 
 # 频道分类与映射 (保持你原有的配置，注意标准缩进)
 CHANNEL_CATEGORIES = {
-# ===============================
-# 分类与映射配置
-# ===============================
-
-CHANNEL_CATEGORIES = {
     "央视频道": [
         "CCTV1", "CCTV2", "CCTV3", "CCTV4", "CCTV4欧洲", "CCTV4美洲", "CCTV5", "CCTV5+", "CCTV6", "CCTV7",
         "CCTV8", "CCTV9", "CCTV10", "CCTV11", "CCTV12", "CCTV13", "CCTV14", "CCTV15", "CCTV16", "CCTV17", "CCTV4K", "CCTV8K",
