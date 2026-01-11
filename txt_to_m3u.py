@@ -145,7 +145,10 @@ def get_logo_url(ch_name):
     name = ch_name.strip()
     name = re.sub(r"[ -_]HD|高清|4K|超清|超高清|8K|plus|\+|Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ", "", name, flags=re.IGNORECASE)
     name = name.replace(" ", "").replace("&", "")
-    filename = LOGO_SPECIAL_MAP.get(ch_name, name) + ".png"
+    target_name = LOGO_SPECIAL_MAP.get(ch_name, name)
+    if isinstance(target_name, list):
+        target_name = target_name[0]  # 如果是列表，取第一个元素
+    filename = str(target_name) + ".png"
     return LOGO_BASE + filename
 
 def main():
