@@ -1,11 +1,12 @@
 import os
 import re
+import requests
 
-# 输入输出文件
-INPUT_FILE = "IPTV.txt"
+# 输入输出文件（改为远程 GitHub Raw URL）
+INPUT_URL = "https://raw.githubusercontent.com/linyu345/2026/refs/heads/main/py/fofa/IPTV.txt"
 OUTPUT_FILE = "IPTV.m3u"
 
-# 台标和 EPG
+# 台标和 EPG（保持不变）
 LOGO_BASE = "https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/"
 EPG_URL = "https://live.fanmingming.cn/e.xml"
 
@@ -28,18 +29,18 @@ CHANNEL_CATEGORIES = {
         "CHC动作电影", "CHC家庭影院", "CHC影迷电影", "淘电影", "淘精彩", "淘剧场", "淘4K", "淘娱乐", "淘BABY", "淘萌宠", "重温经典",
         "星空卫视", "CHANNEL[V]", "凤凰卫视中文台", "凤凰卫视资讯台", "凤凰卫视香港台", "凤凰卫视电影台", "求索纪录", "求索科学",
         "求索生活", "求索动物", "纪实人文", "金鹰纪实", "纪实科教", "睛彩青少", "睛彩竞技", "睛彩篮球", "睛彩广场舞", "魅力足球", "五星体育",
-        "劲爆体育", "快乐垂钓", "茶频道", "先锋乒羽", "天元围棋", "汽摩", "梨园频道", "文物宝库", "武术世界", "哒啵赛事", "哒啵电竞", "黑莓电影", "黑莓动画", 
-        "乐游", "生活时尚", "都市剧场", "欢笑剧场", "游戏风云", "金色学堂", "动漫秀场", "新动漫", "卡酷少儿", "金鹰卡通", "优漫卡通", "哈哈炫动", "嘉佳卡通", 
+        "劲爆体育", "快乐垂钓", "茶频道", "先锋乒羽", "天元围棋", "汽摩", "梨园频道", "文物宝库", "武术世界", "哒啵赛事", "哒啵电竞", "黑莓电影", "黑莓动画",
+        "乐游", "生活时尚", "都市剧场", "欢笑剧场", "游戏风云", "金色学堂", "动漫秀场", "新动漫", "卡酷少儿", "金鹰卡通", "优漫卡通", "哈哈炫动", "嘉佳卡通",
         "中国交通", "中国天气", "华数4K", "华数星影", "华数动作影院", "华数喜剧影院", "华数家庭影院", "华数经典电影", "华数热播剧场", "华数碟战剧场",
-        "华数军旅剧场", "华数城市剧场", "华数武侠剧场", "华数古装剧场", "华数魅力时尚", "华数少儿动画", "华数动画", "iHOT爱喜剧", "iHOT爱科幻", 
-        "iHOT爱院线", "iHOT爱悬疑", "iHOT爱历史", "iHOT爱谍战", "iHOT爱旅行", "iHOT爱幼教", "iHOT爱玩具", "iHOT爱体育", "iHOT爱赛车", "iHOT爱浪漫", 
+        "华数军旅剧场", "华数城市剧场", "华数武侠剧场", "华数古装剧场", "华数魅力时尚", "华数少儿动画", "华数动画", "iHOT爱喜剧", "iHOT爱科幻",
+        "iHOT爱院线", "iHOT爱悬疑", "iHOT爱历史", "iHOT爱谍战", "iHOT爱旅行", "iHOT爱幼教", "iHOT爱玩具", "iHOT爱体育", "iHOT爱赛车", "iHOT爱浪漫",
         "iHOT爱奇谈", "iHOT爱科学", "iHOT爱动漫",
     ],
     "湖北": [
         "湖北公共新闻", "湖北经视频道", "湖北综合频道", "湖北垄上频道", "湖北影视频道", "湖北生活频道", "湖北教育频道", "武汉新闻综合", "武汉电视剧", "武汉科技生活",
         "武汉文体频道", "武汉教育频道", "阳新综合", "房县综合", "蔡甸综合",
     ],
-        "安徽": [
+    "安徽": [
        "安徽经济生活","安徽公共频道","安徽国际频道","安徽农业科教","安徽影视频道","安徽综艺体育","安庆经济生活","安庆新闻综合","蚌埠生活频道","蚌埠新闻综合","亳州农村频道",
         "亳州综合频道","池州文教生活","池州新闻综合","滁州公共频道","滁州科教频道","滁州新闻综合","枞阳电视台","繁昌新闻综合","肥西新闻综合","阜南新闻综合","阜阳都市文艺",
         "阜阳教育频道","阜阳生活频道","阜阳新闻综合","固镇新闻综合","广德生活频道","广德新闻综合","合肥新闻频道","淮北经济生活","淮北新闻综合","淮南民生频道","淮南新闻综合",
@@ -50,17 +51,17 @@ CHANNEL_CATEGORIES = {
         "黟县新闻综合","义安新闻综合",
     ],
     "山西": [
-        "山西黄河HD", "山西经济与科技HD", "山西影视HD", "山西社会与法治HD", "山西文体生活HD" 
-    ],#任意添加，与仓库中rtp/省份运营商.txt内频道一致即可，或在下方频道名映射中改名
+        "山西黄河HD", "山西经济与科技HD", "山西影视HD", "山西社会与法治HD", "山西文体生活HD"
+    ],
     "福建": [
         "福建综合", "福建新闻", "福建经济", "福建电视剧", "福建公共", "福建少儿", "泉州电视台", "福州电视台"
     ],
     "大湾区": [
         "广东珠江","广东体育","广东新闻","广东民生","广东影视","广东综艺","岭南戏曲","广东经济科教",
         "广州综合","广州新闻","广州影视","广州竞赛","广州法治","广州南国都市","佛山综合"
-    ],#任意添加,与仓库中rtp/省份运营商.txt内频道一致即可,或在下方频道名映射中改名
+    ],
 }
-# 台标特殊映射
+
 LOGO_SPECIAL_MAP = {
     "CCTV1": ["CCTV-1", "CCTV-1 HD", "CCTV1 HD", "CCTV-1综合"],
     "CCTV2": ["CCTV-2", "CCTV-2 HD", "CCTV2 HD", "CCTV-2财经"],
@@ -171,29 +172,39 @@ def get_logo_url(ch_name):
     return LOGO_BASE + filename
 
 def main():
-    if not os.path.exists(INPUT_FILE):
-        print(f"❌ 未找到 {INPUT_FILE}，跳过生成 M3U")
+    print(f"正在从远程下载 IPTV.txt: {INPUT_URL}")
+    
+    try:
+        response = requests.get(INPUT_URL, timeout=30)
+        response.raise_for_status()
+        content = response.text
+        print("远程文件下载成功，行数:", len(content.splitlines()))
+    except Exception as e:
+        print(f"❌ 下载失败: {e}")
         return
 
     # 收集所有有效行（保留更新时间、免责和符合分类的频道）
     valid_lines = []
-    with open(INPUT_FILE, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if not line or ",#genre#" in line:
-                continue
-            if "更新时间" in line or "Disclaimer" in line:
+    lines = content.splitlines()
+    for line in lines:
+        line = line.strip()
+        if not line or ",#genre#" in line:
+            continue
+        if "更新时间" in line or "Disclaimer" in line:
+            valid_lines.append(line)
+            continue
+        if "," in line and "$" in line:
+            ch_name = line.split(",", 1)[0].strip()
+            if any(ch_name in chans for chans in CHANNEL_CATEGORIES.values()):
                 valid_lines.append(line)
-                continue
-            if "," in line and "$" in line:
-                ch_name = line.split(",", 1)[0].strip()
-                if any(ch_name in chans for chans in CHANNEL_CATEGORIES.values()):
-                    valid_lines.append(line)
+
+    if not valid_lines:
+        print("❌ 没有找到任何有效频道行，跳过生成 M3U")
+        return
 
     # 生成 M3U
     with open(OUTPUT_FILE, "w", encoding="utf-8") as out:
         out.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n\n')
-
         current_group = "未分类"
         for line in valid_lines:
             # 更新时间和免责视频
@@ -207,7 +218,7 @@ def main():
             # 正常频道行：CCTV1,http://...$广东电信
             ch_name, rest = line.split(",", 1)
             ch_name = ch_name.strip()
-            url_with_operator = rest.strip()  # 直接保留 http://...$广东电信
+            url_with_operator = rest.strip()  # 直接保留 http://...$运营商
 
             # 确定分类
             for cat, chans in CHANNEL_CATEGORIES.items():
@@ -217,16 +228,15 @@ def main():
 
             # 标题只写纯频道名
             title = ch_name
-
             logo = get_logo_url(ch_name)
-
             out.write(f'#EXTINF:-1 tvg-name="{ch_name}" tvg-logo="{logo}" group-title="{current_group}",{title}\n')
             out.write(f"{url_with_operator}\n\n")  # 直接写带 $运营商 的完整字符串
 
     print(f"✅ {OUTPUT_FILE} 生成成功！")
-    print(f"   - URL 行直接带 $运营商（如 http://...$广东电信）")
-    print(f"   - 标题只显示纯频道名")
-    print(f"   - 每个源独立一条目，严格标准兼容所有播放器")
+    print(f" - 输入来源: {INPUT_URL}")
+    print(f" - URL 行直接带 $运营商（如 http://...$广东电信）")
+    print(f" - 标题只显示纯频道名")
+    print(f" - 每个源独立一条目，严格兼容所有播放器")
 
 if __name__ == "__main__":
     main()
