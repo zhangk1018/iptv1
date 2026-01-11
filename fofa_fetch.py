@@ -2,28 +2,24 @@ import os
 import re
 import requests
 import time
+import socket
 import concurrent.futures
-import subprocess
 from datetime import datetime, timezone, timedelta
 
 # ===============================
 # 配置区
 # ===============================
-FOFA_URLS = {
-    "https://fofa.info/result?qbase64=InVkcHh5IiAmJiBjb3VudHJ5PSJDTiI%3D": "ip.txt",
-}
+FOFA_URL = "https://fofa.info/result?qbase64=InVkcHh5IiAmJiBjb3VudHJ5PSJDTiI%3D"
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
 }
-COUNTER_FILE = "计数.txt"
-IP_DIR = "ip"
-RTP_DIR = "rtp"
-ZUBO_FILE = "zubo.txt"
-IPTV_FILE = "IPTV.txt"
 
-# 降低门槛：500kbps 即可通过，或者只要有视频流就保留
-BITRATE_THRESHOLD = 500000 
+# 路径配置
+IP_DIR = "ip"           # 存放分类后的IP
+RTP_DIR = "rtp"         # 存放你的RTP模板
+IPTV_FILE = "IPTV.txt"  # 最终生成的列表
 
+# 频道分类（此处省略，请根据你之前的代码补充完整）
 CHANNEL_CATEGORIES = {
     "央视频道": [
         "CCTV1", "CCTV2", "CCTV3", "CCTV4", "CCTV4欧洲", "CCTV4美洲", "CCTV5", "CCTV5+", "CCTV6", "CCTV7",
@@ -173,155 +169,117 @@ CHANNEL_MAPPING = {
     "华数4K": ["华数低于4K", "华数4K电影", "华数爱上4K"],
 }#格式为"频道分类中的标准名": ["rtp/中的名字"],
 
+
 # ===============================
-# 核心功能逻辑
+# 核心探测：解决 GitHub 0 结果
 # ===============================
 
-def get_isp(ip):
-    # 简易识别
-    if re.match(r"^(110|111|112|113|114|115|116|117|118|119|120|121|122|123|124|125|127|180|181|189|222)\.", ip): return "电信"
-    if re.match(r"^(112|120|123|175|185|186)\.", ip): return "联通"
-    if re.match(r"^(112|117|120|182|183|184|187|188|223)\.", ip): return "移动"
-    return "未知"
-
-def check_stream_quality(url):
-    """改良版检测：有视频流即过，若有码率则需达标"""
+def check_node_alive(ip_port, timeout=3):
+    """
+    TCP 端口探测。
+    GitHub 访问国内 UDPXY 极其不稳定，用 ffprobe 会导致 100% 失败。
+    改用 Socket 检测端口，只要端口开放就认为节点在线。
+    """
     try:
-        # 增加探测时间到 5 秒，增加分析时长
-        cmd = [
-            "ffprobe", "-v", "error", "-show_format", "-show_streams", 
-            "-select_streams", "v", "-analyze_duration", "5000000", "-i", url
-        ]
-        # 增加 timeout 到 10 秒
-        result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
-        output = result.stdout.decode('utf-8')
-
-        # 1. 核心：必须有视频编码信息
-        if "codec_type=video" not in output: 
-            return False
-        
-        # 2. 码率检查：如果能抓到码率，则判断是否达标；抓不到码率但有视频流也放行
-        bitrate_match = re.search(r'bit_rate=(\d+)', output)
-        if bitrate_match:
-            bitrate = int(bitrate_match.group(1))
-            return bitrate > BITRATE_THRESHOLD
-        
-        # 抓不到码率信息但有 codec_type=video，说明流是通的，放行
-        return True
+        ip, port = ip_port.split(":")
+        with socket.create_connection((ip, int(port)), timeout=timeout):
+            return True
     except:
         return False
 
-def first_stage():
-    print(f"📡 正在从 FOFA 获取最新节点...")
-    all_ips = set()
-    try:
-        r = requests.get(next(iter(FOFA_URLS.keys())), headers=HEADERS, timeout=15)
-        urls_all = re.findall(r'http://(\d+\.\d+\.\d+\.\d+:\d+)', r.text)
-        all_ips.update(urls_all)
-    except Exception as e: print(f"❌ FOFA 访问失败: {e}")
+# ===============================
+# 任务阶段
+# ===============================
 
+def first_stage():
+    """第一阶段：爬取 FOFA 并存入 IP 文件夹"""
+    print("📡 正在抓取 FOFA 原始节点...")
     os.makedirs(IP_DIR, exist_ok=True)
-    count = 1
-    if os.path.exists(COUNTER_FILE):
-        try: count = int(open(COUNTER_FILE).read().strip()) + 1
-        except: count = 1
+    all_ips = set()
     
-    # 注意：这里我们只要发现了新节点就写入
-    for ip_port in all_ips:
-        try:
-            ip = ip_port.split(":")[0]
-            # 简化：不去查每个 IP 的 API，提高速度，直接按运营商写
-            isp = get_isp(ip)
-            with open(f"{IP_DIR}/全国{isp}.txt", "a", encoding="utf-8") as f:
-                f.write(ip_port + "\n")
-        except: continue
-    
-    with open(COUNTER_FILE, "w") as f: f.write(str(1 if count >= 73 else count))
-    print(f"✅ 第一阶段完成，节点池已更新。")
+    try:
+        r = requests.get(FOFA_URL, headers=HEADERS, timeout=15)
+        # 匹配 IP:PORT 格式
+        found = re.findall(r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}:\d{2,5})', r.text)
+        all_ips.update(found)
+    except Exception as e:
+        print(f"❌ FOFA 爬取失败: {e}")
+
+    # 将 IP 暂存（为了匹配 RTP 模板，我们可以简单存入“全国.txt”）
+    for ip in all_ips:
+        with open(os.path.join(IP_DIR, "全国.txt"), "a") as f:
+            f.write(ip + "\n")
+    print(f"✅ 第一阶段完成，共发现 {len(all_ips)} 个节点。")
 
 def second_stage():
+    """第二阶段：IP + RTP 模板匹配"""
     print("🔔 第二阶段：匹配 RTP 模板...")
-    combined_lines = []
-    if not os.path.exists(RTP_DIR) or not os.path.exists(IP_DIR): 
-        print("❌ 缺少 rtp 或 ip 文件夹")
-        return
+    if not os.path.exists(RTP_DIR):
+        print("❌ 找不到 rtp 文件夹，请确认路径！")
+        return []
+
+    combined = []
+    # 这里简化逻辑：所有的 IP 尝试匹配所有的 RTP 模板
+    # 你可以根据文件名（如“电信”）做更精细的匹配
+    for rtp_file in os.listdir(RTP_DIR):
+        with open(os.path.join(RTP_DIR, rtp_file), encoding="utf-8") as f_rtp:
+            rtp_lines = [l.strip() for l in f_rtp if "," in l]
+            
+            # 读取 IP 文件夹下所有 IP
+            for ip_file in os.listdir(IP_DIR):
+                with open(os.path.join(IP_DIR, ip_file)) as f_ip:
+                    ips = [l.strip() for l in f_ip if l.strip()]
+                    for ip in ips:
+                        for rline in rtp_lines:
+                            name, rtp_path = rline.split(",")
+                            rtp_hex = rtp_path.replace("rtp://", "").replace("udp://", "")
+                            url = f"http://{ip}/rtp/{rtp_hex}"
+                            combined.append((name, url, ip))
+    return combined
+
+def third_stage(candidates):
+    """第三阶段：在线检测并生成结果"""
+    print(f"🧩 第三阶段：多线程检测 {len(candidates)} 条链接...")
     
-    for ip_file in os.listdir(IP_DIR):
-        # 查找对应的 RTP 模板，比如 "全国电信.txt" 对应 "rtp/湖北电信.txt" 等
-        # 这里为了兼容性，我们遍历 RTP 目录下所有模板
-        for rtp_file in os.listdir(RTP_DIR):
-            # 简单的匹配逻辑：如果 IP 文件名里包含 RTP 文件名的一部分（如“电信”）
-            if ("电信" in ip_file and "电信" in rtp_file) or \
-               ("联通" in ip_file and "联通" in rtp_file) or \
-               ("移动" in ip_file and "移动" in rtp_file):
-                
-                with open(f"{IP_DIR}/{ip_file}", encoding="utf-8") as f_ip, \
-                     open(f"{RTP_DIR}/{rtp_file}", encoding="utf-8") as f_rtp:
-                    ips = list(set([x.strip() for x in f_ip if x.strip()]))
-                    rtps = [x.strip() for x in f_rtp if x.strip()]
-                    for ip_port in ips:
-                        for rtp in rtps:
-                            if "," in rtp:
-                                name, rtp_hex = rtp.split(",")
-                                url = f"http://{ip_port}/rtp/{rtp_hex.replace('rtp://','')}"
-                                combined_lines.append(f"{name},{url}")
+    # 建立映射
+    alias_map = {a: m for m, alist in CHANNEL_MAPPING.items() for a in alist}
     
-    with open(ZUBO_FILE, "w", encoding="utf-8") as f:
-        f.write("\n".join(list(set(combined_lines))))
-    print(f"🎯 预生成 {len(combined_lines)} 条候选链接")
+    # 获取唯一的 IP 进行检测
+    unique_ips = list(set([c[2] for c in candidates]))
+    print(f"🚀 正在检测 {len(unique_ips)} 个节点的在线状态...")
+    
+    alive_ips = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+        future_to_ip = {executor.submit(check_node_alive, ip): ip for ip in unique_ips}
+        for future in concurrent.futures.as_completed(future_to_ip):
+            ip = future_to_ip[future]
+            if future.result():
+                alive_ips.append(ip)
 
-def third_stage():
-    print("🧩 第三阶段：多线程存活抽检...")
-    if not os.path.exists(ZUBO_FILE): return
+    print(f"✅ 在线节点: {len(alive_ips)} 个")
 
-    # 加载映射
-    alias_map = {}
-    for standard, aliases in CHANNEL_MAPPING.items():
-        for a in aliases: alias_map[a] = standard
-
-    # 归类
-    ip_groups = {}
-    with open(ZUBO_FILE, encoding="utf-8") as f:
-        for line in f:
-            if "," not in line: continue
-            name, url = line.strip().split(",")
-            ip_port = url.split("/")[2]
-            ip_groups.setdefault(ip_port, []).append((name, url))
-
-    valid_results = []
-    # 抽检函数
-    def detect(ip):
-        channels = ip_groups[ip]
-        # 尝试测前两个频道，只要有一个通了就算这个 IP 有效
-        for i in range(min(2, len(channels))):
-            if check_stream_quality(channels[i][1]):
-                return ip, True
-        return ip, False
-
-    print(f"🚀 正在检测 {len(ip_groups)} 个节点...")
-    with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
-        futures = {executor.submit(detect, ip): ip for ip in ip_groups.keys()}
-        for future in concurrent.futures.as_completed(futures):
-            ip, ok = future.result()
-            if ok:
-                for name, url in ip_groups[ip]:
-                    # 简化：不写归属地，减少 API 调用
-                    valid_results.append(f"{alias_map.get(name, name)},{url}")
+    # 整理有效频道
+    valid_channels = []
+    for name, url, ip in candidates:
+        if ip in alive_ips:
+            main_name = alias_map.get(name, name)
+            valid_channels.append(f"{main_name},{url}")
 
     # 写入 IPTV.txt
-    bj_now = (datetime.now(timezone.utc) + timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
+    now = (datetime.now(timezone.utc) + timedelta(hours=8)).strftime("%Y-%m-%d %H:%M:%S")
     with open(IPTV_FILE, "w", encoding="utf-8") as f:
-        f.write(f"更新时间,#genre#\n{bj_now},https://kakaxi-1.asia/LOGO/Disclaimer.mp4\n\n")
-        for cat, names in CHANNEL_CATEGORIES.items():
+        f.write(f"更新时间,#genre#\n{now},https://kakaxi-1.asia/LOGO/Disclaimer.mp4\n\n")
+        for cat, target_names in CHANNEL_CATEGORIES.items():
             f.write(f"{cat},#genre#\n")
-            for n in names:
-                for res in valid_results:
-                    if res.startswith(n + ","):
-                        f.write(res + "\n")
+            for tn in target_names:
+                for vc in valid_channels:
+                    if vc.startswith(tn + ","):
+                        f.write(vc + "\n")
             f.write("\n")
-    print(f"🎉 任务完成！有效频道共 {len(valid_results)} 条")
+    print(f"🎉 IPTV.txt 生成完成！有效源共 {len(valid_channels)} 条。")
 
 if __name__ == "__main__":
     first_stage()
-    second_stage()
-    third_stage()
+    cand = second_stage()
+    if cand:
+        third_stage(cand)
