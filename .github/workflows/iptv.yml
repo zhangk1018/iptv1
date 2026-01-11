@@ -2,57 +2,60 @@ name: Update IPTV.m3u from Remote IPTV.txt
 
 on:
   schedule:
-    - cron: '*/30 * * * *'          # 每30分钟运行一次（可改成 */15 或其他）
-  workflow_dispatch:               # 支持手动触发（推荐测试用）
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
 
 jobs:
   build-and-update:
     runs-on: ubuntu-latest
     permissions:
-      contents: write              # 必须开启写权限才能 push
+      contents: write
 
     steps:
-      # 1. 检出仓库（带完整历史，以便 commit）
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0           # 获取完整历史，避免浅克隆问题
+          fetch-depth: 0
 
-      # 2. 设置 Python 环境
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'   # 根据你的脚本需求
+          python-version: '3.11'
 
-      # 3. 安装依赖（requests 用于下载远程文件）
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install requests
 
-      # 4. 下载并运行转换脚本（假设你的脚本文件名为 iptv_to_m3u.py）
       - name: Download IPTV.txt and generate IPTV.m3u
-        run: python iptv_to_m3u.py   # 替换成你的脚本文件名
+        run: python iptv_to_m3u.py
 
-      # 5. 调试：显示文件变化（可选，便于排查）
-      - name: Debug - Show git status
+      - name: Debug - Show files & git status before add
         run: |
           ls -la
           git status
 
-      # 6. 自动提交并推送变更（如果有变化）
       - name: Commit and push if changed
         run: |
+          set +e  # Ignore errors in this block, continue anyway
+
           git config --global user.name "github-actions"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add IPTV.m3u || true
+          echo "Adding files..."
+          git add -u . || true               # Stage modified/deleted tracked files
+          git add IPTV.m3u iptv_to_m3u.py || true  # Explicitly add generated file
 
-          # 只在有实际变更时 commit
+          echo ""
+          echo "Git status after add:"
+          git status
+
           git diff --cached --quiet
           if [ $? -eq 0 ]; then
-            echo "⚠️ 没有实质变更，跳过 commit & push"
+            echo "No staged changes, skipping commit & push"
           else
-            git commit -m "自动更新 IPTV.m3u $(date '+%Y-%m-%d %H:%M:%S 北京时间')"
-            git push origin main || echo "⚠️ 推送失败"
+            echo "Changes detected, committing..."
+            git commit -m "自动更新 IPTV.m3u $(date '+%Y-%m-%d %H:%M:%S 北京时间')" || true
+            echo "Pushing..."
+            git push origin main || echo "推送失败（可能无变更或网络问题）"
           fi
