@@ -1,6 +1,6 @@
 #EXTM3U x-tvg-url="https://live.fanmingming.cn/e.xml"
 
-#EXTINF:-1 group-title="更新时间",2026-01-11 14:38:07
+#EXTINF:-1 group-title="更新时间",2026-01-11 14:43:42
 https://kakaxi-1.asia/LOGO/Disclaimer.mp4
 
 #EXTINF:-1 tvg-name="CCTV1" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/CCTV1.png" group-title="央视频道",CCTV1
@@ -524,13 +524,4 @@ http://58.48.105.55:10001/rtp/239.69.1.192:10794$湖北电信
 
 #EXTINF:-1 tvg-name="蔡甸综合" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/蔡甸综合.png" group-title="湖北",蔡甸综合
 http://58.48.105.55:10001/rtp/239.69.1.245:11112$湖北电信
-
-#EXTINF:-1 tvg-name="山西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/山西卫视.png" group-title="卫视频道",山西卫视
-http://111.78.34.223:8688/rtp/239.252.219.27:5140$江西电信
-
-#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广东卫视.png" group-title="卫视频道",广东卫视
-http://58.48.105.55:10001/rtp/239.254.96.140:8914$湖北电信
-
-#EXTINF:-1 tvg-name="广东卫视" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广东卫视.png" group-title="卫视频道",广东卫视
-http://111.78.34.223:8688/rtp/239.252.219.213:5140$江西电信
 
