@@ -618,9 +618,51 @@ http://183.30.202.100:8000/rtp/239.77.0.106:5146$广东电信
 #EXTINF:-1 tvg-name="华数少儿动画" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/华数少儿动画.png" group-title="数字频道",华数少儿动画
 http://183.30.202.100:8000/rtp/239.77.0.109:5146$广东电信
 
-#EXTINF:-1 tvg-name="山西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/山西卫视.png" group-title="卫视频道",山西卫视
-http://183.30.202.100:8000/rtp/239.77.0.69:5146$广东电信
+#EXTINF:-1 tvg-name="广东珠江" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广东珠江.png" group-title="大湾区",广东珠江
+http://183.30.202.100:8000/rtp/239.77.0.1:5146$广东电信
 
-#EXTINF:-1 tvg-name="山西卫视" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/山西卫视.png" group-title="卫视频道",山西卫视
-http://183.30.202.100:8000/rtp/239.77.1.74:5146$广东电信
+#EXTINF:-1 tvg-name="广东珠江" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广东珠江.png" group-title="大湾区",广东珠江
+http://183.30.202.100:8000/rtp/239.77.0.114:5146$广东电信
+
+#EXTINF:-1 tvg-name="广东珠江" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广东珠江.png" group-title="大湾区",广东珠江
+http://183.30.202.100:8000/rtp/239.77.1.94:5146$广东电信
+
+#EXTINF:-1 tvg-name="广东体育" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广东体育.png" group-title="大湾区",广东体育
+http://183.30.202.100:8000/rtp/239.77.0.112:5146$广东电信
+
+#EXTINF:-1 tvg-name="广东体育" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广东体育.png" group-title="大湾区",广东体育
+http://183.30.202.100:8000/rtp/239.77.0.168:5146$广东电信
+
+#EXTINF:-1 tvg-name="广东体育" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广东体育.png" group-title="大湾区",广东体育
+http://183.30.202.100:8000/rtp/239.77.1.97:5146$广东电信
+
+#EXTINF:-1 tvg-name="广东新闻" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广东新闻.png" group-title="大湾区",广东新闻
+http://183.30.202.100:8000/rtp/239.77.0.173:5146$广东电信
+
+#EXTINF:-1 tvg-name="广东民生" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广东民生.png" group-title="大湾区",广东民生
+http://183.30.202.100:8000/rtp/239.77.0.225:5146$广东电信
+
+#EXTINF:-1 tvg-name="广东影视" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广东影视.png" group-title="大湾区",广东影视
+http://183.30.202.100:8000/rtp/239.77.0.217:5146$广东电信
+
+#EXTINF:-1 tvg-name="岭南戏曲" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/岭南戏曲.png" group-title="大湾区",岭南戏曲
+http://183.30.202.100:8000/rtp/239.77.0.122:5146$广东电信
+
+#EXTINF:-1 tvg-name="广东经济科教" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广东经济科教.png" group-title="大湾区",广东经济科教
+http://183.30.202.100:8000/rtp/239.77.0.85:5146$广东电信
+
+#EXTINF:-1 tvg-name="广东经济科教" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广东经济科教.png" group-title="大湾区",广东经济科教
+http://183.30.202.100:8000/rtp/239.77.0.167:5146$广东电信
+
+#EXTINF:-1 tvg-name="广州综合" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广州综合.png" group-title="大湾区",广州综合
+http://183.30.202.100:8000/rtp/239.253.43.71:5146$广东电信
+
+#EXTINF:-1 tvg-name="广州新闻" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广州新闻.png" group-title="大湾区",广州新闻
+http://183.30.202.100:8000/rtp/239.253.43.72:5146$广东电信
+
+#EXTINF:-1 tvg-name="广州法治" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广州法治.png" group-title="大湾区",广州法治
+http://183.30.202.100:8000/rtp/239.253.43.74:5146$广东电信
+
+#EXTINF:-1 tvg-name="佛山综合" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/佛山综合.png" group-title="大湾区",佛山综合
+http://183.30.202.100:8000/rtp/239.253.43.57:5146$广东电信
 
