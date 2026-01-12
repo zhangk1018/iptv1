@@ -5,7 +5,6 @@ import requests
 # ===============================
 # 配置区
 # ===============================
-# 强制指定目标远程 URL
 TARGET_URL = "https://raw.githubusercontent.com/linyu345/2026/refs/heads/main/py/fofa/IPTV.txt"
 OUTPUT_FILE = "IPTV2.m3u"
 
@@ -22,27 +21,36 @@ CHANNEL_CATEGORIES = {
     "大湾区": ["广东珠江","广东体育","广东新闻","广东民生","广东影视","广东综艺","岭南戏曲","广东经济科教", "广州综合","广州新闻","广州影视","广州竞赛","广州法治","广州南国都市","佛山综合"],
 }
 
+
 def get_logo_url(ch_name):
+    """
+    修改后的逻辑：确保 CCTV 后面【不带】横杠
+    目标结果: CCTV1.png, CCTV5+.png
+    """
     name = ch_name.strip()
-    # 移除后缀
+    # 1. 移除高清、4K等后缀
     name = re.sub(r"[ -_]HD|高清|4K|超清|超高清|8K|plus|\+|Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ", "", name, flags=re.IGNORECASE)
-    # CCTV1 -> CCTV-1
+    
+    # 2. 如果是 CCTV，去掉所有空格、横杠，确保是 CCTV1 这种格式
     if name.upper().startswith("CCTV"):
-        name = re.sub(r"^(CCTV)(\d+|\+)", r"\1-\2", name, flags=re.IGNORECASE).upper()
+        # 去掉名字里所有的横杠 - 和空格
+        name = name.replace("-", "").replace(" ", "")
+    
+    # 3. 特殊处理
     if "欧洲" in name or "美洲" in name:
-        name = "CCTV-4"
-    return f"{LOGO_BASE}{name}.png"
+        name = "CCTV4"
+        
+    return f"{LOGO_BASE}{name.upper()}.png"
 
 def main():
-    print(f"📡 正在从远程获取目标文件: {TARGET_URL}")
+    print(f"📡 正在获取远程文件: {TARGET_URL}")
     try:
         response = requests.get(TARGET_URL, timeout=30)
         response.raise_for_status()
-        # 强制使用 utf-8 编码，防止乱码
         response.encoding = 'utf-8'
         content = response.text
     except Exception as e:
-        print(f"❌ 远程下载失败: {e}")
+        print(f"❌ 下载失败: {e}")
         return
 
     lines = content.splitlines()
@@ -52,33 +60,30 @@ def main():
         line = line.strip()
         if not line or ",#genre#" in line: continue
         
-        # 安全切分逻辑
         if "," in line:
             parts = line.split(",", 1)
             name_part = parts[0].strip()
             url_part = parts[1].strip() if len(parts) > 1 else "http://127.0.0.1"
 
-            # 1. 如果是更新时间行
             if "更新时间" in name_part:
                 m3u_lines.append(f'#EXTINF:-1 group-title="公告说明",{name_part}\n{url_part}')
             
-            # 2. 如果是正常的频道行（带运营商标志 $）
             elif "$" in url_part:
-                group = "其他频道"
+                # 匹配分类
+                current_group = "其他频道"
                 for cat, chans in CHANNEL_CATEGORIES.items():
-                    if name_part in chans:
-                        group = cat
+                    if any(c == name_part for c in chans):
+                        current_group = cat
                         break
                 
+                # 生成不带横杠的 Logo 链接
                 logo = get_logo_url(name_part)
-                m3u_lines.append(f'#EXTINF:-1 tvg-name="{name_part}" tvg-logo="{logo}" group-title="{group}",{name_part}\n{url_part}')
+                m3u_lines.append(f'#EXTINF:-1 tvg-name="{name_part}" tvg-logo="{logo}" group-title="{current_group}",{name_part}\n{url_part}')
 
-    # 写入输出文件
     with open(OUTPUT_FILE, "w", encoding="utf-8") as out:
         out.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n\n' + "\n\n".join(m3u_lines))
 
-    print(f"✅ 转换完成！已生成文件: {OUTPUT_FILE}")
-    print(f"📊 总计处理有效频道数: {len(m3u_lines)}")
+    print(f"✅ 完成！台标已修正为不带横杠格式。")
 
 if __name__ == "__main__":
     main()
