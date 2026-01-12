@@ -5,7 +5,7 @@ import requests
 # ===============================
 # 配置区
 # ===============================
-TARGET_URL = "https://raw.githubusercontent.com/linyu345/2026/refs/heads/main/py/%E5%AE%89%E5%BE%BD%E7%BB%84%E6%92%AD/zubo.txt"
+TARGET_URL = "https://raw.githubusercontent.com/linyu345/2026/refs/heads/main/py/%E5%AE%89%E5%BE%BD%E7%BB%84%E6%92%AD/iptv_list.txt"
 OUTPUT_FILE = "IPTV2.m3u"
 
 LOGO_BASE = "https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/"
