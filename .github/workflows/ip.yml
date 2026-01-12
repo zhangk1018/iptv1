@@ -1,4 +1,4 @@
-name: FOFA IP & M3U 生成
+name: 1.数据同步(fofa_fetch)
 
 on:
   schedule:
@@ -9,13 +9,11 @@ permissions:
   contents: write
 
 jobs:
-  fetch-and-generate:
+  update-source:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          persist-credentials: true
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -33,22 +31,5 @@ jobs:
           sudo apt-get install -y ffmpeg
 
       - name: Run fofa_fetch
+        # 该脚本现在自带了 git push 逻辑
         run: python fofa_fetch.py
-
-      - name: Run Speed Test (速度压力筛选)
-        run: python speed_test_filter.py
-
-      - name: Run txt_to_m3u
-        run: python txt_to_m3u.py
-
-      - name: Commit and push all changes
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@users.noreply.github.com"
-          git add 计数.txt
-          git add ip/*.txt || true
-          git add zubo.txt || true
-          git add IPTV.txt || true
-          git add IPTV.m3u || true
-          git commit -m "自动更新：IP列表 + IPTV.txt + IPTV.m3u（带台标）" || echo "无变更，无需提交"
-          git push origin main || echo "推送失败（可能无变更）"
