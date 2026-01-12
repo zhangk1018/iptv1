@@ -21,11 +21,16 @@ TARGET_GROUP_PREFIX = ["安徽电信"]
 
 def download_txt(url):
     try:
-        with urllib.request.urlopen(url) as response:
-            content = response.read().decode('utf-8')
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req) as response:
+            content = response.read().decode('utf-8', errors='replace')  # 强制UTF-8，遇到问题用替换字符
+        print("文件下载成功，前几行预览：")
+        print('\n'.join(content.splitlines()[:8]))  # 调试用，可删除
         return content.splitlines()
     except Exception as e:
-        print(f"下载文件失败: {e}")
+        print(f"下载文件失败: {str(e)}")
+        import traceback
+        traceback.print_exc()  # 打印详细错误，便于调试
         return []
 
 def is_group_line(line):
