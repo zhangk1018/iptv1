@@ -2,17 +2,17 @@ import os
 import re
 import requests
 
-# 配置
-# 优先读取本地文件（GitHub Actions 运行时生成的最新文件）
-LOCAL_INPUT = "IPTV.txt" 
-# 备用远程地址
-REMOTE_INPUT = "https://raw.githubusercontent.com/linyu345/2026/refs/heads/main/py/fofa/IPTV.txt"
+# ===============================
+# 配置区
+# ===============================
+# 强制指定目标远程 URL
+TARGET_URL = "https://raw.githubusercontent.com/linyu345/2026/refs/heads/main/py/fofa/IPTV.txt"
 OUTPUT_FILE = "IPTV2.m3u"
 
 LOGO_BASE = "https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/"
 EPG_URL = "https://live.fanmingming.cn/e.xml"
 
-# 频道分类
+# 频道分类定义
 CHANNEL_CATEGORIES = {
     "央视频道": ["CCTV1", "CCTV2", "CCTV3", "CCTV4", "CCTV4欧洲", "CCTV4美洲", "CCTV5", "CCTV5+", "CCTV6", "CCTV7", "CCTV8", "CCTV9", "CCTV10", "CCTV11", "CCTV12", "CCTV13", "CCTV14", "CCTV15", "CCTV16", "CCTV17", "CCTV4K", "CCTV8K", "兵器科技", "风云音乐", "风云足球", "风云剧场", "怀旧剧场", "第一剧场", "女性时尚", "世界地理", "央视台球", "高尔夫网球", "央视文化精品", "卫生健康", "电视指南", "中学生", "发现之旅", "书法频道", "国学频道", "环球奇观"],
     "卫视频道": ["湖南卫视", "浙江卫视", "江苏卫视", "东方卫视", "深圳卫视", "北京卫视", "广东卫视", "广西卫视", "东南卫视", "海南卫视", "河北卫视", "河南卫视", "湖北卫视", "江西卫视", "四川卫视", "重庆卫视", "贵州卫视", "云南卫视", "天津卫视", "安徽卫视", "山东卫视", "辽宁卫视", "黑龙江卫视", "吉林卫视", "内蒙古卫视", "宁夏卫视", "山西卫视", "陕西卫视", "甘肃卫视", "青海卫视", "新疆卫视", "西藏卫视", "三沙卫视", "兵团卫视", "延边卫视", "安多卫视", "康巴卫视", "农林卫视", "山东教育卫视", "中国教育1台", "中国教育2台", "中国教育3台", "中国教育4台", "早期教育"],
@@ -23,41 +23,27 @@ CHANNEL_CATEGORIES = {
 }
 
 def get_logo_url(ch_name):
-    """
-    自动处理台标逻辑：
-    1. 移除高清/4K等后缀
-    2. CCTV系列自动补全横杠 (CCTV1 -> CCTV-1)
-    """
     name = ch_name.strip()
-    # 移除干扰词
+    # 移除后缀
     name = re.sub(r"[ -_]HD|高清|4K|超清|超高清|8K|plus|\+|Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ", "", name, flags=re.IGNORECASE)
-    
-    # 核心转换：CCTV1 -> CCTV-1
+    # CCTV1 -> CCTV-1
     if name.upper().startswith("CCTV"):
         name = re.sub(r"^(CCTV)(\d+|\+)", r"\1-\2", name, flags=re.IGNORECASE).upper()
-    
-    # 特殊分支处理
     if "欧洲" in name or "美洲" in name:
         name = "CCTV-4"
-        
     return f"{LOGO_BASE}{name}.png"
 
 def main():
-    content = ""
-    # 策略：如果本地有文件（Actions环境），直接读本地；否则去下载
-    if os.path.exists(LOCAL_INPUT):
-        print(f"📂 发现本地文件 {LOCAL_INPUT}，正在读取...")
-        with open(LOCAL_INPUT, "r", encoding="utf-8") as f:
-            content = f.read()
-    else:
-        print(f"🌐 本地无文件，尝试从远程下载: {REMOTE_INPUT}")
-        try:
-            r = requests.get(REMOTE_INPUT, timeout=30)
-            r.raise_for_status()
-            content = r.text
-        except Exception as e:
-            print(f"❌ 读取失败: {e}")
-            return
+    print(f"📡 正在从远程获取目标文件: {TARGET_URL}")
+    try:
+        response = requests.get(TARGET_URL, timeout=30)
+        response.raise_for_status()
+        # 强制使用 utf-8 编码，防止乱码
+        response.encoding = 'utf-8'
+        content = response.text
+    except Exception as e:
+        print(f"❌ 远程下载失败: {e}")
+        return
 
     lines = content.splitlines()
     m3u_lines = []
@@ -66,32 +52,33 @@ def main():
         line = line.strip()
         if not line or ",#genre#" in line: continue
         
-        # 处理更新时间
-        if "更新时间" in line:
+        # 安全切分逻辑
+        if "," in line:
             parts = line.split(",", 1)
-            m3u_lines.append(f'#EXTINF:-1 group-title="公告说明",{parts[0]}\n{parts[1]}')
-            continue
+            name_part = parts[0].strip()
+            url_part = parts[1].strip() if len(parts) > 1 else "http://127.0.0.1"
 
-        # 处理频道
-        if "," in line and "$" in line:
-            ch_name, url_with_op = line.split(",", 1)
-            ch_name = ch_name.strip()
+            # 1. 如果是更新时间行
+            if "更新时间" in name_part:
+                m3u_lines.append(f'#EXTINF:-1 group-title="公告说明",{name_part}\n{url_part}')
             
-            # 自动分类
-            group = "其他频道"
-            for cat, chans in CHANNEL_CATEGORIES.items():
-                if ch_name in chans:
-                    group = cat
-                    break
-            
-            logo = get_logo_url(ch_name)
-            m3u_lines.append(f'#EXTINF:-1 tvg-name="{ch_name}" tvg-logo="{logo}" group-title="{group}",{ch_name}\n{url_with_op.strip()}')
+            # 2. 如果是正常的频道行（带运营商标志 $）
+            elif "$" in url_part:
+                group = "其他频道"
+                for cat, chans in CHANNEL_CATEGORIES.items():
+                    if name_part in chans:
+                        group = cat
+                        break
+                
+                logo = get_logo_url(name_part)
+                m3u_lines.append(f'#EXTINF:-1 tvg-name="{name_part}" tvg-logo="{logo}" group-title="{group}",{name_part}\n{url_part}')
 
-    # 写入文件
+    # 写入输出文件
     with open(OUTPUT_FILE, "w", encoding="utf-8") as out:
         out.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n\n' + "\n\n".join(m3u_lines))
 
-    print(f"✅ 转换完成！生成文件: {OUTPUT_FILE}")
+    print(f"✅ 转换完成！已生成文件: {OUTPUT_FILE}")
+    print(f"📊 总计处理有效频道数: {len(m3u_lines)}")
 
 if __name__ == "__main__":
     main()
