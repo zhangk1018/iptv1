@@ -1,12 +1,19 @@
-# 文件名建议：zubo_to_m3u_anhui.py
-# 放置位置：https://github.com/linyu345/iptv 根目录
-# 使用方式：在仓库根目录运行 python zubo_to_m3u_anhui.py
+# -*- coding: utf-8 -*-
+"""
+将安徽组播源 zubo.txt 转换为只含安徽电信分组的 m3u 播放列表
+自动添加台标和 EPG
+"""
 
+import requests
 import re
-import urllib.request
+import sys
+import io
 from datetime import datetime
 
-# ==================== 配置区域 ====================
+# 强制 stdout 支持中文输出（GitHub Actions 日志需要）
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
+# ==================== 配置 ====================
 INPUT_URL = "https://raw.githubusercontent.com/linyu345/2026/refs/heads/main/py/安徽组播/zubo.txt"
 
 OUTPUT_FILE = "安徽电信组播.m3u"
@@ -14,27 +21,32 @@ OUTPUT_FILE = "安徽电信组播.m3u"
 LOGO_BASE = "https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/"
 EPG_URL = "https://live.fanmingming.cn/e.xml"
 
-# 想要保留的分类关键词（可按需增加）
-TARGET_GROUP_PREFIX = ["安徽电信"]
+# 只保留以这些开头的分组
+TARGET_GROUP_PREFIXES = ["安徽电信"]
 
-# ===================================================
+# ==============================================
 
 def download_txt(url):
     try:
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        with urllib.request.urlopen(req) as response:
-            content = response.read().decode('utf-8', errors='replace')  # 强制UTF-8，遇到问题用替换字符
-        print("文件下载成功，前几行预览：")
-        print('\n'.join(content.splitlines()[:8]))  # 调试用，可删除
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+        response = requests.get(url, headers=headers, timeout=20)
+        response.raise_for_status()
+        
+        # 强制 UTF-8 解码，错误字符替换
+        content = response.content.decode('utf-8', errors='replace')
+        
+        print("源文件下载成功，前 8 行预览：")
+        print("\n".join(content.splitlines()[:8]))
+        print("-" * 60)
+        
         return content.splitlines()
     except Exception as e:
-        print(f"下载文件失败: {str(e)}")
-        import traceback
-        traceback.print_exc()  # 打印详细错误，便于调试
+        print(f"下载源文件失败: {str(e)}")
         return []
 
-def is_group_line(line):
-    return line.strip().startswith('#genre#') or re.match(r'^[^,]+,#genre#', line.strip())
+def is_genre_line(line):
+    line = line.strip()
+    return line.endswith(',#genre#') or line == '#genre#'
 
 def get_group_name(line):
     line = line.strip()
@@ -45,76 +57,78 @@ def get_group_name(line):
 def is_target_group(group_name):
     if not group_name:
         return False
-    for prefix in TARGET_GROUP_PREFIX:
-        if group_name.startswith(prefix):
-            return True
-    return False
+    return any(group_name.startswith(prefix) for prefix in TARGET_GROUP_PREFIXES)
+
+def clean_channel_name_for_logo(name):
+    """简单清洗频道名用于匹配台标"""
+    name = re.sub(r'(HD|高清|超清|标清|4K|\d+K|\(\d+\)|Ⅰ|Ⅱ|Ⅲ)', '', name, flags=re.I)
+    name = name.replace("频道", "").replace("台", "").replace("卫视", "卫视").strip()
+    return name
 
 def make_logo_url(channel_name):
-    """简单处理频道名 → 台标名（可根据实际情况加强清洗规则）"""
-    # 去掉常见后缀/前缀
-    name = re.sub(r'(HD|高清|超清|标清|\d+K|4K|\(\d+\))', '', channel_name, flags=re.I)
-    name = name.replace("频道", "").replace("台", "").replace("卫视", "").strip()
-    return f"{LOGO_BASE}{name}.png"
+    clean_name = clean_channel_name_for_logo(channel_name)
+    return f"{LOGO_BASE}{clean_name}.png"
 
 def main():
-    print(f"正在处理: {INPUT_URL}")
-    lines = download_txt(INPUT_URL)
+    print(f"开始处理源文件: {INPUT_URL}\n")
     
+    lines = download_txt(INPUT_URL)
     if not lines:
-        print("文件内容为空或下载失败，退出")
+        print("源文件为空或下载失败，程序退出。")
         return
 
     current_group = ""
-    in_target_group = False
-    channels = []
+    in_target = False
+    channels = []  # (group, name, url)
 
     for line in lines:
         line = line.strip()
-        if not line or line.startswith('#'):
+        if not line or line.startswith('#') and not is_genre_line(line):
             continue
 
-        # 是分组行
-        if is_group_line(line):
+        if is_genre_line(line):
             current_group = get_group_name(line)
-            in_target_group = is_target_group(current_group)
+            in_target = is_target_group(current_group)
             
-            if in_target_group:
-                print(f"找到目标分组 → {current_group}")
+            if in_target:
+                print(f"发现目标分组：{current_group}")
             continue
 
-        # 普通频道行
-        if in_target_group and ',' in line:
+        if in_target and ',' in line:
             try:
                 name, url = [x.strip() for x in line.split(',', 1)]
-                if url.startswith(('http', 'rtmp', 'p2p', 'mitv')):
+                if url and any(url.startswith(p) for p in ['http', 'rtp', 'udp', 'rtmp', 'mitv', 'p2p']):
                     channels.append((current_group, name, url))
             except:
-                continue
+                pass
 
-    # 开始生成 m3u 文件内容
-    m3u_lines = [
+    if not channels:
+        print("未找到任何符合条件的安徽电信频道，m3u 文件将为空。")
+    
+    # 生成 m3u
+    m3u = [
         "#EXTM3U",
-        f"#EXTM3U x-tvg-url=\"{EPG_URL}\"",
-        f"# Generated by zubo_to_m3u_anhui.py at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
-        "# Only Anhui Telecom groups",
-        ""
+        f'#EXTM3U x-tvg-url="{EPG_URL}"',
+        f"# 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} (UTC+8)",
+        "# 来源: 安徽组播源 → 只保留安徽电信分组",
+        "# 台标来源: https://github.com/kenye201/TVlog",
+        "",
     ]
 
     for group, name, url in channels:
         logo = make_logo_url(name)
-        m3u_lines.append(f'#EXTINF:-1 tvg-logo="{logo}" tvg-name="{name}" group-title="{group}",{name}')
-        m3u_lines.append(url)
-        m3u_lines.append("")
+        m3u.append(f'#EXTINF:-1 tvg-logo="{logo}" tvg-name="{name}" group-title="{group}",{name}')
+        m3u.append(url)
+        m3u.append("")
 
-    # 写入文件
     try:
         with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-            f.write('\n'.join(m3u_lines))
-        print(f"\n转换完成！已保存为：{OUTPUT_FILE}")
-        print(f"共提取 {len(channels)} 个频道")
+            f.write("\n".join(m3u))
+        print(f"\n转换完成！共提取 {len(channels)} 个频道")
+        print(f"输出文件: {OUTPUT_FILE}")
+        print("请检查仓库是否已自动提交此文件。")
     except Exception as e:
-        print(f"保存文件失败: {e}")
+        print(f"保存 m3u 文件失败: {str(e)}")
 
 if __name__ == "__main__":
     main()
