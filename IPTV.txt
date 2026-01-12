@@ -24,6 +24,10 @@
 数字频道,#genre#
 山西,#genre#
 大湾区,#genre#
+央视频道,#genre#
+卫视频道,#genre#
+数字频道,#genre#
+山西,#genre#
 
 央视频道,#genre#
 CCTV1,http://183.191.179.23:8002/rtp/226.0.2.153:9136$山西联通
