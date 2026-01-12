@@ -32,10 +32,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ffmpeg
 
-      - name: 运行 1. fofa_fetch.py
+      - name: Run fofa_fetch
         run: python fofa_fetch.py
 
-      - name: 运行 2. txt_to_m3u.py
+      - name: Run Speed Test (速度压力筛选)
+        run: python speed_test_filter.py
+
+      - name: Run txt_to_m3u
         run: python txt_to_m3u.py
 
       - name: Commit and push all changes
