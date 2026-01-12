@@ -4,8 +4,8 @@ import re
 # ===============================
 # 配置区
 # ===============================
-INPUT_FILE = "IPTV.txt"  # 修改为直接读取本地文件
-OUTPUT_FILE = "IPTV.m3u"
+INPUT_FILE = "livezubo.txt"   # 修改：输入文件改为 livezubo.txt
+OUTPUT_FILE = "IPTV.m3u"      # 输出不变，仍为 IPTV.m3u
 LOGO_BASE = "https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/"
 EPG_URL = "https://live.fanmingming.cn/e.xml"
 
@@ -35,7 +35,7 @@ def get_logo_url(ch_name):
     name = ch_name.strip()
     name = re.sub(r"[ -_]HD|高清|4K|超清|超高清|8K|plus|\+|Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ", "", name, flags=re.IGNORECASE)
     name = name.replace(" ", "").replace("&", "")
-    
+   
     # 优先从映射表取名
     target_name = LOGO_SPECIAL_MAP.get(ch_name, name)
     return f"{LOGO_BASE}{target_name}.png"
@@ -44,65 +44,71 @@ def main():
     if not os.path.exists(INPUT_FILE):
         print(f"❌ 错误: 找不到本地文件 {INPUT_FILE}")
         return
-
+    
     print(f"📂 正在读取本地文件: {INPUT_FILE}")
     with open(INPUT_FILE, "r", encoding="utf-8") as f:
         lines = f.readlines()
-
+    
+    # 先收集所有有效行（只保留分类中出现的频道 + 特殊行）
     valid_lines = []
     for line in lines:
         line = line.strip()
         if not line or ",#genre#" in line:
             continue
-        # 保留更新时间和免责声明
-        if "更新时间" in line or "Disclaimer" in line:
+        # 保留更新时间等特殊行
+        if "更新时间" in line:
             valid_lines.append(line)
             continue
         # 处理频道行
         if "," in line and "$" in line:
             ch_name = line.split(",", 1)[0].strip()
-            # 检查频道是否在分类定义中
+            # 只保留在分类中定义的频道
             if any(ch_name in chans for chans in CHANNEL_CATEGORIES.values()):
                 valid_lines.append(line)
-
+    
     if not valid_lines:
         print("⚠️ 未发现有效内容，取消生成 M3U")
         return
-
+    
     # 生成 M3U 文件
     with open(OUTPUT_FILE, "w", encoding="utf-8") as out:
         out.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n\n')
         
         for line in valid_lines:
-            # 1. 处理特殊行（更新时间、免责）
-            if "更新时间" in line or "Disclaimer" in line:
+            # 1. 处理更新时间等公告行（格式：标题,url）
+            if "更新时间" in line:
                 parts = line.split(",", 1)
                 if len(parts) == 2:
                     title, url = parts
-                    out.write(f'#EXTINF:-1 group-title="公告说明",{title.strip()}\n{url.strip()}\n\n')
+                    pure_url = url.split("$")[0].strip() if "$" in url else url.strip()
+                    out.write(f'#EXTINF:-1 group-title="公告说明",{title.strip()}\n{pure_url}\n\n')
                 continue
-
+            
             # 2. 处理常规频道行
             try:
                 ch_name, url_with_op = line.split(",", 1)
                 ch_name = ch_name.strip()
                 url_with_op = url_with_op.strip()
-
+                
+                # 提取纯 URL（去掉 $operator 部分）
+                pure_url = url_with_op.split("$", 1)[0].strip()
+                
                 # 匹配所属分类
                 current_group = "其他频道"
                 for cat, chans in CHANNEL_CATEGORIES.items():
                     if ch_name in chans:
                         current_group = cat
                         break
-
+                
                 logo = get_logo_url(ch_name)
-                # 写入 M3U 格式
+                
+                # 写入标准 M3U 格式
                 out.write(f'#EXTINF:-1 tvg-name="{ch_name}" tvg-logo="{logo}" group-title="{current_group}",{ch_name}\n')
-                out.write(f"{url_with_op}\n\n")
+                out.write(f"{pure_url}\n\n")
             except Exception as e:
-                print(f"跳过错误行: {line} -> {e}")
-
-    print(f"✅ {OUTPUT_FILE} 生成成功，共处理 {len(valid_lines)} 行。")
+                print(f"⚠️ 跳过错误行: {line} -> {e}")
+    
+    print(f"✅ {OUTPUT_FILE} 生成成功（基于 {INPUT_FILE}），共处理约 {len(valid_lines)} 行有效内容。")
 
 if __name__ == "__main__":
     main()
