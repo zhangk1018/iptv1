@@ -1,0 +1,43 @@
+name: IPTV 筛选与格式转换（每30分钟）
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"  # 每30分钟触发一次
+  workflow_dispatch:        # 支持手动触发
+
+jobs:
+  filter-and-convert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 仓库
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: 安装依赖（requests）
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: 运行速度筛选脚本（生成 livezubo.txt）
+        run: python speed_filter.py
+        # 请确保你的筛选脚本文件名为 speed_filter.py
+        # 输入：live.txt   输出：livezubo.txt
+
+      - name: 运行 M3U 格式转换脚本（生成 IPTV.m3u）
+        run: python convert_to_m3u.py
+        # 请确保你的转换脚本文件名为 convert_to_m3u.py
+        # 输入：livezubo.txt   输出：IPTV.m3u
+
+      - name: 提交并推送更新文件
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add livezubo.txt IPTV.m3u
+          git commit -m "自动更新：速度筛选后 livezubo.txt + M3U 格式 IPTV.m3u" || echo "无变化，无需提交"
+          git push origin main || echo "推送失败（可能无变化）"
