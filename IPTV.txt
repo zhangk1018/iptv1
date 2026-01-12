@@ -1,7 +1,7 @@
-更新时间: 2026-01-12 07:01:13（北京时间）
+更新时间: 2026-01-12 12:17:58（北京时间）
 
 更新时间,#genre#
-2026-01-12 07:01:13,http://live.njgdmm.com/changzhi/cztv1.m3u8$长治综合#http://live.njgdmm.com/changzhi/cztv2.m3u8$长治公共#http://live.njgdmm.com/changzhi/czetv.m3u8$长治教育#https://f3jok3az.live.sxmty.com/live/hls/ebaa2bf2e7f94dc79d4e642ac76d2415/0d97361a940348729fbd0ee3f4eb9e47.m3u8$屯留电视台#http://zhibo.czmarathon.net/cdd/TVLive.m3u8?auth_key=1724143889-0-0-929d4ecd8b7700822ec202b14ebc6c3c$上党TV#https://zmjp3jin.live.sxmty.com/live/hls/268fe96f955d496db37fb10bb887cda9/fc196029d289449ea524a94a95379a0d.m3u8$壶关电视台#http://60.220.198.84:81/0.m3u8$武乡电视台#http://player4.juyun.tv:80/tv/149466149.m3u8$平顺电视台#http://jwcdnqx.hebyun.com.cn/live/SXTV1/1500k/tzwj_video.m3u8$涉县综合#http://live.jinnews.com.cn/xwzh/sd/live.m3u8$晋城综合#http://live.jinnews.com.cn/xwzh/sd/live.m3u8?zshanxd$晋城综合#http://live.jinnews.com.cn/ggpd/sd/live.m3u8$晋城文化#http://live.jinnews.com.cn/ggpd/sd/live.m3u8?zshanxd$晋城文化
+2026-01-12 12:17:58,http://live.njgdmm.com/changzhi/cztv1.m3u8$长治综合#http://live.njgdmm.com/changzhi/cztv2.m3u8$长治公共#http://live.njgdmm.com/changzhi/czetv.m3u8$长治教育#https://f3jok3az.live.sxmty.com/live/hls/ebaa2bf2e7f94dc79d4e642ac76d2415/0d97361a940348729fbd0ee3f4eb9e47.m3u8$屯留电视台#http://zhibo.czmarathon.net/cdd/TVLive.m3u8?auth_key=1724143889-0-0-929d4ecd8b7700822ec202b14ebc6c3c$上党TV#https://zmjp3jin.live.sxmty.com/live/hls/268fe96f955d496db37fb10bb887cda9/fc196029d289449ea524a94a95379a0d.m3u8$壶关电视台#http://60.220.198.84:81/0.m3u8$武乡电视台#http://player4.juyun.tv:80/tv/149466149.m3u8$平顺电视台#http://jwcdnqx.hebyun.com.cn/live/SXTV1/1500k/tzwj_video.m3u8$涉县综合#http://live.jinnews.com.cn/xwzh/sd/live.m3u8$晋城综合#http://live.jinnews.com.cn/xwzh/sd/live.m3u8?zshanxd$晋城综合#http://live.jinnews.com.cn/ggpd/sd/live.m3u8$晋城文化#http://live.jinnews.com.cn/ggpd/sd/live.m3u8?zshanxd$晋城文化
 
 央视频道,#genre#
 CCTV1,http://183.30.202.100:8000/rtp/239.77.0.86:5146$广东电信
