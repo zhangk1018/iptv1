@@ -222,6 +222,9 @@ http://113.17.153.30:8001/rtp/239.81.0.223:4056
 #EXTINF:-1 tvg-name="延边卫视" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/延边卫视.png" group-title="卫视频道",延边卫视
 http://116.21.204.108:9530/rtp/239.77.0.10:5146
 
+#EXTINF:-1 tvg-name="农林卫视" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/农林卫视.png" group-title="卫视频道",农林卫视
+http://113.25.105.248:10000/rtp/239.1.1.73:8073
+
 #EXTINF:-1 tvg-name="山东教育卫视" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/山东教育卫视.png" group-title="卫视频道",山东教育卫视
 http://113.17.153.30:8001/rtp/239.81.0.93:4056
 
@@ -230,6 +233,9 @@ http://113.17.153.30:8001/rtp/239.81.0.92:4056
 
 #EXTINF:-1 tvg-name="中国教育2台" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/中国教育2台.png" group-title="卫视频道",中国教育2台
 http://113.17.153.30:8001/rtp/239.81.0.245:4056
+
+#EXTINF:-1 tvg-name="中国教育3台" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/中国教育3台.png" group-title="卫视频道",中国教育3台
+http://115.171.216.84:4000/rtp/225.1.8.194:4120
 
 #EXTINF:-1 tvg-name="中国教育4台" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/中国教育4台.png" group-title="卫视频道",中国教育4台
 http://113.17.153.30:8001/rtp/239.81.0.188:4056
@@ -246,14 +252,35 @@ http://113.17.153.30:8001/rtp/239.81.0.238:4056
 #EXTINF:-1 tvg-name="CHC影迷电影" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/CHC影迷电影.png" group-title="数字频道",CHC影迷电影
 http://113.17.153.30:8001/rtp/239.81.0.240:4056
 
+#EXTINF:-1 tvg-name="淘电影" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/淘电影.png" group-title="数字频道",淘电影
+http://115.171.216.84:4000/rtp/225.1.8.38:8002
+
+#EXTINF:-1 tvg-name="淘精彩" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/淘精彩.png" group-title="数字频道",淘精彩
+http://115.171.216.84:4000/rtp/225.1.8.33:8002
+
+#EXTINF:-1 tvg-name="淘剧场" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/淘剧场.png" group-title="数字频道",淘剧场
+http://115.171.216.84:4000/rtp/225.1.8.37:8002
+
+#EXTINF:-1 tvg-name="淘4K" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/淘.png" group-title="数字频道",淘4K
+http://115.171.216.84:4000/rtp/225.1.8.211:8002
+
+#EXTINF:-1 tvg-name="淘娱乐" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/淘娱乐.png" group-title="数字频道",淘娱乐
+http://115.171.216.84:4000/rtp/225.1.8.61:8002
+
+#EXTINF:-1 tvg-name="淘BABY" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/淘BABY.png" group-title="数字频道",淘BABY
+http://115.171.216.84:4000/rtp/225.1.8.36:8002
+
 #EXTINF:-1 tvg-name="凤凰卫视中文台" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/凤凰卫视中文台.png" group-title="数字频道",凤凰卫视中文台
-http://60.177.205.224:9999/rtp/233.50.202.35:5140
+http://123.155.16.65:8889/rtp/233.50.202.35:5140
 
 #EXTINF:-1 tvg-name="凤凰卫视资讯台" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/凤凰卫视资讯台.png" group-title="数字频道",凤凰卫视资讯台
-http://60.177.205.224:9999/rtp/233.50.202.36:5140
+http://123.155.16.65:8889/rtp/233.50.202.36:5140
 
 #EXTINF:-1 tvg-name="求索纪录" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/求索纪录.png" group-title="数字频道",求索纪录
 http://113.17.153.30:8001/rtp/239.81.0.153:4056
+
+#EXTINF:-1 tvg-name="纪实人文" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/纪实人文.png" group-title="数字频道",纪实人文
+http://115.171.216.84:4000/rtp/225.1.8.53:8060
 
 #EXTINF:-1 tvg-name="金鹰纪实" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/金鹰纪实.png" group-title="数字频道",金鹰纪实
 http://113.17.153.30:8001/rtp/239.81.0.91:4056
@@ -274,7 +301,7 @@ http://116.21.204.108:9530/rtp/239.77.1.21:5146
 http://116.21.204.108:9530/rtp/239.77.1.23:5146
 
 #EXTINF:-1 tvg-name="魅力足球" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/魅力足球.png" group-title="数字频道",魅力足球
-http://180.108.12.38:8000/rtp/239.49.1.179:6000
+http://113.25.105.248:10000/rtp/239.1.1.75:8075
 
 #EXTINF:-1 tvg-name="快乐垂钓" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/快乐垂钓.png" group-title="数字频道",快乐垂钓
 http://116.21.204.108:9530/rtp/239.77.0.145:5146
@@ -301,25 +328,25 @@ http://180.108.12.38:8000/rtp/239.49.0.209:8000
 http://180.108.12.38:8000/rtp/239.49.0.205:8000
 
 #EXTINF:-1 tvg-name="乐游" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/乐游.png" group-title="数字频道",乐游
-http://180.108.12.38:8000/rtp/239.49.1.173:6000
+http://113.25.105.248:10000/rtp/239.1.1.84:8084
 
 #EXTINF:-1 tvg-name="生活时尚" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/生活时尚.png" group-title="数字频道",生活时尚
-http://180.108.12.38:8000/rtp/239.49.1.181:6000
+http://113.25.105.248:10000/rtp/239.1.1.76:8076
 
 #EXTINF:-1 tvg-name="都市剧场" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/都市剧场.png" group-title="数字频道",都市剧场
-http://180.108.12.38:8000/rtp/239.49.1.170:6000
+http://113.25.105.248:10000/rtp/239.1.1.81:8081
 
 #EXTINF:-1 tvg-name="欢笑剧场" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/欢笑剧场.png" group-title="数字频道",欢笑剧场
-http://60.177.205.224:9999/rtp/233.50.200.229:5140
+http://123.155.16.65:8889/rtp/233.50.201.189:5140
 
 #EXTINF:-1 tvg-name="游戏风云" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/游戏风云.png" group-title="数字频道",游戏风云
-http://180.108.12.38:8000/rtp/239.49.1.177:6000
+http://113.25.105.248:10000/rtp/239.1.1.83:8083
 
 #EXTINF:-1 tvg-name="金色学堂" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/金色学堂.png" group-title="数字频道",金色学堂
-http://60.177.205.224:9999/rtp/233.50.200.122:5140
+http://113.25.105.248:10000/rtp/239.1.1.82:8082
 
 #EXTINF:-1 tvg-name="动漫秀场" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/动漫秀场.png" group-title="数字频道",动漫秀场
-http://180.108.12.38:8000/rtp/239.49.1.171:6000
+http://113.25.105.248:10000/rtp/239.1.1.80:8080
 
 #EXTINF:-1 tvg-name="新动漫" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/新动漫.png" group-title="数字频道",新动漫
 http://113.17.153.30:8001/rtp/239.81.0.235:4056
@@ -334,7 +361,7 @@ http://113.17.153.30:8001/rtp/239.81.0.148:4056
 http://116.21.204.108:9530/rtp/239.77.0.222:5146
 
 #EXTINF:-1 tvg-name="哈哈炫动" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/哈哈炫动.png" group-title="数字频道",哈哈炫动
-http://60.177.205.224:9999/rtp/233.50.200.167:5140
+http://113.25.105.248:10000/rtp/239.1.1.64:8064
 
 #EXTINF:-1 tvg-name="嘉佳卡通" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/嘉佳卡通.png" group-title="数字频道",嘉佳卡通
 http://113.17.153.30:8001/rtp/239.81.0.64:4056
@@ -342,11 +369,56 @@ http://113.17.153.30:8001/rtp/239.81.0.64:4056
 #EXTINF:-1 tvg-name="中国天气" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/中国天气.png" group-title="数字频道",中国天气
 http://113.17.153.30:8001/rtp/239.81.0.63:4056
 
+#EXTINF:-1 tvg-name="华数星影" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/华数星影.png" group-title="数字频道",华数星影
+http://115.171.216.84:4000/rtp/225.1.8.254:4120
+
+#EXTINF:-1 tvg-name="华数动作影院" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/华数动作影院.png" group-title="数字频道",华数动作影院
+http://115.171.216.84:4000/rtp/225.1.8.252:4120
+
+#EXTINF:-1 tvg-name="华数喜剧影院" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/华数喜剧影院.png" group-title="数字频道",华数喜剧影院
+http://115.171.216.84:4000/rtp/225.1.8.251:4120
+
+#EXTINF:-1 tvg-name="华数家庭影院" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/华数家庭影院.png" group-title="数字频道",华数家庭影院
+http://115.171.216.84:4000/rtp/225.1.8.253:4120
+
+#EXTINF:-1 tvg-name="华数经典电影" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/华数经典电影.png" group-title="数字频道",华数经典电影
+http://115.171.216.84:4000/rtp/225.1.8.203:9024
+
 #EXTINF:-1 tvg-name="华数热播剧场" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/华数热播剧场.png" group-title="数字频道",华数热播剧场
 http://116.21.204.108:9530/rtp/239.77.0.106:5146
 
+#EXTINF:-1 tvg-name="华数军旅剧场" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/华数军旅剧场.png" group-title="数字频道",华数军旅剧场
+http://115.171.216.84:4000/rtp/225.1.8.228:4120
+
+#EXTINF:-1 tvg-name="华数城市剧场" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/华数城市剧场.png" group-title="数字频道",华数城市剧场
+http://115.171.216.84:4000/rtp/225.1.8.227:4120
+
+#EXTINF:-1 tvg-name="华数古装剧场" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/华数古装剧场.png" group-title="数字频道",华数古装剧场
+http://115.171.216.84:4000/rtp/225.1.8.229:4120
+
+#EXTINF:-1 tvg-name="华数魅力时尚" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/华数魅力时尚.png" group-title="数字频道",华数魅力时尚
+http://115.171.216.84:4000/rtp/225.1.8.204:9012
+
 #EXTINF:-1 tvg-name="华数少儿动画" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/华数少儿动画.png" group-title="数字频道",华数少儿动画
 http://116.21.204.108:9530/rtp/239.77.0.109:5146
+
+#EXTINF:-1 tvg-name="华数动画" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/华数动画.png" group-title="数字频道",华数动画
+http://115.171.216.84:4000/rtp/225.1.8.240:4120
+
+#EXTINF:-1 tvg-name="山西黄河HD" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/山西黄河HD.png" group-title="山西",山西黄河HD
+http://183.191.179.23:8002/rtp/226.0.2.235:9792
+
+#EXTINF:-1 tvg-name="山西经济与科技HD" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/山西经济与科技HD.png" group-title="山西",山西经济与科技HD
+http://113.25.105.248:10000/rtp/239.1.1.3:8003
+
+#EXTINF:-1 tvg-name="山西影视HD" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/山西影视HD.png" group-title="山西",山西影视HD
+http://113.25.105.248:10000/rtp/239.1.1.4:8004
+
+#EXTINF:-1 tvg-name="山西社会与法治HD" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/山西社会与法治HD.png" group-title="山西",山西社会与法治HD
+http://113.25.105.248:10000/rtp/239.1.1.5:8005
+
+#EXTINF:-1 tvg-name="山西文体生活HD" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/山西文体生活HD.png" group-title="山西",山西文体生活HD
+http://113.25.105.248:10000/rtp/239.1.1.6:8006
 
 #EXTINF:-1 tvg-name="广东珠江" tvg-logo="https://gcore.jsdelivr.net/gh/kenye201/TVlog/img/广东珠江.png" group-title="大湾区",广东珠江
 http://116.21.204.108:9530/rtp/239.77.0.1:5146
