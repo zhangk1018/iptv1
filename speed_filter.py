@@ -13,13 +13,13 @@ OUTPUT_FILE = "livezubo.txt"
 CHECK_COUNT = 2
 TEST_DURATION = 12
 
-# 筛选标准（可自行调整）
-MIN_PEAK_REQUIRED   = 0.80
-MIN_STABLE_REQUIRED = 0.40
+# 严格模式（推荐主力）
+MIN_PEAK_REQUIRED   = 1.00
+MIN_STABLE_REQUIRED = 0.90   # ← 谷底参考是关键，0.9+ 才真正稳
 
-# 降级标准
-FALLBACK_PEAK   = 0.60
-FALLBACK_STABLE = 0.25
+# 降级模式（自动触发时用）
+FALLBACK_PEAK   = 0.95
+FALLBACK_STABLE = 0.75
 
 def get_realtime_speed(url):
     """返回：峰值速度, 后半段平均速度(谷底参考), 整体平均速度"""
@@ -72,33 +72,65 @@ def get_realtime_speed(url):
         return 0.0, 0.0, 0.0
 
 
-def test_ip_group(ip_port, channels):
-    test_targets = [u for n, u in channels if "CCTV1" in n or "CCTV5" in n][:CHECK_COUNT]
-    if len(test_targets) < CHECK_COUNT:
-        test_targets = [c[1] for c in channels[:CHECK_COUNT]]
+import random  # ← 记得在脚本顶部添加这个导入
 
+def test_ip_group(ip_port, channels):
+    # 优先匹配 CCTV-4 / 湖南卫视 的常见写法（不区分大小写，兼容各种别名）
+    keywords = [
+        "CCTV4", "CCTV-4", "CCTV-04", "CCTV4中文国际", "CCTV-4中文国际", "中文国际", "CCTV4国际",
+        "湖南卫视",  # 芒果TV相关有时会带
+    ]
+    
+    test_targets = []
+    for name, url in channels:
+        upper_name = name.upper()
+        if any(kw.upper() in upper_name for kw in keywords):
+            test_targets.append(url)
+    
+    # 如果找到的 >= CHECK_COUNT（默认2），就取前几个
+    if len(test_targets) >= CHECK_COUNT:
+        test_targets = test_targets[:CHECK_COUNT]
+    
+    # 如果不够或完全没找到，就随机补齐/全随机
+    else:
+        remaining = CHECK_COUNT - len(test_targets)
+        other_channels = [url for n, url in channels if url not in test_targets]
+        
+        if other_channels:
+            # 随机选 remaining 个不重复的
+            random_selected = random.sample(other_channels, min(remaining, len(other_channels)))
+            test_targets.extend(random_selected)
+        else:
+            # 极端情况：服务器只有一个频道，就全用它
+            test_targets = [url for _, url in channels][:CHECK_COUNT]
+    
+    # 如果还是空（不可能，但防错），就跳过或用第一个
+    if not test_targets:
+        test_targets = [channels[0][1]] if channels else []
+    
+    # 下面继续原来的测试逻辑...
     best_peak = 0.0
     best_stable = 0.0
     best_overall = 0.0
     best_url = ""
-
+    
     for url in test_targets:
         peak, stable, overall = get_realtime_speed(url)
+        # 优先峰值，其次稳定性
         if (peak > best_peak) or (peak == best_peak and stable > best_stable):
             best_peak = peak
             best_stable = stable
             best_overall = overall
             best_url = url
-
+    
     timestamp = time.strftime("%H:%M:%S", time.localtime())
     sys.stdout.write(
         f"[{timestamp}] {ip_port:21} → "
-        f"峰值:{best_peak:5.2f}  谷底参考:{best_stable:5.2f}  整体:{best_overall:5.2f} MB/s   {best_url[:70]}\n"
+        f"峰值:{best_peak:5.2f}  谷底参考:{best_stable:5.2f}  整体:{best_overall:5.2f} MB/s   测试用: {best_url[:70]}\n"
     )
     sys.stdout.flush()
-
+    
     return ip_port, best_peak, best_stable, best_overall
-
 
 def main():
     if not os.path.exists(INPUT_FILE):
