@@ -10,7 +10,7 @@ import sys
 # ===============================
 INPUT_FILE = "live.txt"
 OUTPUT_FILE = "livezubo.txt"
-CHECK_COUNT = 3
+CHECK_COUNT = 2
 TEST_DURATION = 12
 
 # 严格模式（推荐主力）
