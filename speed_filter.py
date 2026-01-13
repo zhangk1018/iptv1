@@ -10,16 +10,17 @@ import sys
 # ===============================
 INPUT_FILE = "live.txt"
 OUTPUT_FILE = "livezubo.txt"
-CHECK_COUNT = 2
+CHECK_COUNT = 3
 TEST_DURATION = 12
 
 # 严格模式（推荐主力）
-MIN_PEAK_REQUIRED   = 1.00
-MIN_STABLE_REQUIRED = 0.90   # ← 谷底参考是关键，0.9+ 才真正稳
+# 严格模式（主力推荐，建议先用这个）
+MIN_PEAK_REQUIRED   = 1.10     # 峰值至少 1.10，确保爆发力够
+MIN_STABLE_REQUIRED = 1.00     # 谷底参考 ≥1.00（最关键！），高峰期稳如狗
 
-# 降级模式（自动触发时用）
-FALLBACK_PEAK   = 0.95
-FALLBACK_STABLE = 0.75
+# 降级模式（如果严格模式 <8 个源，自动降级）
+FALLBACK_PEAK   = 1.05
+FALLBACK_STABLE = 0.95
 
 def get_realtime_speed(url):
     """返回：峰值速度, 后半段平均速度(谷底参考), 整体平均速度"""
