@@ -20,8 +20,8 @@ CHECK_COUNT = 2
 TEST_DURATION = 12
 
 # 严格模式（主力推荐，根据实际源池可调）
-MIN_PEAK_REQUIRED = 1.00
-MIN_STABLE_REQUIRED = 0.90   # 谷底参考 ≥0.9 才真正稳
+MIN_PEAK_REQUIRED = 1.10
+MIN_STABLE_REQUIRED = 1.03   # 谷底参考 ≥0.9 才真正稳
 
 # 降级模式
 FALLBACK_PEAK = 0.95
