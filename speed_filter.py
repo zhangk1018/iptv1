@@ -13,7 +13,7 @@ OUTPUT_FILE = "livezubo.txt"     # 修改：输出文件改为 livezubo.txt
 CHECK_COUNT = 2
 TEST_DURATION = 8
 # 阶梯标准：只要达到这一层，该层所有符合条件的 IP 都要
-SPEED_STEPS = [ 0.94, 0.90, 0.85, 0.80, 0.50]
+SPEED_STEPS = [ 0.93, 0.90, 0.85, 0.80, 0.50]
 
 def get_realtime_speed(url):
     headers = {
