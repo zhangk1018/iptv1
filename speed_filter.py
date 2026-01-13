@@ -14,13 +14,12 @@ CHECK_COUNT = 2
 TEST_DURATION = 12
 
 # 严格模式（推荐主力）
-# 严格模式（主力推荐，建议先用这个）
-MIN_PEAK_REQUIRED   = 1.10     # 峰值至少 1.10，确保爆发力够
-MIN_STABLE_REQUIRED = 1.00     # 谷底参考 ≥1.00（最关键！），高峰期稳如狗
+MIN_PEAK_REQUIRED   = 1.00
+MIN_STABLE_REQUIRED = 0.90   # ← 谷底参考是关键，0.9+ 才真正稳
 
-# 降级模式（如果严格模式 <8 个源，自动降级）
-FALLBACK_PEAK   = 1.05
-FALLBACK_STABLE = 0.95
+# 降级模式（自动触发时用）
+FALLBACK_PEAK   = 0.95
+FALLBACK_STABLE = 0.75
 
 def get_realtime_speed(url):
     """返回：峰值速度, 后半段平均速度(谷底参考), 整体平均速度"""
@@ -79,7 +78,7 @@ def test_ip_group(ip_port, channels):
     # 优先匹配 CCTV-4 / 湖南卫视 的常见写法（不区分大小写，兼容各种别名）
     keywords = [
         "CCTV4", "CCTV-4", "CCTV-04", "CCTV4中文国际", "CCTV-4中文国际", "中文国际", "CCTV4国际",
-        "湖南卫视",  # 芒果TV相关有时会带
+        "湖南卫视", "湖南", "HUNAN", "快乐大本营", "芒果"  # 芒果TV相关有时会带
     ]
     
     test_targets = []
@@ -238,10 +237,34 @@ def main():
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write("\n".join(final_output).rstrip() + "\n")
+    # ...（前面的 for category 循环不变，收集 final_output）
+
+    # ===================== 最终全局去重 =====================
+    seen_lines = set()  # 用整行内容去重（最严格，适合你描述的重复整行情况）
+    unique_output = []
+
+    for line in final_output:
+        stripped = line.strip()
+        if not stripped:  # 空行保留
+            unique_output.append(line)
+            continue
+
+        # 保留分类标题、头部信息（即使重复也无所谓，通常不会重复）
+        if ",#genre#" in stripped or "更新时间" in stripped:
+            unique_output.append(line)
+            continue
+
+        # 频道行：只添加没见过的
+        if stripped not in seen_lines:
+            seen_lines.add(stripped)
+            unique_output.append(line)
+
+    # 只写一次文件
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        f.write("\n".join(unique_output).rstrip() + "\n")
 
     print(f"\n🎯 筛选完成！输出文件：{OUTPUT_FILE}")
-    print(f"   已保留 {len(selected_ips)} 个服务器源，同频道链接已去重")
-
+    print(f"   已保留 {len(selected_ips)} 个服务器源，全局去重后无重复行")
 
 if __name__ == "__main__":
     main()
