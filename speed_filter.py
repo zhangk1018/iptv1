@@ -21,11 +21,11 @@ TEST_DURATION = 12
 
 # 严格模式（主力推荐，根据实际源池可调）
 MIN_PEAK_REQUIRED = 1.10
-MIN_STABLE_REQUIRED = 1.03   # 谷底参考 ≥0.9 才真正稳
+MIN_STABLE_REQUIRED = 1.01   # 谷底参考 ≥0.9 才真正稳
 
 # 降级模式
-FALLBACK_PEAK = 0.95
-FALLBACK_STABLE = 0.75
+FALLBACK_PEAK = 1.00
+FALLBACK_STABLE = 0.95
 
 def get_realtime_speed(url):
     """返回：峰值速度, 后半段平均速度(谷底参考), 整体平均速度"""
