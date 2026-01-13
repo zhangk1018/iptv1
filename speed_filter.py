@@ -4,24 +4,27 @@ import time
 import requests
 import concurrent.futures
 import sys
+import random
 
 # ===============================
 # 配置区
 # ===============================
 INPUT_FILES = [
     "live.txt",
-    "IPTV.txt"   
+    "IPTV.txt"
+    # 可以继续添加更多文件，例如 "backup.txt", "new_sources.txt"
 ]
+
 OUTPUT_FILE = "livezubo.txt"
 CHECK_COUNT = 2
 TEST_DURATION = 12
 
-# 严格模式（推荐主力）
-MIN_PEAK_REQUIRED   = 1.00
-MIN_STABLE_REQUIRED = 0.90   # ← 谷底参考是关键，0.9+ 才真正稳
+# 严格模式（主力推荐，根据实际源池可调）
+MIN_PEAK_REQUIRED = 1.00
+MIN_STABLE_REQUIRED = 0.90   # 谷底参考 ≥0.9 才真正稳
 
-# 降级模式（自动触发时用）
-FALLBACK_PEAK   = 0.95
+# 降级模式
+FALLBACK_PEAK = 0.95
 FALLBACK_STABLE = 0.75
 
 def get_realtime_speed(url):
@@ -75,68 +78,55 @@ def get_realtime_speed(url):
         return 0.0, 0.0, 0.0
 
 
-import random  # ← 记得在脚本顶部添加这个导入
-
 def test_ip_group(ip_port, channels):
-    # 优先匹配 CCTV-4 / 湖南卫视 的常见写法（不区分大小写，兼容各种别名）
     keywords = [
-        "CCTV4", "CCTV-4", "CCTV-04", "CCTV4中文国际", "CCTV-4中文国际", "中文国际", "CCTV4国际",
-        "湖南卫视", "湖南", "HUNAN", "快乐大本营", "芒果"  # 芒果TV相关有时会带
+        "CCTV4", "CCTV-4", "CCTV-04", "CCTV4中文国际", "CCTV-4中文国际", "中文国际", "CCTV4国际", "国际频道", "四套",
+        "湖南卫视", "湖南", "HUNAN", "快乐大本营", "芒果", "芒果TV", "金鹰", "卫视湖南", "湖南一套"
     ]
-    
+
     test_targets = []
     for name, url in channels:
         upper_name = name.upper()
         if any(kw.upper() in upper_name for kw in keywords):
             test_targets.append(url)
-    
-    # 如果找到的 >= CHECK_COUNT（默认2），就取前几个
+
     if len(test_targets) >= CHECK_COUNT:
         test_targets = test_targets[:CHECK_COUNT]
-    
-    # 如果不够或完全没找到，就随机补齐/全随机
     else:
         remaining = CHECK_COUNT - len(test_targets)
         other_channels = [url for n, url in channels if url not in test_targets]
-        
+
         if other_channels:
-            # 随机选 remaining 个不重复的
             random_selected = random.sample(other_channels, min(remaining, len(other_channels)))
             test_targets.extend(random_selected)
         else:
-            # 极端情况：服务器只有一个频道，就全用它
             test_targets = [url for _, url in channels][:CHECK_COUNT]
-    
-    # 如果还是空（不可能，但防错），就跳过或用第一个
-    if not test_targets:
-        test_targets = [channels[0][1]] if channels else []
-    
-    # 下面继续原来的测试逻辑...
+
+    if not test_targets and channels:
+        test_targets = [channels[0][1]]
+
     best_peak = 0.0
     best_stable = 0.0
     best_overall = 0.0
     best_url = ""
-    
+
     for url in test_targets:
         peak, stable, overall = get_realtime_speed(url)
-        # 优先峰值，其次稳定性
         if (peak > best_peak) or (peak == best_peak and stable > best_stable):
             best_peak = peak
             best_stable = stable
             best_overall = overall
             best_url = url
-    
+
     timestamp = time.strftime("%H:%M:%S", time.localtime())
     sys.stdout.write(
         f"[{timestamp}] {ip_port:21} → "
         f"峰值:{best_peak:5.2f}  谷底参考:{best_stable:5.2f}  整体:{best_overall:5.2f} MB/s   测试用: {best_url[:70]}\n"
     )
     sys.stdout.flush()
-    
+
     return ip_port, best_peak, best_stable, best_overall
 
-
-# ... 其他配置不变
 
 def main():
     if not INPUT_FILES:
@@ -153,7 +143,6 @@ def main():
             all_lines.extend(lines)
         print(f"已读取 {input_file}，共 {len(lines)} 行")
 
-    # 继续原来的解析逻辑，使用 all_lines 代替 lines
     ip_groups = {}
     other_info = []
     for line in all_lines:
@@ -167,8 +156,6 @@ def main():
         elif line:
             other_info.append(line)
 
-    # 后面代码完全不变...
-
     print(f"\n🚀 启动筛选 | 候选服务器: {len(ip_groups)} 个 | 测试时长: {TEST_DURATION}s\n")
 
     results = {}
@@ -180,7 +167,6 @@ def main():
 
     print("\n" + "="*70)
 
-    # 筛选服务器
     selected_ips = [
         ip for ip, (peak, stable, _) in results.items()
         if peak >= MIN_PEAK_REQUIRED and stable >= MIN_STABLE_REQUIRED
@@ -204,83 +190,34 @@ def main():
 
     print(f"✅ 最终入选 {len(selected_ips)} 个服务器（标准：{final_step}）\n")
 
-    # ===================== 输出部分 - 增加去重 =====================
-    try:
-        from fofa_fetch import CHANNEL_CATEGORIES
-    except ImportError:
-        print("❌ 无法导入 CHANNEL_CATEGORIES，请检查 fofa_fetch.py")
-        return
+    # ===================== 输出所有入选服务器的全部频道（不重组，不限类别） =====================
+    final_output = [line for line in other_info if line.strip()]  # 保留头部信息
+    final_output.append("")  # 加空行
 
-    final_output = [l for l in other_info if "#genre#" in l or "更新时间" in l]
-    final_output.append("")
+    # 收集入选服务器的所有原始频道行
+    all_selected_lines = []
+    for ip in selected_ips:
+        for name, url_part in ip_groups.get(ip, []):
+            all_selected_lines.append(f"{name},{url_part}")
 
-    for category, ch_list in CHANNEL_CATEGORIES.items():
-        category_added = False
+    # 全局去重整行（防止源文件本身有完全相同的重复行）
+    seen_lines = set()
+    unique_lines = []
+    for line in all_selected_lines:
+        stripped = line.strip()
+        if stripped and stripped not in seen_lines:
+            seen_lines.add(stripped)
+            unique_lines.append(line)
 
-        for std_name in ch_list:
-            # 用 dict 存储 url → (peak, stable) ，天然去重
-            url_info = {}
+    final_output.extend(unique_lines)
 
-            for ip in selected_ips:
-                for name, url_part in ip_groups.get(ip, []):
-                    if name == std_name:
-                        peak, stable, _ = results[ip]
-                        # 如果已有相同url，取更好的评分
-                        if url_part not in url_info or (peak, stable) > url_info[url_part]:
-                            url_info[url_part] = (peak, stable)
-
-            if not url_info:
-                continue
-
-            # 按 (峰值, 谷底) 降序排序
-            sorted_entries = sorted(
-                url_info.items(),
-                key=lambda x: (x[1][0], x[1][1]),
-                reverse=True
-            )
-
-            # 只取最好的那一个（已去重）
-            if sorted_entries:
-                if not category_added:
-                    final_output.append(f"{category},#genre#")
-                    category_added = True
-                
-                best_url, _ = sorted_entries[0]
-                final_output.append(f"{std_name},{best_url}")
-
-        if category_added:
-            final_output.append("")
-
+    # 写文件
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write("\n".join(final_output).rstrip() + "\n")
-    # ...（前面的 for category 循环不变，收集 final_output）
-
-    # ===================== 最终全局去重 =====================
-    seen_lines = set()  # 用整行内容去重（最严格，适合你描述的重复整行情况）
-    unique_output = []
-
-    for line in final_output:
-        stripped = line.strip()
-        if not stripped:  # 空行保留
-            unique_output.append(line)
-            continue
-
-        # 保留分类标题、头部信息（即使重复也无所谓，通常不会重复）
-        if ",#genre#" in stripped or "更新时间" in stripped:
-            unique_output.append(line)
-            continue
-
-        # 频道行：只添加没见过的
-        if stripped not in seen_lines:
-            seen_lines.add(stripped)
-            unique_output.append(line)
-
-    # 只写一次文件
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        f.write("\n".join(unique_output).rstrip() + "\n")
 
     print(f"\n🎯 筛选完成！输出文件：{OUTPUT_FILE}")
-    print(f"   已保留 {len(selected_ips)} 个服务器源，全局去重后无重复行")
+    print(f"   已保留 {len(selected_ips)} 个服务器的所有频道（去重后共 {len(unique_lines)} 条唯一行）")
+
 
 if __name__ == "__main__":
     main()
