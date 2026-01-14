@@ -16,16 +16,18 @@ INPUT_FILES = [
 ]
 
 OUTPUT_FILE = "livezubo.txt"
-CHECK_COUNT = 2
-TEST_DURATION = 12
+
+CHECK_COUNT = 3               # 目标测试频道数量（尽量达到这个数）
+TEST_DURATION = 12            # 每个频道测试秒数
 
 # 严格模式（主力推荐，根据实际源池可调）
 MIN_PEAK_REQUIRED = 1.10
-MIN_STABLE_REQUIRED = 1.01   # 谷底参考 ≥0.9 才真正稳
+MIN_STABLE_REQUIRED = 1.01    # 谷底参考 ≥0.9 才真正稳
 
 # 降级模式
 FALLBACK_PEAK = 1.00
 FALLBACK_STABLE = 0.95
+
 
 def get_realtime_speed(url):
     """返回：峰值速度, 后半段平均速度(谷底参考), 整体平均速度"""
@@ -48,7 +50,6 @@ def get_realtime_speed(url):
                 if chunk:
                     total_size += len(chunk)
                     now = time.time()
-
                     if now - last_check >= 0.8:
                         interval = now - last_check
                         current_speed = (total_size - last_size) / interval / 1024 / 1024
@@ -69,6 +70,7 @@ def get_realtime_speed(url):
             return overall_avg, overall_avg, overall_avg
 
         peak_speed = max(speed_samples)
+        # 后60%作为稳定参考（谷底）
         split_idx = max(2, len(speed_samples) * 4 // 10)
         stable_avg = sum(speed_samples[split_idx:]) / len(speed_samples[split_idx:]) if len(speed_samples) > 4 else overall_avg
 
@@ -79,31 +81,18 @@ def get_realtime_speed(url):
 
 
 def test_ip_group(ip_port, channels):
-    keywords = [
-        "CCTV4", "CCTV-4", "CCTV-04", "CCTV4中文国际", "CCTV-4中文国际", "中文国际", "CCTV4国际", "国际频道", "四套",
-        "湖南卫视", "湖南", "HUNAN", "快乐大本营", "芒果", "芒果TV", "金鹰", "卫视湖南", "湖南一套"
-    ]
+    all_urls = [url for _, url in channels]
+    
+    if not all_urls:
+        return ip_port, 0.0, 0.0, 0.0
 
-    test_targets = []
-    for name, url in channels:
-        upper_name = name.upper()
-        if any(kw.upper() in upper_name for kw in keywords):
-            test_targets.append(url)
-
-    if len(test_targets) >= CHECK_COUNT:
-        test_targets = test_targets[:CHECK_COUNT]
+    # 决定要测哪些频道
+    if len(all_urls) >= CHECK_COUNT:
+        # 足够多 → 随机抽取
+        test_targets = random.sample(all_urls, CHECK_COUNT)
     else:
-        remaining = CHECK_COUNT - len(test_targets)
-        other_channels = [url for n, url in channels if url not in test_targets]
-
-        if other_channels:
-            random_selected = random.sample(other_channels, min(remaining, len(other_channels)))
-            test_targets.extend(random_selected)
-        else:
-            test_targets = [url for _, url in channels][:CHECK_COUNT]
-
-    if not test_targets and channels:
-        test_targets = [channels[0][1]]
+        # 不够就全测（1~2个的情况）
+        test_targets = all_urls[:]
 
     best_peak = 0.0
     best_stable = 0.0
@@ -112,6 +101,8 @@ def test_ip_group(ip_port, channels):
 
     for url in test_targets:
         peak, stable, overall = get_realtime_speed(url)
+        
+        # 优先峰值，其次稳定度
         if (peak > best_peak) or (peak == best_peak and stable > best_stable):
             best_peak = peak
             best_stable = stable
@@ -121,7 +112,8 @@ def test_ip_group(ip_port, channels):
     timestamp = time.strftime("%H:%M:%S", time.localtime())
     sys.stdout.write(
         f"[{timestamp}] {ip_port:21} → "
-        f"峰值:{best_peak:5.2f}  谷底参考:{best_stable:5.2f}  整体:{best_overall:5.2f} MB/s   测试用: {best_url[:70]}\n"
+        f"峰值:{best_peak:5.2f} 谷底参考:{best_stable:5.2f} 整体:{best_overall:5.2f} MB/s "
+        f"测试 {len(test_targets)}/{len(all_urls)} 条  示例:{best_url[:68]}\n"
     )
     sys.stdout.flush()
 
@@ -145,6 +137,7 @@ def main():
 
     ip_groups = {}
     other_info = []
+
     for line in all_lines:
         line = line.strip()
         if "," in line and "$" in line:
@@ -156,7 +149,7 @@ def main():
         elif line:
             other_info.append(line)
 
-    print(f"\n🚀 启动筛选 | 候选服务器: {len(ip_groups)} 个 | 测试时长: {TEST_DURATION}s\n")
+    print(f"\n🚀 启动筛选 | 候选服务器: {len(ip_groups)} 个 | 每组目标测试: {CHECK_COUNT}个频道 | 时长: {TEST_DURATION}s\n")
 
     results = {}
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
@@ -165,13 +158,13 @@ def main():
             ip_port, peak, stable, overall = future.result()
             results[ip_port] = (peak, stable, overall)
 
-    print("\n" + "="*70)
+    print("\n" + "="*80)
 
+    # 严格筛选
     selected_ips = [
         ip for ip, (peak, stable, _) in results.items()
         if peak >= MIN_PEAK_REQUIRED and stable >= MIN_STABLE_REQUIRED
     ]
-
     final_step = f"峰值≥{MIN_PEAK_REQUIRED} & 谷底≥{MIN_STABLE_REQUIRED}"
 
     if not selected_ips:
@@ -190,7 +183,7 @@ def main():
 
     print(f"✅ 最终入选 {len(selected_ips)} 个服务器（标准：{final_step}）\n")
 
-    # ===================== 输出所有入选服务器的全部频道（不重组，不限类别） =====================
+    # ===================== 输出所有入选服务器的全部频道（不重组） =====================
     final_output = [line for line in other_info if line.strip()]  # 保留头部信息
     final_output.append("")  # 加空行
 
@@ -200,7 +193,7 @@ def main():
         for name, url_part in ip_groups.get(ip, []):
             all_selected_lines.append(f"{name},{url_part}")
 
-    # 全局去重整行（防止源文件本身有完全相同的重复行）
+    # 全局去重（防止源文件本身有完全相同的重复行）
     seen_lines = set()
     unique_lines = []
     for line in all_selected_lines:
@@ -216,7 +209,7 @@ def main():
         f.write("\n".join(final_output).rstrip() + "\n")
 
     print(f"\n🎯 筛选完成！输出文件：{OUTPUT_FILE}")
-    print(f"   已保留 {len(selected_ips)} 个服务器的所有频道（去重后共 {len(unique_lines)} 条唯一行）")
+    print(f" 已保留 {len(selected_ips)} 个服务器的所有频道（去重后共 {len(unique_lines)} 条唯一行）")
 
 
 if __name__ == "__main__":
