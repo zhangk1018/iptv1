@@ -11,7 +11,7 @@ import random
 # ===============================
 INPUT_FILES = [
     "live.txt",
-    "IPTV.txt"
+    "IPTV2.txt"
     # 可以继续添加更多文件，例如 "backup.txt", "new_sources.txt"
 ]
 
