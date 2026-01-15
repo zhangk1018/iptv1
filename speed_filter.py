@@ -17,12 +17,12 @@ INPUT_FILES = [
 
 OUTPUT_FILE = "livezubo.txt"
 
-CHECK_COUNT = 3               # 目标测试频道数量（尽量达到这个数）
-TEST_DURATION = 12            # 每个频道测试秒数
+CHECK_COUNT = 3               # 目标测试频道数量
+TEST_DURATION = 12            # 每个测试时长（秒）
 
-# 严格模式（主力推荐，根据实际源池可调）
+# 严格模式
 MIN_PEAK_REQUIRED = 1.10
-MIN_STABLE_REQUIRED = 1.01    # 谷底参考 ≥0.9 才真正稳
+MIN_STABLE_REQUIRED = 1.01
 
 # 降级模式
 FALLBACK_PEAK = 1.00
@@ -70,7 +70,6 @@ def get_realtime_speed(url):
             return overall_avg, overall_avg, overall_avg
 
         peak_speed = max(speed_samples)
-        # 后60%作为稳定参考（谷底）
         split_idx = max(2, len(speed_samples) * 4 // 10)
         stable_avg = sum(speed_samples[split_idx:]) / len(speed_samples[split_idx:]) if len(speed_samples) > 4 else overall_avg
 
@@ -86,12 +85,9 @@ def test_ip_group(ip_port, channels):
     if not all_urls:
         return ip_port, 0.0, 0.0, 0.0
 
-    # 决定要测哪些频道
     if len(all_urls) >= CHECK_COUNT:
-        # 足够多 → 随机抽取
         test_targets = random.sample(all_urls, CHECK_COUNT)
     else:
-        # 不够就全测（1~2个的情况）
         test_targets = all_urls[:]
 
     best_peak = 0.0
@@ -102,7 +98,6 @@ def test_ip_group(ip_port, channels):
     for url in test_targets:
         peak, stable, overall = get_realtime_speed(url)
         
-        # 优先峰值，其次稳定度
         if (peak > best_peak) or (peak == best_peak and stable > best_stable):
             best_peak = peak
             best_stable = stable
@@ -113,7 +108,7 @@ def test_ip_group(ip_port, channels):
     sys.stdout.write(
         f"[{timestamp}] {ip_port:21} → "
         f"峰值:{best_peak:5.2f} 谷底参考:{best_stable:5.2f} 整体:{best_overall:5.2f} MB/s "
-        f"测试 {len(test_targets)}/{len(all_urls)} 条  示例:{best_url[:68]}\n"
+        f"测试 {len(test_targets)}/{len(all_urls)} 条 示例:{best_url[:68]}\n"
     )
     sys.stdout.flush()
 
@@ -135,22 +130,20 @@ def main():
             all_lines.extend(lines)
         print(f"已读取 {input_file}，共 {len(lines)} 行")
 
+    # 建立 IP → 频道列表 的映射（用于后续判断）
     ip_groups = {}
-    other_info = []
-
     for line in all_lines:
         line = line.strip()
-        if "," in line and "$" in line:
+        if "," in line and "http://" in line:
             name, url_part = line.split(",", 1)
             match = re.search(r'http://(.*?)/', url_part)
             if match:
                 ip_port = match.group(1)
                 ip_groups.setdefault(ip_port, []).append((name, url_part))
-        elif line:
-            other_info.append(line)
 
     print(f"\n🚀 启动筛选 | 候选服务器: {len(ip_groups)} 个 | 每组目标测试: {CHECK_COUNT}个频道 | 时长: {TEST_DURATION}s\n")
 
+    # 测试所有服务器
     results = {}
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
         futures = {executor.submit(test_ip_group, ip, chs): ip for ip, chs in ip_groups.items()}
@@ -160,7 +153,7 @@ def main():
 
     print("\n" + "="*80)
 
-    # 严格筛选
+    # 决定入选服务器
     selected_ips = [
         ip for ip, (peak, stable, _) in results.items()
         if peak >= MIN_PEAK_REQUIRED and stable >= MIN_STABLE_REQUIRED
@@ -183,33 +176,36 @@ def main():
 
     print(f"✅ 最终入选 {len(selected_ips)} 个服务器（标准：{final_step}）\n")
 
-    # ===================== 输出所有入选服务器的全部频道（不重组） =====================
-    final_output = [line for line in other_info if line.strip()]  # 保留头部信息
-    final_output.append("")  # 加空行
+    # 核心：按原始文件顺序处理，只保留达标服务器的频道行
+    final_output = []
+    selected_set = set(selected_ips)  # 快速查找用 set
 
-    # 收集入选服务器的所有原始频道行
-    all_selected_lines = []
-    for ip in selected_ips:
-        for name, url_part in ip_groups.get(ip, []):
-            all_selected_lines.append(f"{name},{url_part}")
+    for original_line in all_lines:
+        line = original_line.strip()
 
-    # 全局去重（防止源文件本身有完全相同的重复行）
-    seen_lines = set()
-    unique_lines = []
-    for line in all_selected_lines:
-        stripped = line.strip()
-        if stripped and stripped not in seen_lines:
-            seen_lines.add(stripped)
-            unique_lines.append(line)
+        # 非频道行全部保留（标题、分组、空行、公告等）
+        if not ("," in line and "http://" in line):
+            final_output.append(original_line.rstrip())
+            continue
 
-    final_output.extend(unique_lines)
+        # 是频道行，判断所属 IP 是否入选
+        try:
+            _, url_part = line.split(",", 1)
+            match = re.search(r'http://(.*?)/', url_part)
+            if match:
+                ip_port = match.group(1)
+                if ip_port in selected_set:
+                    final_output.append(original_line.rstrip())  # 保留原始完整行
+        except:
+            # 解析失败的行也保留（安全起见）
+            final_output.append(original_line.rstrip())
 
-    # 写文件
+    # 写入输出文件
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         f.write("\n".join(final_output).rstrip() + "\n")
 
     print(f"\n🎯 筛选完成！输出文件：{OUTPUT_FILE}")
-    print(f" 已保留 {len(selected_ips)} 个服务器的所有频道（去重后共 {len(unique_lines)} 条唯一行）")
+    print(f" 已按原始分类结构和顺序保留达标服务器的频道")
 
 
 if __name__ == "__main__":
