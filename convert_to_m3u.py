@@ -1,6 +1,3 @@
-/volume1/docker/iptv-api2/config
-
-
 import os
 import re
 
@@ -23,44 +20,61 @@ def main():
         print(f"❌ 找不到 {INPUT_FILE}")
         return
 
-    print(f"正在读取 {INPUT_FILE} 并完整保留 $ 后面的所有注释...")
+    print(f"正在读取 {INPUT_FILE} 并尝试保留原始分类结构...")
+    
     with open(INPUT_FILE, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as out:
         out.write(f'#EXTM3U x-tvg-url="{EPG_URL}"\n\n')
 
+        current_group = "未分组"  # 默认分组
+
         for line in lines:
-            line = line.strip()
-            if not line or line.endswith(",#genre#"):
+            original_line = line.rstrip()
+            stripped = line.strip()
+
+            if not stripped:
+                out.write(original_line + "\n")
                 continue
 
-            # 公告行特殊处理
-            if "更新时间" in line or "GitHub" in line or "作者" in line:
-                parts = line.split(",", 1)
+            # 分组标题行
+            if stripped.endswith(",#genre#"):
+                group_name = stripped.split(",")[0].strip()
+                current_group = group_name if group_name else "未分组"
+                continue  # 不写入分组标题（播放器不需要）
+
+            # 公告行
+            if "更新时间" in stripped or "GitHub" in stripped or "作者" in stripped:
+                parts = stripped.split(",", 1)
                 if len(parts) == 2:
                     title, url = parts
                     out.write(f'#EXTINF:-1 group-title="公告说明",{title.strip()}\n{url.strip()}\n\n')
                 continue
 
-            if "," in line:
+            # 频道行
+            if "," in stripped:
                 try:
-                    ch_name, full_url = line.split(",", 1)   # 关键：只按第一个逗号分
+                    ch_name, full_url = stripped.split(",", 1)
                     ch_name = ch_name.strip()
-                    full_url = full_url.strip()               # 只去首尾空格，内部不动！
+                    full_url = full_url.strip()
 
                     logo = get_logo_url(ch_name)
 
-                    out.write(f'#EXTINF:-1 tvg-name="{ch_name}" tvg-logo="{logo}" group-title="全部频道",{ch_name}\n')
-                    out.write(f"{full_url}\n\n")              # 完整写入，包括 $河南联通 $$上海电信 等全部内容
+                    out.write(
+                        f'#EXTINF:-1 tvg-name="{ch_name}" tvg-logo="{logo}" '
+                        f'group-title="{current_group}",{ch_name}\n'
+                    )
+                    out.write(f"{full_url}\n\n")
 
                 except Exception as e:
-                    print(f"跳过错误行: {line}")
+                    print(f"跳过错误行: {stripped} → {e}")
 
-    print(f"转换完成！已生成 {OUTPUT_FILE}，$ 后面的运营商注释已100%完整保留！")
+            # 其他行原样保留
+            else:
+                out.write(original_line + "\n")
+
+    print(f"转换完成！已生成 {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     main()
-
-
-脚本没有读取livezubo.txt里面的分类 所有频道都在一起了没有央视卫视等分类了
