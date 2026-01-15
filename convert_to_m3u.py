@@ -1,3 +1,6 @@
+/volume1/docker/iptv-api2/config
+
+
 import os
 import re
 
@@ -58,3 +61,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+脚本没有读取livezubo.txt里面的分类 所有频道都在一起了没有央视卫视等分类了
