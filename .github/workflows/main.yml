@@ -1,9 +1,9 @@
-name: "Sichuan IPTV Auto Scan"
+name: "National IPTV Auto Scan"
 
 on:
   schedule:
-    - cron: '0 */1 * * *'  # 每天凌晨 2 点(北京时间约10点)自动运行
-  workflow_dispatch:       # 支持手动点击运行
+    - cron: '0 2 * * *'
+  workflow_dispatch:
 
 jobs:
   run_scanner:
@@ -20,18 +20,17 @@ jobs:
       with:
         php-version: '8.2'
 
-    - name: Run Scan Script
+    - name: Run Multi-Province Scan
       run: php scan_sichuan.php
 
     - name: Commit and Push Results
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add sc_telecom.m3u
-        # 只有在文件有变化时才提交，防止报错
+        git add all_telecom_list.m3u
         if git diff --staged --quiet; then
-          echo "No changes to commit"
+          echo "No changes"
         else
-          git commit -m "Auto Update: Sichuan IPTV List $(date +'%Y-%m-%d %H:%M')"
+          git commit -m "Update National IPTV List $(date +'%Y-%m-%d %H:%M')"
           git push
         fi
