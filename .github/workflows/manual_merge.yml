@@ -1,0 +1,31 @@
+name: 手动合并 IPTV 列表
+
+on:
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+
+      - name: 设置 Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: 安装依赖
+        run: pip install requests
+
+      - name: 执行合并脚本
+        run: python update_iptv.py
+
+      - name: 提交并推送更改
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add merged_iptv.txt
+          git commit -m "自动合并更新 IPTV 列表" || echo "没有更改需要提交"
+          git push
