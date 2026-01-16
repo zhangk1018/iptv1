@@ -4,7 +4,7 @@ error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
 date_default_timezone_set('Asia/Shanghai');
 
 // --- 配置区 ---
-$ip_url = "https://raw.githubusercontent.com/linyu345/iptv/refs/heads/main/ip/%E6%B1%9F%E8%8B%8F%E8%81%94%E9%80%9A.txt";
+$ip_url = "https://raw.githubusercontent.com/linyu345/iptv/refs/heads/main/ip/%E9%87%8D%E5%BA%86%E5%B8%82%E8%81%94%E9%80%9A.txt";
 $rtp_url = "https://raw.githubusercontent.com/linyu345/iptv/main/rtp/%E5%9B%9B%E5%B7%9D%E7%94%B5%E4%BF%A1.txt";
 $output_file = "sc_telecom.m3u";
 
