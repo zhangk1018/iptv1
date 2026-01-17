@@ -21,8 +21,8 @@ $sources = [
     ]
 ];
 
-// 统一文件名，建议用这个名字
 $output_file = "all_telecom_list.m3u";
+$logo_base = "https://gcore.jsdelivr.net/gh/taksssss/tv/icon/";
 
 function fetch_data($url) {
     $ch = curl_init();
@@ -35,25 +35,25 @@ function fetch_data($url) {
     return $data;
 }
 
-echo "--- 准备生成 M3U 列表 ---\n";
+echo "--- 开始深度扫描 (全量不限服务器数量) ---\n";
 $final_m3u = "#EXTM3U x-tvg-url=\"https://live.fanmingming.com/e.xml\"\n";
 
 foreach ($sources as $prov_name => $urls) {
-    echo "\n[省份分类: $prov_name]\n";
+    echo "\n[整理省份: $prov_name]\n";
     
     $ips_raw = fetch_data($urls['ip']);
-    $rtp_raw = fetch_data($urls['rtp']);
+    $rtps_raw = fetch_data($urls['rtp']);
     
-    if (!$ips_raw || !$rtp_raw) {
-        echo "  x 获取源数据失败，跳过。\n"; continue;
+    if (!$ips_raw || !$rtps_raw) {
+        echo "  [Error] 无法获取源数据\n"; continue;
     }
 
     preg_match_all('/(\d+\.\d+\.\d+\.\d+:\d+)/', $ips_raw, $matches);
     $ip_list = array_unique($matches[1]);
-    echo "  找到 " . count($ip_list) . " 个待测服务器\n";
+    echo "  待测 IP 总数: " . count($ip_list) . "\n";
 
     $channels = [];
-    foreach (explode("\n", $rtp_raw) as $line) {
+    foreach (explode("\n", $rtps_raw) as $line) {
         $line = trim($line);
         if (strpos($line, ',') !== false) {
             list($cname, $rtp) = explode(',', $line);
@@ -61,32 +61,30 @@ foreach ($sources as $prov_name => $urls) {
         }
     }
 
-    $alive_count = 0;
     foreach ($ip_list as $server) {
+        echo "  探测服务器: $server ... ";
         list($host, $port) = explode(':', $server);
-        // 增加详细过程显示
-        echo "  正在探测 -> $server ... ";
         
-        $fp = @fsockopen($host, $port, $errno, $errstr, 1.0); // 稍微延长探测时间保证准确性
+        $fp = @fsockopen($host, $port, $errno, $errstr, 0.8);
         if ($fp) {
             fclose($fp);
-            echo " [√ 在线]\n";
+            echo "[√]\n";
             
             foreach ($channels as $chan) {
-                $final_m3u .= "#EXTINF:-1 group-title=\"$prov_name\",{$chan['name']} ({$server})\n";
-                $final_m3u .= "http://{$server}/rtp/{$chan['rtp']}\n";
-            }
-            
-            $alive_count++;
-            if ($alive_count >= 3) {
-                echo "  (该省份已找齐 3 个可用服务器，停止继续探测)\n";
-                break;
+                $name = $chan['name'];
+                $logo = $logo_base . $name . ".png";
+                $raw_url = "http://{$server}/rtp/{$chan['rtp']}";
+                
+                // 构造 M3U 结构
+                $final_m3u .= "#EXTINF:-1 tvg-id=\"$name\" tvg-logo=\"$logo\" group-title=\"$prov_name\",$name\n";
+                // 关键：对整个 URL 进行编码
+                $final_m3u .= urlencode($raw_url) . "\n";
             }
         } else {
-            echo " [x 离线]\n";
+            echo "[x]\n";
         }
     }
 }
 
 file_put_contents($output_file, $final_m3u);
-echo "\n--- 任务完成，结果保存至 $output_file ---\n";
+echo "\n--- 扫描结束，结果已存至 $output_file ---\n";
