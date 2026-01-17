@@ -20,13 +20,18 @@ jobs:
       with:
         php-version: '8.2'
 
-    - name: Run Multi-Province Scan
-      run: php scan_sichuan.php
-
     - name: Commit and Push Results
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add all_telecom_list.m3u  # 确保这里和 PHP 里的名字一模一样
-        git commit -m "Update IPTV List $(date +'%Y-%m-%d %H:%M')" || echo "No changes"
-        git push
+        
+        # 核心改动：使用 -A 追踪所有新创建的文件（包括 sc_telecom.m3u）
+        git add -A 
+        
+        # 检查是否有内容需要提交
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Auto Update IPTV: $(date +'%Y-%m-%d %H:%M')"
+          git push
+        fi
