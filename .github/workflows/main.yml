@@ -27,10 +27,6 @@ jobs:
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add all_telecom_list.m3u
-        if git diff --staged --quiet; then
-          echo "No changes"
-        else
-          git commit -m "Update National IPTV List $(date +'%Y-%m-%d %H:%M')"
-          git push
-        fi
+        git add all_telecom_list.m3u  # 确保这里和 PHP 里的名字一模一样
+        git commit -m "Update IPTV List $(date +'%Y-%m-%d %H:%M')" || echo "No changes"
+        git push
