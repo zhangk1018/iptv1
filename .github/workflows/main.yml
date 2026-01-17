@@ -1,37 +1,43 @@
-name: "National IPTV Auto Scan"
+name: "Auto Scan Sichuan IPTV"
 
 on:
   schedule:
+    # 每天凌晨 2 点自动运行 (UTC 时间，对应北京时间上午 10 点)
     - cron: '0 2 * * *'
+  # 支持手动点击 Actions 按钮运行
   workflow_dispatch:
 
 jobs:
-  run_scanner:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    - name: Setup PHP Environment
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.2'
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
 
-    - name: Commit and Push Results
-      run: |
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
-        
-        # 核心改动：使用 -A 追踪所有新创建的文件（包括 sc_telecom.m3u）
-        git add -A 
-        
-        # 检查是否有内容需要提交
-        if git diff --staged --quiet; then
-          echo "No changes to commit"
-        else
-          git commit -m "Auto Update IPTV: $(date +'%Y-%m-%d %H:%M')"
-          git push
-        fi
+      - name: Run Scan Script
+        # 这里必须和你仓库里的文件名一致
+        run: php scan_sichuan.php
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # 关键点：强制添加生成的文件
+          git add sc_telecom.m3u
+          
+          # 只有在文件内容确实有变化时才提交，防止 Actions 报错
+          if git diff --staged --quiet; then
+            echo "No changes in sc_telecom.m3u, skipping commit."
+          else
+            git commit -m "Auto-update IPTV List: $(date +'%Y-%m-%d %H:%M')"
+            git push
+          fi
